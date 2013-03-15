@@ -42,7 +42,6 @@ echo "-------------------------------------------------------------------"
 
 # Do the deployment 
 #
-echo $AWS_ACCESS_KEY_ID
 foreman run s3cmd sync -v -c $S3CFG \
   --exclude '.DS_Store' \
   --exclude '.git/*' \

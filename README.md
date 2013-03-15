@@ -6,7 +6,7 @@ If you'd like to help build something, please get in touch: I'm @4242jensen on T
 
 ## Requirements
 
-The placeholder site is statically generated assets that are hosted on AWS's S3.
+The placeholder site is just statically generated assets that are hosted on AWS's S3.
 
 To deploy the site you'll need [s3cmd](http://s3tools.org/s3cmd), which you can install
 as a Ruby gem or via homebrew, e.g.
