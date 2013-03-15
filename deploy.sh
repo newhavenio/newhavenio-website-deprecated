@@ -20,9 +20,9 @@ BUCKET="www.nhv.io"
 S3CMD=$(command -v s3cmd || die "...Error: s3cmd is not in your path!")
 
 
-# Check for .env file.  This is where your AWS credentials
+# Check for .s3cfg file.  This is where your AWS credentials
 # should be stored.  That file will require a value for both
-# AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY.
+# "access_key" and "secret_key".
 #
 S3CFG=$BASE_DIR/.s3cfg
 if [[ ! -e "$S3CFG" ]]; then
