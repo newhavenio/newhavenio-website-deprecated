@@ -1,0 +1,29 @@
+/* Fonts */
+
+// Import Google Web Fonts
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200italic,300,300italic,regular,italic,600,600italic,700,700italic,900,900italic&subsets=latin-ext,latin);
+
+@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700&subset=latin,latin-ext);
+
+// Set local icon font
+@font-face {
+	font-family: "#{$icons}";
+	font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/icons/#{$icons}.eot);
+	src: url("../fonts/icons/#{$icons}.eot?#iefix") format("ie9-skip-eot"),
+			 url("../fonts/icons/#{$icons}.woff") format("woff"),
+			 url("../fonts/icons/#{$icons}.ttf")  format("truetype");
+}
+
+// To include your own, local copies of fonts, use the following template
+//
+//@font-face {
+//	font-family: "#{$some-font-variable}";
+//	font-style: normal;
+//  font-weight: 400;
+//  src: url(../fonts/icons/#{$some-font-variable}.eot);
+//	src: url("../fonts/icons/#{$some-font-variable}.eot?#iefix") format("ie9-skip-eot"),
+//			 url("../fonts/icons/#{$some-font-variable}.woff") format("woff"),
+//			 url("../fonts/icons/#{$some-font-variable}.ttf")  format("truetype");
+//}

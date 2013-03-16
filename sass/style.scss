@@ -1,0 +1,77 @@
+@import 'modular-scale';
+
+@import "var/settings";
+@import "var/lists";
+
+@import "compass";
+@import "compass/reset";
+@import "compass/css3";
+@import "compass/css3/images";
+@import "compass/utilities/general/clearfix";
+
+@import "mixins/all";
+
+@import "functions/breakpoints";
+@import "functions/grid-calc";
+
+@import "fonts";
+@import "grid";
+@import "typography";
+@import "base";
+@import "ui/all";
+
+.navbar {
+  margin-bottom: 30px;
+}
+
+.navbar .logo a {
+  color: #fff;
+  font-family: $font-family-heading;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.navbar ul li a {
+  font-family: $font-family-heading;
+  text-shadow: none;
+}
+
+.brick {
+  background: #fff;
+  padding: 25px;
+  margin-bottom: 25px;
+}
+
+.brick .wrapper {
+  position: relative;
+  border-top: 1px solid #eceef1;
+  top: 10px;
+}
+
+.brick .left {
+  border-right: 1px solid #eceef1;
+  padding-right: 15px;
+  padding-top: 15px;
+  @include respond(portrait-tablets) {
+    border-right: none;
+    padding-right: 0;
+  }
+}
+
+.brick .right {
+  padding-left: 15px;
+  padding-top: 15px;
+  @include respond(portrait-tablets) {
+    padding-left: 0;
+  }
+}
+
+.brick h2 {
+  font-size: 1.2rem;
+  @include respond(portrait-tablets) {
+    font-size: 1.4rem;
+  }
+  margin-bottom: 15px;
+}
+
+

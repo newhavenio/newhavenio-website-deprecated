@@ -1,0 +1,2 @@
+// Gumby is ready to go
+Gumby.ready(function(){console.log("Gumby is ready to go...",Gumby.debug());(Gumby.isOldie||Gumby.$dom.find("html").hasClass("ie9"))&&$("input, textarea").placeholder()});Gumby.oldie(function(){});$(function(){});
