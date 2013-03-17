@@ -20,27 +20,32 @@
 @import "base";
 @import "ui/all";
 
+
+html, body {
+	height: 100%;
+}
+
 .navbar {
   margin-bottom: 30px;
 }
 
+/* Prevent any object from being highlighted upon touch event*/
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
 .navbar .logo a {
   color: #fff;
   font-family: $font-family-heading;
   font-size: 30px;
   font-weight: 600;
+  @include respond(portrait-tablets) {
+    padding-left: 20px;
+  }
 }
 
 .navbar ul li a {
   font-family: $font-family-heading;
   text-shadow: none;
-}
-
-* {
-	margin: 0;
-}
-html, body {
-	height: 100%;
 }
 
 .main-wrapper {
@@ -53,17 +58,31 @@ html, body {
 .brick {
   background: #fff;
   padding: 25px;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
+  position: relative;
 }
 
 .brick .wrapper {
   position: relative;
-  border-top: 1px solid #eceef1;
+  border-top: 1px solid #e0e2e4;
   top: 10px;
+  @include respond(portrait-tablets) {
+    margin-top: 25px;
+  }
+}
+
+.brick .timer {
+  font-size: 12px;
+  position: absolute;
+  right: 25px;
+  @include respond(portrait-tablets) {
+    top: 54px;
+    left: 25px;
+  }
 }
 
 .brick .left {
-  border-right: 1px solid #eceef1;
+  border-right: 1px solid #e0e2e4;
   padding-right: 15px;
   padding-top: 15px;
   @include respond(portrait-tablets) {
@@ -89,6 +108,10 @@ html, body {
   margin-bottom: 10px;
 }
 
+.brick ul {
+  margin-bottom: 20px;
+}
+
 .push {
   height: 50px;  
 }
@@ -97,18 +120,27 @@ footer {
   position: relative;
   margin: 0 auto;
   height: 50px;
-  padding: 0 20px;
+}
+
+footer ul {
+  @include respond(portrait-tablets) {
+    padding-left: 20px;
+  }
+  float: left;
 }
 
 footer h3 {
   font-size: 16px;
   font-family: $font-family-heading;
   float: right;
+  @include respond(portrait-tablets) {
+    padding-right: 20px;
+  }
 }
 
 footer li {
-  float: left;
-  margin-right: 15px;
+  display: inline;
+  margin-right: 8px;
   font-size: 14px;
   font-family: $font-family-heading;
   a {
