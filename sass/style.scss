@@ -36,9 +36,12 @@ html, body {
 .navbar .logo a {
   color: #fff;
   font-family: $font-family-heading;
-  font-size: 30px;
-  font-weight: 600;
+  font-size: 24px;
+  padding-left: 0;
   @include respond(portrait-tablets) {
+    padding-left: 20px;
+  }
+  @include respond(tablets) {
     padding-left: 20px;
   }
 }
@@ -52,7 +55,7 @@ html, body {
   min-height: 100%;
   height: auto !important;
   height: 100%;
-  margin: 0 auto -50px;
+  margin: 0 auto -100;
 }
 
 .brick {
@@ -113,13 +116,13 @@ html, body {
 }
 
 .push {
-  height: 50px;  
+  height: 100;  
 }
 
 footer {
   position: relative;
   margin: 0 auto;
-  height: 50px;
+  height: 100;
 }
 
 footer ul {

@@ -1,3 +1,4 @@
 .env
 .s3cfg
 *~
+.sass-cache/
