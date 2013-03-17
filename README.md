@@ -2,7 +2,8 @@ NHV.io
 ======
 
 This is the code for the [nhv.io](http://www.nhv.io) website.  Just a placeholder right now.
-If you'd like to help build something, please get in touch: I'm @4242jensen on Twitter.
+If you'd like to help build something, please get in touch.  There's a
+[Google group](https://groups.google.com/forum/?fromgroups#!forum/newhavenio).
 
 ## Requirements
 
@@ -20,3 +21,14 @@ You'll also need a `.s3cfg` file containing at least the following lines
 	secret_key=YOUR-SECRET-KEY-GOES-HERE-YO
 
 You can get deployment keys from Kyle.
+
+## Contributors
+
+* [Adam Soffer](http://github.com/ads1018)
+* [Joel Nimety](https://github.com/jnimety)
+* [Dan Bernier](https://github.com/danbernier)
+* [Zach Morek](https://github.com/ZachBeta)
+* [Krishna R. Sampath](https://github.com/KrishnaRSampath)
+* [Kyle Jensen](http://github.com/kljensen)
+
+Your name could be here!  
