@@ -36,6 +36,20 @@
   text-shadow: none;
 }
 
+* {
+	margin: 0;
+}
+html, body {
+	height: 100%;
+}
+
+.main-wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -50px;
+}
+
 .brick {
   background: #fff;
   padding: 25px;
@@ -71,7 +85,35 @@
   @include respond(portrait-tablets) {
     font-size: 1.4rem;
   }
-  margin-bottom: 15px;
+  padding-top: 0;
+  margin-bottom: 10px;
+}
+
+.push {
+  height: 50px;  
+}
+
+footer {
+  position: relative;
+  margin: 0 auto;
+  height: 50px;
+  padding: 0 20px;
+}
+
+footer h3 {
+  font-size: 16px;
+  font-family: $font-family-heading;
+  float: right;
+}
+
+footer li {
+  float: left;
+  margin-right: 15px;
+  font-size: 14px;
+  font-family: $font-family-heading;
+  a {
+    color: #7d7d7d;
+  }
 }
 
 

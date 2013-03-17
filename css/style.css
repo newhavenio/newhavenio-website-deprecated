@@ -1823,6 +1823,12 @@ body .video { width: 100%; position: relative; height: 0; padding-bottom: 56.25%
 
 .navbar ul li a { font-family: Source Code Pro; text-shadow: none; }
 
+* { margin: 0; }
+
+html, body { height: 100%; }
+
+.main-wrapper { min-height: 100%; height: auto !important; height: 100%; margin: 0 auto -50px; }
+
 .brick { background: #fff; padding: 25px; margin-bottom: 25px; }
 
 .brick .wrapper { position: relative; border-top: 1px solid #eceef1; top: 10px; }
@@ -1833,5 +1839,14 @@ body .video { width: 100%; position: relative; height: 0; padding-bottom: 56.25%
 .brick .right { padding-left: 15px; padding-top: 15px; }
 @media only screen and (max-width: 768px) { .brick .right { padding-left: 0; } }
 
-.brick h2 { font-size: 1.2rem; margin-bottom: 15px; }
+.brick h2 { font-size: 1.2rem; padding-top: 0; margin-bottom: 10px; }
 @media only screen and (max-width: 768px) { .brick h2 { font-size: 1.4rem; } }
+
+.push { height: 50px; }
+
+footer { position: relative; margin: 0 auto; height: 50px; padding: 0 20px; }
+
+footer h3 { font-size: 16px; font-family: Source Code Pro; float: right; }
+
+footer li { float: left; margin-right: 15px; font-size: 14px; font-family: Source Code Pro; }
+footer li a { color: #7d7d7d; }
