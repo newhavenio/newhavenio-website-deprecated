@@ -1824,12 +1824,13 @@ html, body { height: 100%; }
 /* Prevent any object from being highlighted upon touch event*/
 * { -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
-.navbar .logo a { color: #fff; font-family: Source Code Pro; font-size: 30px; font-weight: 600; }
+.navbar .logo a { color: #fff; font-family: Source Code Pro; font-size: 24px; padding-left: 0; }
 @media only screen and (max-width: 768px) { .navbar .logo a { padding-left: 20px; } }
+@media only screen and (min-width: 768px) and (max-width: 939px) { .navbar .logo a { padding-left: 20px; } }
 
 .navbar ul li a { font-family: Source Code Pro; text-shadow: none; }
 
-.main-wrapper { min-height: 100%; height: auto !important; height: 100%; margin: 0 auto -50px; }
+.main-wrapper { min-height: 100%; height: auto !important; height: 100%; margin: 0 auto -100; }
 
 .brick { background: #fff; padding: 25px; margin-bottom: 20px; position: relative; }
 
@@ -1850,9 +1851,9 @@ html, body { height: 100%; }
 
 .brick ul { margin-bottom: 20px; }
 
-.push { height: 50px; }
+.push { height: 100; }
 
-footer { position: relative; margin: 0 auto; height: 50px; }
+footer { position: relative; margin: 0 auto; height: 100; }
 
 footer ul { float: left; }
 @media only screen and (max-width: 768px) { footer ul { padding-left: 20px; } }
