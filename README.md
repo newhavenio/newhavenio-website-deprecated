@@ -1,4 +1,4 @@
-NHV.io
+newhaven.io
 ======
 
 This is the code for the [newhaven.io](http://www.newhaven.io) website.  Just a placeholder right now.
