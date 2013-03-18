@@ -1,36 +1,52 @@
 newhaven.io
-======
+===========
 
-This is the code for the [newhaven.io](http://www.newhaven.io) website.  Just a placeholder right now.
-If you'd like to help build something, please get in touch.  There's a
-[Google group](https://groups.google.com/forum/?fromgroups#!forum/newhavenio).
+This is the code for the [newhaven.io](http://www.newhaven.io) website.  
+It's just a placeholder right now. If you'd like to help build the
+site (and the New Haven hacker community) please get in touch.  You can
+find fellow New Haven hackers via
+
+* the [newhaven.io Google group](https://groups.google.com/forum/?fromgroups#!forum/newhavenio);
+* the [newhaven.io Twitter account](http://twitter.com/newhavenio)
+* the #newhavenio IRC channel on Freenode.
 
 ## Requirements
 
-newhaven.io is powered by Gumby 2, a sass-based (and New Haven born) front-end toolkit. Gumby 2 utilizes Sass and Compass which you'll need to install to get your environment set up correctly. 
+The newhavenio.io website is statically generated and hosted on AWS's S3
+service.  To make changes to the website, you'll need a few
+[Ruby](http://www.ruby-lang.org/) tools in your environment.  The following
+instructions will help you install those tools.  (These instructions are
+a tad pedantic for the benefit of those who would like to contribute
+but perhaps have less development experience.)
 
-	# install Compass with Ruby gem, this also handles Sass installation
-	$ gem install compass
-	
-	# install the modular scale mixin with Ruby gem
-	$ gem install modular-scale
-  
-	# compile all SCSS files according to settings config.rb
-	$ compass compile
-  
-	# compile all SCSS when a change is detected in any file
-	$ compass watch		
+### Setting up your Ruby environment
 
+...todo.  Deps are in the `.rvmrc` file.
+
+## About thew newhaven.io site
+
+newhaven.io is powered in part by [Gumby 2](http://gumbyframework.com/), a
+front-end toolkit created by New Haven's own
+[Digital Surgeons](http://www.digitalsurgeons.com/).  The design
+was created by [Adam Soffer](http://github.com/ads1018).
+
+Gumby 2 uses Sass and Compass which you'll need to install to get your environment
+set up correctly.  (See the section above on setting up your environment.)
 Gumby 2 has a nice set of docs you can check out [here](http://gumbyframework.com/docs/sass/).
 
-newhaven.io is just statically generated assets that are hosted on AWS's S3.
+## Building and deploying
+
+To build the .css assets, run
+
+	compass compile
 
 To deploy the site you'll need [s3cmd](http://s3tools.org/s3cmd), which you can install
 via homebrew, e.g.
 
 	brew install s3cmd
 
-You'll also need a `.s3cfg` file containing at least the following lines
+or, via bundle/gem.  You'll also need a `.s3cfg` file containing at least
+the following lines
 
 	[default]
 	access_key=YOUR-ACCESS-KEY-GOES-HERE-YO
