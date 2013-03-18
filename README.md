@@ -10,7 +10,7 @@ If you'd like to help build something, please get in touch.  There's a
 The placeholder site is just statically generated assets that are hosted on AWS's S3.
 
 To deploy the site you'll need [s3cmd](http://s3tools.org/s3cmd), which you can install
-as a Ruby gem (via Bundler, if you like - see the Gemfile) or via homebrew, e.g.
+via homebrew, e.g.
 
 	brew install s3cmd
 
