@@ -27,7 +27,7 @@ The site is powered by Gumby 2, a sass-based (and New Haven born) front-end tool
 Gumby 2 has a nice set of docs you can check out [here](http://gumbyframework.com/docs/grid/).
 
 To deploy the site you'll need [s3cmd](http://s3tools.org/s3cmd), which you can install
-as a Ruby gem (via Bundler, if you like - see the Gemfile) or via homebrew, e.g.
+via homebrew, e.g.
 
 	brew install s3cmd
 

@@ -1,4 +1,3 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
-gem 's3cmd'
 gem 'foreman'
