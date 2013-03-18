@@ -20,7 +20,9 @@ You'll also need a `.s3cfg` file containing at least the following lines
 	access_key=YOUR-ACCESS-KEY-GOES-HERE-YO
 	secret_key=YOUR-SECRET-KEY-GOES-HERE-YO
 
-You can get deployment keys from Kyle.
+You can get deployment keys from Kyle.  To run a deployment, do 
+
+	sh ./deploy.sh
 
 ## Contributors
 
