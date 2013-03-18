@@ -7,9 +7,7 @@ If you'd like to help build something, please get in touch.  There's a
 
 ## Requirements
 
-The placeholder site is just statically generated assets that are hosted on AWS's S3.
-
-The site is powered by Gumby 2, a sass-based (and New Haven born) front-end toolkit. You'll need to install Sass and Compass to get your environment set up correctly. 
+newhaven.io is powered by Gumby 2, a sass-based (and New Haven born) front-end toolkit. Gumby 2 utilizes Sass and Compass which you'll need to install to get your environment set up correctly. 
 
 	# install Compass with Ruby gem, this also handles Sass installation
 	$ gem install compass
@@ -23,8 +21,9 @@ The site is powered by Gumby 2, a sass-based (and New Haven born) front-end tool
 	# compile all SCSS when a change is detected in any file
 	$ compass watch		
 
-
 Gumby 2 has a nice set of docs you can check out [here](http://gumbyframework.com/docs/grid/).
+
+newhaven.io is just statically generated assets that are hosted on AWS's S3.
 
 To deploy the site you'll need [s3cmd](http://s3tools.org/s3cmd), which you can install
 via homebrew, e.g.
