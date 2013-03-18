@@ -3,7 +3,7 @@
 BASE_DIR=`dirname $0`
 
 echo ""
-echo "This script deploys the nhv.io static website"
+echo "This script deploys the newhaven.io static website"
 echo "---------------------------------------------"
 
 # Custom die function.

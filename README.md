@@ -1,7 +1,7 @@
 NHV.io
 ======
 
-This is the code for the [nhv.io](http://www.nhv.io) website.  Just a placeholder right now.
+This is the code for the [newhaven.io](http://www.newhaven.io) website.  Just a placeholder right now.
 If you'd like to help build something, please get in touch.  There's a
 [Google group](https://groups.google.com/forum/?fromgroups#!forum/newhavenio).
 
