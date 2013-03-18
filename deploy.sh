@@ -12,7 +12,7 @@ die() { echo >&2 -e "\nRUN ERROR: $@\n"; exit 1; }
 
 # Config parameters
 #
-BUCKET="www.nhv.io"
+BUCKET="www.newhaven.io"
 
 
 # Check for required programs: coffee, redis-server, and Postgres.app
