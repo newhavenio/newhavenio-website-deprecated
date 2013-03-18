@@ -9,6 +9,23 @@ If you'd like to help build something, please get in touch.  There's a
 
 The placeholder site is just statically generated assets that are hosted on AWS's S3.
 
+The site is powered by Gumby 2, a sass-based (and New Haven born) front-end toolkit. You'll need to install Sass and Compass to get your environment set up correctly. 
+
+	# install Compass with Ruby gem, this also handles Sass installation
+	$ gem install compass
+	
+	# install the modular scale mixin with Ruby gem
+	$ gem install modular-scale
+  
+	# compile all SCSS files according to settings config.rb
+	$ compass compile
+  
+	# compile all SCSS when a change is detected in any file
+	$ compass watch		
+
+
+Gumby 2 has a nice set of docs you can check out [here](http://gumbyframework.com/docs/grid/).
+
 To deploy the site you'll need [s3cmd](http://s3tools.org/s3cmd), which you can install
 as a Ruby gem (via Bundler, if you like - see the Gemfile) or via homebrew, e.g.
 
