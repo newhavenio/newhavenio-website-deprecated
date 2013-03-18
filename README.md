@@ -21,7 +21,7 @@ newhaven.io is powered by Gumby 2, a sass-based (and New Haven born) front-end t
 	# compile all SCSS when a change is detected in any file
 	$ compass watch		
 
-Gumby 2 has a nice set of docs you can check out [here](http://gumbyframework.com/docs/grid/).
+Gumby 2 has a nice set of docs you can check out [here](http://gumbyframework.com/docs/sass/).
 
 newhaven.io is just statically generated assets that are hosted on AWS's S3.
 
