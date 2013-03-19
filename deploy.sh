@@ -47,6 +47,7 @@ foreman run s3cmd sync -v -c $S3CFG \
   --exclude '.git/*' \
   --exclude '*.sh' \
   --exclude '*.md' \
+  --exclude '*.sass-cache' \
   --exclude-from '.gitignore' \
   --acl-public ./ s3://$BUCKET
 
