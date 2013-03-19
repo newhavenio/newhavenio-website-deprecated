@@ -54,6 +54,7 @@ foreman run s3cmd sync -v -c $S3CFG \
   --exclude '*.rb' \
   --exclude '*.sh' \
   --exclude-from '.gitignore' \
+  —-delete-removed \
   --acl-public ./ s3://$BUCKET
 
 
