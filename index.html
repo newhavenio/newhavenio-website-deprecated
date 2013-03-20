@@ -41,96 +41,45 @@ title: newhaven.io
 
   </div>
   <div class="nine columns">
-    <div class="brick">
-      <span class="timer" id="lunchTimer">days</span>
-      <h2><strong>Founders' Lunch</strong></h2>
-      <div class="row wrapper">
-        <div class="ten columns">
-          <div class="left">
-            <p><strong>Sitar</strong>
-            <br>45 Grove St  New Haven, CT</p>
-            <p>Weekly meeting of founders.  Conversation usually about
-              what people are working on, fund raising, etc.
-            </p>
+    {% for event in site.categories.events reversed %}
+      <div class="brick">
+        <!-- <span class="timer" id="lunchTimer">days</span> -->
+        <h2><strong>{{event.title}}</strong></h2>
+        <div class="row wrapper">
+          <div class="ten columns">
+            <div class="left">
+              <p><strong>{{event.location}}</strong>
+              <br>
+                <a href="http://maps.google.com/?q={{event.address | cgi_escape}}">
+                  {{event.address}}
+                </a>
+              </p>
+              <p>
+                {{event.content | markdownify }}
+              </p>
+            </div>
           </div>
-        </div>
-        <div class="six columns">
-          <div class="right">
-            <p>
-              <strong>Wed Mar 20</strong>
-              <br>12:30 PM
-            </p>
-            <p>
-              <strong>Hosted by:</strong>
-              <br>Tim Holahan
-              <br><a href="http://twitter.com/timholahan">@timholahan</a>
-            </p>
+          <div class="six columns">
+            <div class="right">
+              <p>
+                <strong>{{event.date | date: "%a %b %d"}}</strong>
+                <br>{{event.time}}
+              </p>
+              {% if event.host %}
+                <p>
+                  <strong>Hosted by:</strong>
+                  <br>{{event.host}}
+                  {% if event.host_twitter %}
+                    <br><a href="http://twitter.com/{{event.host_twitter}}">@{{event.host_twitter}}</a>
+                  {% endif %}
+                </p>
+              {% endif %}
 
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="brick">
-      <span class="timer" id="lunchTimer2">days</span>
-      <h2><strong>Next NewHaven.rb social</strong></h2>
-      <div class="row wrapper">
-        <div class="ten columns">
-          <div class="left">
-            <p><strong>Christy's</strong>
-            <br>261 Orange St, New Haven, CT</p>
-            <p>Get some drinks & dinner in New Haven, and talk about your start-up, your open source project, or whatever. It's easy.</p>
-          </div>
-        </div>
-        <div class="six columns">
-          <div class="right">
-            <p>
-              <strong>Wed Mar 20</strong>
-              <br>6:00 PM
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="brick">
-      <span class="timer" id="meetupTimer">days</span>
-      <h2>
-        <strong>JavaScript Meetup</strong>
-      </h2>
-
-      <div class="row wrapper">
-        <div class="ten columns">
-          <div class="left">
-            <p><strong>SeeClickFix</strong>
-            <br>746 Chapel St. Suite 207, New Haven, CT</p>
-            <p>
-              Come eat pizza, drink beer, and learn about
-              <a href="http://angularjs.org">Angularjs.</a>
-            </p>
-            <p><strong>Agenda:</strong></p>
-            <ul>
-              <li>6:00 PM - Door opens, Food, Drinks and Socializing</li>
-              <li>6:20 PM - Talk on Angular</li>
-              <li>6:50 PM - Q&A and socializing</li>
-              <li>7:15 PM - The End</li>
-            </ul>
-          </div>
-        </div>
-        <div class="six columns">
-          <div class="right">
-            <p>
-              <strong>Wed Apr 27</strong>
-              <br>6:00 PM
-            </p>
-            <p>
-              <strong>Hosted by:</strong>
-              <br>SeeClickFix
-              <br><a href="http://twitter.com/seeclickfix">@seeclickfix</a>
-            </p>
-          </div>
-        </div>
-      </div>
-
-    </div>
+    {% endfor %}
   </div>
 </div>
 
