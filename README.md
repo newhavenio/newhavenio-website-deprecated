@@ -37,7 +37,7 @@ Gumby 2 has a nice set of docs you can check out [here](http://gumbyframework.co
 ## Running locally
 
 [Usage · mojombo/jekyll Wiki](https://github.com/mojombo/jekyll/wiki/usage#running-jekyll)
-        
+
     jekyll --server
     open localhost:4000
 
@@ -45,23 +45,23 @@ Gumby 2 has a nice set of docs you can check out [here](http://gumbyframework.co
 
 To build the .css assets, run
 
-	compass compile
+    compass compile
 
 To deploy the site you'll need [s3cmd](http://s3tools.org/s3cmd), which you can install
 via homebrew, e.g.
 
-	brew install s3cmd
+    brew install s3cmd
 
 or, via bundle/gem.  You'll also need a `.s3cfg` file containing at least
 the following lines
 
-	[default]
-	access_key=YOUR-ACCESS-KEY-GOES-HERE-YO
-	secret_key=YOUR-SECRET-KEY-GOES-HERE-YO
+    [default]
+    access_key=YOUR-ACCESS-KEY-GOES-HERE-YO
+    secret_key=YOUR-SECRET-KEY-GOES-HERE-YO
 
 You can get deployment keys from Kyle.  To run a deployment, do 
 
-	sh ./deploy.sh
+    sh ./deploy.sh
 
 ## Contributors
 
