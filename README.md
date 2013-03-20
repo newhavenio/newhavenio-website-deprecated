@@ -10,6 +10,10 @@ find fellow New Haven hackers via
 * the [newhaven.io Twitter account](http://twitter.com/newhavenio)
 * the #newhavenio IRC channel on Freenode.
 
+## TODO
+
+* Use a stylized http://en.wikipedia.org/wiki/File:Reset_button.svg for logo and favicon of all sizes
+
 ## Requirements
 
 The newhavenio.io website is statically generated and hosted on AWS's S3
