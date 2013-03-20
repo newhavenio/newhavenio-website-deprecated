@@ -21,6 +21,7 @@ but perhaps have less development experience.)
 
 ### Setting up your Ruby environment
 
+    bundle # this should get the right gems setup
 ...todo.  Deps are in the `.rvmrc` file.
 
 ## About thew newhaven.io site
