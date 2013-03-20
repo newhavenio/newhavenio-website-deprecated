@@ -34,6 +34,13 @@ Gumby 2 uses Sass and Compass which you'll need to install to get your environme
 set up correctly.  (See the section above on setting up your environment.)
 Gumby 2 has a nice set of docs you can check out [here](http://gumbyframework.com/docs/sass/).
 
+## Running locally
+
+[Usage · mojombo/jekyll Wiki](https://github.com/mojombo/jekyll/wiki/usage#running-jekyll)
+        
+    jekyll --server
+    open localhost:4000
+
 ## Building and deploying
 
 To build the .css assets, run
