@@ -63,6 +63,33 @@ You can get deployment keys from Kyle.  To run a deployment, do
 
     sh ./deploy.sh
 
+## Creating a new event
+
+To make a new event, add a file to the `events/_posts` directory.
+The file name should start with a date and end with `md`,
+e.g. `2013-03-04-my-event.md`.  The file's content should look
+something like the following:
+
+    ---
+    layout: event
+    title: March NewHaven.rb Social
+    location: Christies
+    time: 6:00 PM
+    address: 261 Orange St, New Haven, CT
+    host: NewHaven.rb
+    host_twitter: newhavenrb
+    ---
+    Get some drinks & dinner in New Haven, and talk about your
+    start-up, your open source project, or whatever. It's easy.
+    You can
+    [RSVP](http://www.meetup.com/newhavenrb/events/106769762/)
+    on Meetup.com.
+
+The top-matter is in [Yaml](http://www.yaml.org/) format and the
+"content" is in [Markdown](http://daringfireball.net/projects/markdown/)
+format.  These fields are used to render information about the event
+on the newhaven.io website.
+
 ## Contributors
 
 * [Adam Soffer](http://github.com/ads1018)
