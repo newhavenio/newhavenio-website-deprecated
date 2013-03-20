@@ -18,6 +18,7 @@ BUCKET="www.newhaven.io"
 # Check for required programs: coffee, redis-server, and Postgres.app
 #
 S3CMD=$(command -v s3cmd || die "...Error: s3cmd is not in your path!")
+JEKYLL=$(command -v jekyll || die "...Error: jekyll is not in your path!")
 
 
 # Check for .s3cfg file.  This is where your AWS credentials
@@ -35,10 +36,15 @@ fi
 echo ""
 echo "Configuration:"
 echo -e "\t BUCKET: $BUCKET"
+echo -e "\t JEKYLL: $JEKYLL"
 echo -e "\t  S3CMD: $S3CMD"
 echo -e "\t .s3cfg: $S3CFG"
 echo ""
 echo "-------------------------------------------------------------------"
+
+# Build the site
+#
+jekyll --no-server --no-auto
 
 # Do the deployment 
 #
