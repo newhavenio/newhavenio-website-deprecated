@@ -1,6 +1,6 @@
 ---
 layout: event
-title: Founders Lunch
+title: Founders' Lunch
 location: Sitar
 time: 12:30 PM
 address: 45 Grove St., New Haven, CT
