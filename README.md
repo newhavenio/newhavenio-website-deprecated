@@ -12,7 +12,7 @@ find fellow New Haven hackers via
 
 ## TODO
 
-* create small, simple logo for favicon ala twitter
+* create small, simple logo ala twitter, apple
 
 ## Requirements
 
