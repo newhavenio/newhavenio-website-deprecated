@@ -5,7 +5,6 @@ location: The Grove
 time: 5:30 PM
 address: 71 Orange St., New Haven, CT
 host: The Whiteboard
-published: false
 ---
 Anyone wanting to learn programming or become better at
 it can attend StudyHall weekly at The Grove on Thursdays
