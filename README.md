@@ -12,7 +12,7 @@ find fellow New Haven hackers via
 
 ## TODO
 
-* Use a stylized http://en.wikipedia.org/wiki/File:Reset_button.svg for logo and favicon of all sizes
+* create small, simple logo for favicon ala twitter
 
 ## Requirements
 
