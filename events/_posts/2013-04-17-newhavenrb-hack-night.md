@@ -6,6 +6,7 @@ time: 6:00 PM
 address: 746 Chapel St., Ste 207, New Haven, CT
 host: NewHaven.rb
 host_twitter: newhavenrb
+published: false
 ---
 If you want to give a short talk, let us know, and we'll do that,
 but until then, 4/4 is: April Hack Night El Primero! We had really
