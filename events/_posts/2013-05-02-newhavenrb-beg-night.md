@@ -6,6 +6,7 @@ time: 6:00 PM
 address: 59 Elm Street, Suite 210, New Haven, CT
 host: NewHaven.rb
 host_twitter: newhavenrb
+published: false
 ---
 New to Ruby? Stuck on a Ruby Koan, or an exercise from
 Learn Ruby The Hard Way? Bring your laptop, and we'll
