@@ -13,5 +13,5 @@ from 5:30-7:30PM.  Think of this as your chance to get
 some cool work done if you've got some technical chops,
 or your chance to pick up a new technical skill in a
 low-stress environment!  You can
-[RSVP](http://www.meetup.com/a100-dev-community/events/116381462/)
+[RSVP](http://www.meetup.com/a100-dev-community/events/117608762/)
 on Meetup.com.
