@@ -1,17 +1,15 @@
 ---
 layout: event
 title: NewHaven.rb Hack Night
-location: SeeClickFix
+location: TBA
 time: 6:00 PM
-address: 746 Chapel St., Ste 207, New Haven, CT
+address: TBA
 host: NewHaven.rb
 host_twitter: newhavenrb
 published: true
 ---
-If you want to give a short talk, let us know, and we'll do that,
-but until then, 4/4 is: April Hack Night El Primero! We had really
-good results pairing up for Document-Ruby night, so we'll try to
-do something like that again.
+Standard hack night.  If you want to give a talk,
+let us know; otherwise we'll be pairing up and hacking.
 You can
 [RSVP](http://www.meetup.com/newhavenrb/events/121206982/)
 on Meetup.com.
