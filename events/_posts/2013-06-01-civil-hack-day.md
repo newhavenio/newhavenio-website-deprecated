@@ -6,7 +6,7 @@ time: 6:00 PM
 address: 746 Chapel Street Suite 207, New Haven, CT
 host: NewHaven.rb
 host_twitter: newhavenrb
-published: true
+published: false
 ---
 SeeClickFix is hosting the Connecticut event of the
 [National Civic Hack Day](http://www.hackforchange.org/ct-civic-hack-day)
