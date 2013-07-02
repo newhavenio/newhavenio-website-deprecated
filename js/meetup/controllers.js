@@ -14,8 +14,13 @@ Site.config(function($interpolateProvider){
 //
 function MeetupEventController($scope, $http) {
 
+  // Calculate the difference in days between two
+  // times, ignoring the hours, min, sec, etc.
   function dayDiff( d1, d2 ){
-    var timeDiff = Math.abs(d2.getTime() - d1.getTime());
+    var one = new Date(d1.getFullYear(), d1.getMonth(), d1.getDate());
+    var two = new Date(d2.getFullYear(), d2.getMonth(), d2.getDate());
+
+    var timeDiff = Math.abs(two.getTime() - one.getTime());
     var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
     return diffDays
   }
