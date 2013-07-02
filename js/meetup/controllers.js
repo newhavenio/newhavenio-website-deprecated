@@ -9,14 +9,6 @@ Site.config(function($interpolateProvider){
     }
 );
 
-// Set up the $http service for CORS
-Site.config(['$httpProvider', function($httpProvider) {
-        $httpProvider.defaults.useXDomain = true;
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
-        console.log("wootshit");
-    }
-]);
-
 // Controller that populates the upcoming events
 // from the NewHaven.IO meet-up feed.
 //
