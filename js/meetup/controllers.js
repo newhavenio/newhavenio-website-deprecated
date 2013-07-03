@@ -25,18 +25,47 @@ function MeetupEventController($scope, $http) {
     return diffDays
   }
 
-  // Grab the meetup data
-  var meetupUrl = 'http://api.meetup.com/2/events?callback=JSON_CALLBACK&status=upcoming&order=time&limited_events=False&group_urlname=newhavenrb&desc=false&offset=0&format=json&page=10&fields=&sig_id=26187422&sig=e35187c94012e213ca7a64a603f21489b29094cb';
-  $http.jsonp(meetupUrl).success(function(meetupResponse){
+  // Array of Meetup.com event feeds
+  var meetupFeeds = [
+    {
+      "eventPrefix": "NewHaven.rb",
+      "meetupUrl": "http://api.meetup.com/2/events?callback=JSON_CALLBACK&status=upcoming&order=time&limited_events=False&group_urlname=newhavenrb&desc=false&offset=0&format=json&page=10&fields=&sig_id=26187422&sig=e35187c94012e213ca7a64a603f21489b29094cb"
+    },
+    {
+      "eventPrefix": "A100",
+      "meetupUrl": "http://api.meetup.com/2/events?callback=JSON_CALLBACK&status=upcoming&order=time&limited_events=False&group_urlname=a100-dev-community&desc=false&offset=0&format=json&page=10&fields=&sig_id=26187422&sig=eb79b98cfd0843a7ad2998077697ca2f2d6baf76"
+    }
+  ];
 
-    // Save the events to the scope
-    $scope.events = meetupResponse["results"];
+  // Our list of events
+  $scope.events = [];
 
-    // Label each event with how many days away it is.
-    var today = new Date();
-    for (var i = $scope.events.length - 1; i >= 0; i--) {
-      var event_time = new Date($scope.events[i]["time"]);
-      $scope.events[i]["daysAway"] = dayDiff(event_time, today);
-    };
-  });
+  fetchEvents = function(eventPrefix, meetupUrl) {
+
+    // Fetch the API response
+    $http.jsonp(meetupUrl).success(function(meetupResponse){
+
+      // Label each event with how many days away it is.
+      var today = new Date();
+      for (var i = meetupResponse["results"].length - 1; i >= 0; i--) {
+
+        this_event = meetupResponse["results"][i];
+
+        // Add the prefix
+        this_event["name"] = eventPrefix + " " + this_event["name"];
+
+        // Calculate the number of days until this event
+        var event_time = new Date(this_event["time"]);
+        this_event["daysAway"] = dayDiff(event_time, today);
+
+        // Push it onto our array of events
+        $scope.events.push(this_event);
+      };
+    });
+  }
+
+  // Populate the events list from the Meetup.com API
+  for (var i = meetupFeeds.length - 1; i >= 0; i--) {
+    fetchEvents(meetupFeeds[i]["eventPrefix"], meetupFeeds[i]["meetupUrl"]);
+  };
 }
