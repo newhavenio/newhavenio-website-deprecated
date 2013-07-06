@@ -25,14 +25,15 @@ function MeetupEventController($scope, $http) {
     return diffDays
   }
 
+
   // Array of Meetup.com event feeds
   var meetupFeeds = [
     {
-      "eventPrefix": "NewHaven.rb",
-      "meetupUrl": "http://api.meetup.com/2/events?callback=JSON_CALLBACK&status=upcoming&order=time&limited_events=False&group_urlname=newhavenrb&desc=false&offset=0&format=json&page=10&fields=&sig_id=26187422&sig=e35187c94012e213ca7a64a603f21489b29094cb"
+      "eventPrefix": "",
+      "meetupUrl": "http://api.meetup.com/2/events?callback=JSON_CALLBACK&status=upcoming&order=time&limited_events=False&group_urlname=newhavenio&desc=false&offset=0&format=json&page=20&fields=&sig_id=26187422&sig=aa008c5591ab44f404d9c70a48211e9089e5f7f8"
     },
     {
-      "eventPrefix": "A100",
+      "eventPrefix": "A100 ",
       "meetupUrl": "http://api.meetup.com/2/events?callback=JSON_CALLBACK&status=upcoming&order=time&limited_events=False&group_urlname=a100-dev-community&desc=false&offset=0&format=json&page=10&fields=&sig_id=26187422&sig=eb79b98cfd0843a7ad2998077697ca2f2d6baf76"
     }
   ];
@@ -52,7 +53,7 @@ function MeetupEventController($scope, $http) {
         this_event = meetupResponse["results"][i];
 
         // Add the prefix
-        this_event["name"] = eventPrefix + " " + this_event["name"];
+        this_event["name"] = eventPrefix + this_event["name"];
 
         // Calculate the number of days until this event
         var event_time = new Date(this_event["time"]);
