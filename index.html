@@ -47,7 +47,7 @@ title: newhaven.io
   </div>
   <div class="nine columns" ng-controller="MeetupEventController">
     <div class="brick" data-ng-repeat="event in events| orderBy:'time' | limitTo: 10">
-      <h2><strong>{[{event.name}]}</strong></h2>
+      <h2><a href="{[{event.event_url}]}">{[{event.name}]}</a></h2>
       <div class="row wrapper">
         <div class="ten columns">
           <div class="left">

@@ -3,3 +3,8 @@
        display: none;
    }
 }
+
+h2 a {
+	/*font-weight: bold;*/
+	color: #ff6c00;
+}
