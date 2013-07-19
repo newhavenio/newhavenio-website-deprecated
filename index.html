@@ -2,85 +2,68 @@
 layout: default
 title: newhaven.io
 ---
-<div class="row" ng-app='newhavenIO'>
-  <div class="seven columns">
-    <div class="brick">
-      <h2><strong>welcome to newhaven.io</strong></h2>
-        <p>
-          newhaven.io is an aggregator for all hacker-related stuff going
-          on in New Haven, CT. We’re just getting started and could use
+<div ng-app='newhavenIO'>
+ <header id="masthead">
+    <div class="row">
+    	<div class="sixteen columns">
+    		<div class="welcome">
+			    <h2><strong>Welcome to newhaven.io</strong></h2>
+	        <p>Newhaven.io is an aggregator for all hacker-related stuff going
+	          on in New Haven, CT. We’re just getting started and could use
           your help. If you’re interested in programming, the intertubes,
           and whatnot, please get in touch.
-          Please follow us on Twitter at <a href="http://www.twitter.com/newhavenio">@newhavenio</a>;
+          Follow us on Twitter at <a href="http://www.twitter.com/newhavenio">@newhavenio</a>;
           subscribe to our 
           <a href="http://groups.google.com/forum/?fromgroups#!forum/newhavenio">Google Group</a>;
           and join the
-          <a href="http://www.meetup.com/newhavenio/">Meetup.com Group</a>.
-        </p>
-
-        <p>
-          If you want to help us build something here, please start
-          contributing to <a href="http://github.com/newhavenio">our repo
-          on GitHub</a>.
-        </p>
-
-        <p>newhaven.io is made by people from:</p>
-        <ul>
-          <li>
-            <a href="http://digitalsurgeons.com">
-              Digital Surgeons
-            </a>
-          </li>
-          <li>
-            <a href="http://newhavenrb.org">
-              NewHaven.rb
-            </a>
-          </li>
-          <li>
-            <a href="http://www.meetup.com/a100-dev-community/">
-              A100 Developer Community
-            </a>
-          </li>
-        </ul>
+          <a href="http://www.meetup.com/newhavenio/">Meetup.com Group</a>.</p>
+	          
+    		</div>
+    	</div>
     </div>
-
-  </div>
-  <div class="nine columns" ng-controller="MeetupEventController">
-    <div class="brick" data-ng-repeat="event in events| orderBy:'time' | limitTo: 10">
-      <h2><a href="{[{event.event_url}]}">{[{event.name}]}</a></h2>
-      <div class="row wrapper">
-        <div class="ten columns">
-          <div class="left">
-            <p><strong>{[{event.venue.name}]}</strong>
-            <br>
-              <a href="http://maps.google.com/?q={[{event.venue.address_1}]}">
-                {[{event.venue.address_1}]}
-              </a>
-            </p>
-            <div data-ng-bind-html-unsafe="event.description"></div>
-          </div>
-        </div>
-        <div class="six columns">
-          <div class="right">
-            <p>
-              <strong>{[{event.time | date:'EEE MM/dd @ h:mma'}]}</strong>
-              <span data-ng-switch data-on="event.daysAway">
+  </header>
+  <div class="container">
+  	<div class="row">
+	  <div class="sixteen columns centered" ng-controller="MeetupEventController">
+	    <div class="brick" data-ng-repeat="event in events| orderBy:'time' | limitTo: 10">
+	      <h2>
+	      	<a href="{[{event.event_url}]}">{[{event.name}]}</a>
+					<span class="fright">
+						{[{event.time | date:'EEE MM/dd @ h:mma'}]}
+						<span data-ng-switch data-on="event.daysAway">
                 <span ng-switch-when="0">
-                  TODAY!
+                  <strong>TODAY!</strong>
                 </span>
                 <span ng-switch-when="1">
-                  TOMORROW!
+                  <strong>TOMORROW!</strong>
                 </span>
-              </span>
-            </p>
-            <p>
-              <a href="{[{event.event_url}]}">RSVP</a> on Meetup.com<br>
-              ({[{event.yes_rsvp_count}]} already RSVP'd)
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+            </span>
+					</span>
+				</h2>
+	      <div class="row wrapper">
+	        <div class="ten columns">
+	          <div class="left">
+	            <p><strong>{[{event.venue.name}]}</strong>
+	            <br>
+	              <a href="http://maps.google.com/?q={[{event.venue.address_1}]}">
+	                {[{event.venue.address_1}]}
+	              </a>
+	            </p>
+	            <div data-ng-bind-html-unsafe="event.description"></div>
+	          </div>
+	        </div>
+	        <div class="six columns">
+	          <div class="right">
+	            <p>
+	             <strong><a href="{[{event.event_url}]}">RSVP</a> on Meetup.com</strong><br>
+	              ({[{event.yes_rsvp_count}]} already RSVP'd)
+	            </p>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+  </div>
   </div>
 </div>
 
