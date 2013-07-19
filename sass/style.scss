@@ -33,6 +33,11 @@ html, body {
 	float: left;
 }
 
+/* prevent the Angular template from being briefly displayed by the browser in its raw (uncompiled) form while your application is loading */
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+  
 .navbar {
   margin-bottom: 0;
 }
