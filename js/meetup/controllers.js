@@ -1,4 +1,4 @@
-var Site = angular.module('newhavenIO',[]);
+var Site = angular.module('newhavenIO', ['ordinalFilter']);
 
 // Jekyll brackets conflict with Angularjs's.
 // So, make Angular use this triplet instead.
