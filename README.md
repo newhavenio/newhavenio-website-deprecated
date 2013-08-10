@@ -1,8 +1,9 @@
 newhaven.io
 ===========
 
-This is the code for the [newhaven.io](http://www.newhaven.io) website.  
-It's just a placeholder right now. If you'd like to help build the
+This is the code for the
+[newhaven.io](http://www.newhaven.io) website. It's just a
+placeholder right now. If you'd like to help build the
 site (and the New Haven hacker community) please get in touch.  You can
 find fellow New Haven hackers via
 
@@ -126,7 +127,9 @@ you can deploy using
 It is likely most convenient to keep your credentials in a `.env`
 file, which is ignored in `.gitignore`, and to run the grunt deployment
 task using [foreman](https://github.com/ddollar/foreman) or one of
-its variants.
+its variants.  E.g.
+
+    foreman run grunt deploy
 
 ## Contributors
 
