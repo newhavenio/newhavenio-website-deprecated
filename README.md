@@ -10,92 +10,128 @@ find fellow New Haven hackers via
 * the [newhaven.io Twitter account](http://twitter.com/newhavenio)
 * the #newhavenio IRC channel on Freenode.
 
-## TODO
-
-* create small, simple logo ala twitter, apple
-
 ## Requirements
 
-The newhavenio.io website is statically generated and hosted on AWS's S3
-service.  To make changes to the website, you'll need a few
-[Ruby](http://www.ruby-lang.org/) tools in your environment.  The following
+The newhaven.io website is a single-page
+[Angular.js](http://angularjs.org/) application
+that is hosted on [S3](http://aws.amazon.com/s3/)
+as a set of static assets.  Those static
+assets are built locally using
+[Yeoman](http://yeoman.io/),
+[Bower](http://bower.io/), and
+[Grunt](http://gruntjs.com/) as described in the
+[Yeoman documentation](https://github.com/yeoman/yeoman/wiki/Getting-Started).
+
+To make changes to the website, you'll need a few
+tools in your environment, mostly Yeoman, Bower, Grunt
+and their dependencies, all of which are based on the
+[node.js](http://nodejs.org/) stack.  The following
 instructions will help you install those tools.  (These instructions are
 a tad pedantic for the benefit of those who would like to contribute
 but perhaps have less development experience.)
 
-### Setting up your Ruby environment
+### Installing node and npm
 
-    bundle # this should get the right gems setup
-...todo.  Deps are in the `.rvmrc` file.
+If you're on a mac, it's likely easiest to install node via
+[homebrew](http://brew.sh/).  If you're on another *nix machine,
+you can likely figure this out for yourself.  If you're on windows,
+you're on your own.
 
-## About thew newhaven.io site
+    brew install node
 
-newhaven.io is powered in part by [Gumby 2](http://gumbyframework.com/), a
-front-end toolkit created by New Haven's own
-[Digital Surgeons](http://www.digitalsurgeons.com/).  The design
-was created by [Adam Soffer](http://github.com/ads1018).
+Then, you'll need to install [npm](https://npmjs.org/),
+the node package manager.
 
-Gumby 2 uses Sass and Compass which you'll need to install to get your environment
-set up correctly.  (See the section above on setting up your environment.)
-Gumby 2 has a nice set of docs you can check out [here](http://gumbyframework.com/docs/sass/).
+    curl https://npmjs.org/install.sh | sh
 
-## Running locally
+### Checking out this repo
 
-[Usage · mojombo/jekyll Wiki](https://github.com/mojombo/jekyll/wiki/usage#running-jekyll)
+First, you'll need to check out this repository.
 
-    jekyll --server
-    open localhost:4000
+    git clone https://github.com/newhavenio/newhavenio-website
+    cd newhavenio-website
 
-## Building and deploying
+### Installing the dependencies
 
-To build the .css assets, run
+The server-side dependencies for the newhaven.io website (those
+things we need to build the site) are enumerated in `package.json`.
+To install the dependencies do
 
-    compass compile
+    npm install
 
-To deploy the site you'll need [s3cmd](http://s3tools.org/s3cmd), which you can install
-via homebrew, e.g.
+from the copy of the repo that you checked out.  That will create
+a directory called `node_modules`, which is ignored via our `.gitignore`
+file.  The `node_modules` directory contains a subdirectory called 
+`.bin` into which a number of executable scripts are placed.  We
+need to run some of these during
+our build process, so we want to make sure they're in our path.
+If you're using a Bourne-decended shell (bash, zsh, etc.) you can
+add the `.bin` directory to your path like
 
-    brew install s3cmd
+    export PATH="./node_modules/.bin:$PATH"
 
-or, via bundle/gem.  You'll also need a `.s3cfg` file containing at least
-the following lines
+*Note:* you'll probably want to do that every time you work on the site.
 
-    [default]
-    access_key=YOUR-ACCESS-KEY-GOES-HERE-YO
-    secret_key=YOUR-SECRET-KEY-GOES-HERE-YO
+Now we want to install our client-side dependencies, like
+[jQuery](http://jquery.com/), Angular, etc.  These are enumerated in
+`bower.json`. You can install those dependencies via
 
-You can get deployment keys from Kyle.  To run a deployment, do 
+    bower install
 
-    sh ./deploy.sh
+which populates the directory `app/bower_components`.  Now you've
+got everything you need to test, build, and deploy the site.
 
-## Creating a new event
+## Developing
 
-To make a new event, add a file to the `events/_posts` directory.
-The file name should start with a date and end with `md`,
-e.g. `2013-03-04-my-event.md`.  The file's content should look
-something like the following:
+### Working on the site
 
-    ---
-    layout: event
-    title: March NewHaven.rb Social
-    location: Christies
-    time: 6:00 PM
-    address: 261 Orange St, New Haven, CT
-    host: NewHaven.rb
-    host_twitter: newhavenrb
-    ---
-    Get some drinks & dinner in New Haven, and talk about your
-    start-up, your open source project, or whatever. It's easy.
-    You can
-    [RSVP](http://www.meetup.com/newhavenrb/events/106769762/)
-    on Meetup.com.
+You can preview any changes you're making live by running
 
-The top-matter is in [Yaml](http://www.yaml.org/) format and the
-"content" is in [Markdown](http://daringfireball.net/projects/markdown/)
-format.  These fields are used to render information about the event
-on the newhaven.io website.
+    grunt server
+
+This will open up a browser window and automatically refresh
+as you make changes to different files.
+
+### Testing the site
+
+There are a handful of tests, just for grins.  To run these,
+you'll need [PhantomJS](http://phantomjs.org/), which you can
+install by running
+
+    brew install phantomjs
+
+Then, you can run the tests like
+
+    grunt test
+
+### Building the site
+
+To build the site, run
+
+    grunt build
+
+This will compile, concatenate, minify, and version all our
+assets, placing them into the `dist` directory.
+
+### Deploying the site
+
+To deploy the site, you'll need to set two environment variables:
+`AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.  These are the
+credentials that allow you to write to the www.newhaven.io bucket
+on S3.  If you're on of these people that has these credentials,
+you can deploy using
+
+    grunt deploy
+
+It is likely most convenient to keep your credentials in a `.env`
+file, which is ignored in `.gitignore`, and to run the grunt deployment
+task using [foreman](https://github.com/ddollar/foreman) or one of
+its variants.
 
 ## Contributors
+
+The following people generously donated their time to building
+the newhaven.io website.  You should generously donate yours too!
 
 * [Adam Soffer](http://github.com/ads1018)
 * [Joel Nimety](https://github.com/jnimety)
@@ -103,8 +139,6 @@ on the newhaven.io website.
 * [Zach Morek](https://github.com/ZachBeta)
 * [Krishna R. Sampath](https://github.com/KrishnaRSampath)
 * [Kyle Jensen](http://github.com/kljensen)
-
-Your name could be here!
 
 ## License
 

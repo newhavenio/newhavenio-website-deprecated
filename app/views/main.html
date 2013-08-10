@@ -1,0 +1,64 @@
+ <header id="masthead">
+    <div class="row">
+    	<div class="sixteen columns">
+    		<div class="welcome">
+			    <h2><strong>Welcome to newhaven.io</strong></h2>
+	        <p>Newhaven.io is an aggregator for all developer-related stuff going
+	          on in New Haven, CT. If you’re interested in programming, the intertubes,
+          and whatnot, this is the group for you.
+          Follow us on Twitter at <a href="http://www.twitter.com/newhavenio">@newhavenio</a>;
+          subscribe to our 
+          <a href="http://groups.google.com/forum/?fromgroups#!forum/newhavenio">Google Group</a>;
+          and join the
+          <a href="http://www.meetup.com/newhavenio/">Meetup.com Group</a>.</p>
+	          
+    		</div>
+    	</div>
+    </div>
+  </header>
+  <div class="container">
+  	<div class="row">
+	  	<div class="sixteen columns centered" ng-controller="MeetupCtrl">
+	    <div class="brick" data-ng-repeat="event in events| orderBy:'time' | limitTo: 10">
+	        <h2>
+		      	<a href="{{event.event_url}}">{{event.name}}</a>
+				  </h2>
+	      <div class="row wrapper">
+	        <div class="ten columns">
+	          <div class="left">
+	            <div data-ng-bind-html-unsafe="event.description"></div>
+	          </div>
+	        </div>
+	        <div class="six columns">
+	          <div class="right">
+							<p>
+								<strong>When: </strong>
+								<span data-ng-switch data-on="event.daysAway">
+									<span ng-switch-when="0">
+										Today!
+									</span>
+									<span ng-switch-when="1">
+										Tomorrow!
+									</span>
+								</span>
+
+								{{event.time | date:"EEEE, MMMM"}}&nbsp;{{event.time | date:"d" | ordinal }}
+								at&nbsp;{{event.time | date:"h:mma"}}
+							</p>
+	            <p data-ng-show="event.venue"><strong>Where: </strong>
+	              <a href="http://maps.google.com/?q={{event.venue.address_1}}">
+	              	{{event.venue.name}},
+	                {{event.venue.address_1}}
+	              </a>
+	            </p>
+	            <p>
+	             <strong>Who: </strong>
+	              <a href="{{event.event_url}}">{{event.yes_rsvp_count}} already RSVP'd</a>
+	            </p>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	 	  </div>
+  	</div>
+  </div>
