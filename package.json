@@ -33,7 +33,9 @@
     "grunt-cli": "~0.1.9",
     "bower": "~1.1.0",
     "grunt-s3": "~0.2.0-alpha.2",
-    "generator-angular": "~0.3.1"
+    "generator-angular": "~0.3.1",
+    "grunt-env": "~0.4.0",
+    "grunt-express-server": "~0.4.4"
   },
   "engines": {
     "node": ">=0.8.0 <0.10.*"

@@ -27,6 +27,32 @@ module.exports = function (grunt) {
   } catch (e) {}
 
   grunt.initConfig({
+    env: {
+      dev: {
+        STATIC_DIR: "app"
+      },
+      dist: {
+        STATIC_DIR: "dist"
+      },
+    },
+    express: {
+      options: {
+        script: 'app.js',
+        debug: true,
+        port: 9000,
+      },
+      dev: {
+        options: {
+          script: 'app.js'
+        }
+      },
+      dist: {
+        options: {
+          script: 'app.js',
+          background: false
+        }
+      }
+    },
     aws: {
       access_key: process.env.AWS_ACCESS_KEY_ID,
       secret_key: process.env.AWS_SECRET_ACCESS_KEY,
@@ -42,6 +68,18 @@ module.exports = function (grunt) {
       coffeeTest: {
         files: ['test/spec/{,*/}*.coffee'],
         tasks: ['coffee:test']
+      },
+      express: {
+        files: [
+          '<%= yeoman.app %>/{,*/}*.html',
+          '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
+          '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
+          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+        ],
+        options: {
+          nospawn: true
+        },
+        tasks: ['express']
       },
       livereload: {
         options: {
@@ -336,16 +374,20 @@ module.exports = function (grunt) {
 
   grunt.registerTask('server', function (target) {
     if (target === 'dist') {
-      return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
+      return grunt.task.run(['env:dist', 'build', 'open', 'express:dist']);
+      // return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
     }
 
     grunt.task.run([
+      'env:dev',
       'clean:server',
-      'concurrent:server',
-      'connect:livereload',
+      'express:dev',
+      // 'concurrent:server',
+      // 'connect:livereload',
       'open',
       'watch'
     ]);
+    process.stdout.write('wooot');
   });
 
   grunt.registerTask('test', [
