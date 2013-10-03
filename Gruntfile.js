@@ -79,7 +79,7 @@ module.exports = function (grunt) {
         options: {
           nospawn: true
         },
-        tasks: ['express']
+        tasks: ['express:dev']
       },
       livereload: {
         options: {
@@ -375,19 +375,15 @@ module.exports = function (grunt) {
   grunt.registerTask('server', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['env:dist', 'build', 'open', 'express:dist']);
-      // return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
     }
 
     grunt.task.run([
       'env:dev',
       'clean:server',
       'express:dev',
-      // 'concurrent:server',
-      // 'connect:livereload',
       'open',
       'watch'
     ]);
-    process.stdout.write('wooot');
   });
 
   grunt.registerTask('test', [
