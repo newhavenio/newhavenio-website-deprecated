@@ -4,7 +4,8 @@
   "dependencies": {
     "grunt-karma": "~0.4.5",
     "express": "3.4.0",
-    "ejs": "*"
+    "ejs": "*",
+    "passport-github": "~0.1.5"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
