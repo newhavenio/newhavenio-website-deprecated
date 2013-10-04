@@ -29,26 +29,26 @@ module.exports = function (grunt) {
   grunt.initConfig({
     env: {
       dev: {
-        STATIC_DIR: "app"
+        STATIC_DIR: "../app"
       },
       dist: {
-        STATIC_DIR: "dist"
+        STATIC_DIR: "../dist"
       },
     },
     express: {
       options: {
-        script: 'app.js',
+        script: './server/app.js',
         debug: true,
         port: 9000,
       },
       dev: {
         options: {
-          script: 'app.js'
+          script: './server/app.js'
         }
       },
       dist: {
         options: {
-          script: 'app.js',
+          script: './server/app.js',
           background: false
         }
       }
@@ -354,7 +354,7 @@ module.exports = function (grunt) {
           gzip: true,
           gzipExclude: ['.jpg', '.jpeg', '.png', '.ico']
         },
-        // Files to be uploaded.  The configuration of 
+        // Files to be uploaded.  The configuration of
         // grunt-s3 is silly in the sense that we need
         // to list directories individually because it
         // won't preserve paths when uploading.
