@@ -29,10 +29,14 @@ module.exports = function (grunt) {
   grunt.initConfig({
     env: {
       dev: {
-        STATIC_DIR: "../app"
+        STATIC_DIR: "../app",
+        GITHUB_CLIENT_ID: "a093ba3d0018f04a72a9",
+        GITHUB_CLIENT_SECRET: "cd45130f2d36cb0fa762e7cc85f4738cb91784ff"
       },
       dist: {
-        STATIC_DIR: "../dist"
+        STATIC_DIR: "../dist",
+        GITHUB_CLIENT_ID: "",
+        GITHUB_CLIENT_SECRET: ""
       },
     },
     express: {
