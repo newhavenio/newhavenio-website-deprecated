@@ -2,45 +2,15 @@
 /**
  * Module dependencies.
  */
-
 var express = require('express');
-var routes = require('./routes');
-var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 var passport = require('passport');
-var GitHubStrategy = require('passport-github').Strategy;
-
-/**
- * Serializing user object...apparently
- *
- * @link https://github.com/jaredhanson/passport-github/blob/master/examples/login/app.js#L10
- */
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
-});
-
-/**
- * Handle
- * @link https://github.com/jaredhanson/passport-github/blob/master/examples/login/app.js#L26
- */
-passport.use(new GitHubStrategy({
-    clientID: process.env.GITHUB_CLIENT_ID,
-    clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: "http://172.16.27.146:9000/auth/callback" // whooo, hard-coding!
-  },
-  function(accessToken, refreshToken, profile, done) {
-    // Code to verify user. Return prfile if verified.
-    // Here we're just verifying straight away.
-    return done(null, profile);
-  }
-));
+var ApiController = require('./controllers/api');
+var AuthController = require('./controllers/auth');
 
 var app = express();
+
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -53,7 +23,6 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser('newhaven.iosuperlargehadroncolliderkey'));
 app.use(express.session());
-// Passport init and session
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(app.router);
@@ -64,22 +33,39 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+
+/**
+ * Application home page
+ */
 app.get('/',  function(req, res){
   res.sendfile(app.get('static_dir') + "/index.html");
 });
 
-app.get('/me', function(req, res){
-    console.log(req.user); // Error app out if not set
-});
 
-app.get('/auth', passport.authenticate('github'));
-app.get('/auth/callback',
-    passport.authenticate('github', { failureRedirect: '/' }),
-    function(req, res) {
-        // Successful authentication, redirect home.
-        res.redirect('/');
-});
+/**
+ * Setup Business API routes
+ *
+ * POST /business       Create new business
+ * GET  /business       Show listing of businesses
+ * GET  /business/{id}  Show business by ID
+ */
+api = new ApiController(app);
+api.route();
 
+
+/**
+ * Setup Authentication routes
+ * using Github oAuth
+ *
+ * GET /auth           Redirect to Github for auth
+ * GET /auth/callback  Retrieve token from Github
+ * GET /me             Test route to get session-based user info
+ */
+auth = new AuthController(app);
+auth.init(passport).route();
+
+
+// Start server
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
