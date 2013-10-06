@@ -18,12 +18,12 @@ ApiController.prototype.route = function()
     // Create new business entry
     this.app.post('/business', function(req, res)
     {
-        req.send('posted new business');
+        res.send('posted new business');
     });
 
     this.app.get('/business', function(req, res)
     {
-        req.send('listing of businesses');
+        res.send('listing of businesses');
     });
 
     // Display a business entry
