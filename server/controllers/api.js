@@ -1,4 +1,5 @@
-var EventEmitter = require('events').EventEmitter;
+var EventEmitter = require('events').EventEmitter,
+    BusinessValidator = require('../lib/validation/business');
 
 function ApiController(app)
 {
@@ -7,6 +8,7 @@ function ApiController(app)
     EventEmitter.call(this);
 
     this.app = app;
+    this.validator = new BusinessValidator();
 }
 
 ApiController.prototype = Object.create(EventEmitter.prototype);
@@ -15,10 +17,20 @@ ApiController.prototype = Object.create(EventEmitter.prototype);
 // Setup Routes
 ApiController.prototype.route = function()
 {
+    var _this = this;
+
     // Create new business entry
     this.app.post('/business', function(req, res)
     {
-        res.send('posted new business');
+
+        if( ! _this.validator.valid(req) )
+        {
+            res.json( {status:'error', messages:_this.validator.errors()}, 400 );
+            return;
+        }
+
+        res.json({status:'success'});
+        return;
     });
 
     this.app.get('/business', function(req, res)
