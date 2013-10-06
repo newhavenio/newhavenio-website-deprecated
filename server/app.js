@@ -3,6 +3,7 @@
  * Module dependencies.
  */
 var express = require('express');
+var expressValidator = require('express-validator');
 var http = require('http');
 var path = require('path');
 var passport = require('passport');
@@ -20,6 +21,7 @@ app.set('view engine', 'ejs');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
+app.use(expressValidator());
 app.use(express.methodOverride());
 app.use(express.cookieParser('newhaven.iosuperlargehadroncolliderkey'));
 app.use(express.session());

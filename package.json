@@ -6,7 +6,8 @@
     "express": "3.4.0",
     "ejs": "*",
     "passport-github": "~0.1.5",
-    "passport": "~0.1.17"
+    "passport": "~0.1.17",
+    "express-validator": "~0.8.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
