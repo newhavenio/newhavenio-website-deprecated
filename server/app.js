@@ -3,13 +3,23 @@
  * Module dependencies.
  */
 var express = require('express');
+var fs = require('fs');
+
+// Initialize our MongoDB connection
+// and our models
+var mongoose = require('mongoose');
+var models_path = __dirname + '/models';
+fs.readdirSync(models_path).forEach( function(file){
+	require(models_path + '/' + file);
+});
+
+// Other dependencies...
 var expressValidator = require('express-validator');
 var http = require('http');
 var path = require('path');
 var passport = require('passport');
 var ApiController = require('./controllers/api');
 var AuthController = require('./controllers/auth');
-
 var app = express();
 
 
@@ -29,6 +39,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(app.router);
 app.use(express.static(app.get('static_dir')));
+
+// Database configuration
+mongoose.connect(process.env.MONGOHQ_URL);
 
 // development only
 if ('development' == app.get('env')) {

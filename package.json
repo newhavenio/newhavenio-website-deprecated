@@ -7,7 +7,8 @@
     "ejs": "*",
     "passport-github": "~0.1.5",
     "passport": "~0.1.17",
-    "express-validator": "~0.8.0"
+    "express-validator": "~0.8.0",
+    "mongoose": "~3.6.20"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
