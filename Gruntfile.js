@@ -28,16 +28,16 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     env: {
+      // Some environment variables.  Note that, you'll probably
+      // want to be running grunt with foreman or honcho in order
+      // to get your environment variables in .env.  We may find
+      // a better solution (js-only) later.
       dev: {
         STATIC_DIR: "../app",
-        GITHUB_CLIENT_ID: "a093ba3d0018f04a72a9",
-        GITHUB_CLIENT_SECRET: "cd45130f2d36cb0fa762e7cc85f4738cb91784ff"
       },
       dist: {
         STATIC_DIR: "../dist",
-        GITHUB_CLIENT_ID: "",
-        GITHUB_CLIENT_SECRET: ""
-      },
+      }
     },
     express: {
       options: {
