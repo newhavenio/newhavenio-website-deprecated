@@ -1,5 +1,10 @@
 var EventEmitter = require('events').EventEmitter,
-    GitHubStrategy = require('passport-github').Strategy;
+    GitHubStrategy = require('passport-github').Strategy,
+    mongoose = require('mongoose');
+
+// Get the User model from mongoose.  Assumes that
+// You've registered this model already.  See user.js.
+var User = mongoose.model('User');
 
 function AuthController(app)
 {
@@ -18,31 +23,69 @@ AuthController.prototype.init = function(passport)
     this.passport = passport;
 
     /**
-     * Serializing user object...apparently
+     * Passport session setup.
+     * To support persistent login sessions, Passport needs to be able to
+     * serialize users into and deserialize users out of the session. 
+     * This is as simple as storing the user '_id' when serializing, and finding
+     * the user by '_id' when deserializing. 
      *
      * @link https://github.com/jaredhanson/passport-github/blob/master/examples/login/app.js#L10
      */
     this.passport.serializeUser(function(user, done) {
-      done(null, user);
+      done(null, user._id);
     });
 
-    this.passport.deserializeUser(function(obj, done) {
-      done(null, obj);
+    this.passport.deserializeUser(function(user_id, done) {
+      // The `done` callback here accepts err and user,
+      // which are just what findOne will pass.
+      User.findOne({'_id': mongoose.Types.ObjectId(user_id)}, done);
     });
 
     /**
      * Use Github Auth Strategy
      * @link https://github.com/jaredhanson/passport-github/blob/master/examples/login/app.js#L26
      */
+    console.log(this.app);
     this.passport.use(new GitHubStrategy({
         clientID: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        callbackURL: "http://172.16.27.146:9000/auth/callback" // whooo, hard-coding!
+        callbackURL: process.env.GITHUB_CALLBACK_URL
       },
       function(accessToken, refreshToken, profile, done) {
-        // Code to verify user. Return prfile if verified.
-        // Here we're just verifying straight away.
-        return done(null, profile);
+
+        // Code to verify user. Return the user object
+        // if verified.
+
+        // Try to find a user with this GitHub ID.
+        User.findOne({'githubInfo.id': profile._json.id}, function(err, user){
+
+          // If we could not find a user, create one.
+          if (user === null){
+
+            console.log("Persisting new user");
+            user = new User;
+            user.githubAccessToken = accessToken;
+
+            // Note that, only some of the attributes
+            // of GitHub's `_json` attribute will be persisted,
+            // based on our User model. 
+            //
+            user.githubInfo = profile._json;
+
+            // Save the user
+            user.save(function(){
+              return done(err, user);
+            });
+
+          }else{
+
+            // We found a user with this Github ID
+            // in our database.  Return the user object.
+            return done(err, user);
+
+          };
+        });
+
       }
     ));
 
