@@ -27,10 +27,15 @@ var UserSchema = new Schema({
   email : { type: String, required: false, index: { unique: true } },
 
   // OAuth info.  We're using GitHub, perhaps others
-  // in the future.
+  // in the future.  Notice the `select` parameter here.
+  // By setting this to false, we won't get the 
+  // `githubAccess___` attributes back in queries
+  // by default.  This is to better protect this 
+  // information and not accidently return it in an
+  // API response.
   // 
-  githubAccessToken : { type: String, required: true },
-  githubAccessTokenExpired : { type: String, required: true, default: false},
+  githubAccessToken : { type: String, required: true, select: false},
+  githubAccessTokenExpired : { type: String, required: true, default: false, select: false},
 
   // Info we receive from GitHub after successful
   // OAuth callback.
@@ -48,15 +53,16 @@ var UserSchema = new Schema({
     company: String,
     blog: String,
     location: String,
-    email: String,
+    email: {type: String, select: false},
     hireable: Boolean,
-    bio: String,
-    created_at: String,
-    updated_at: String,
-    public_repos: Number,
-    followers: Number,
-    following: Number,
-    public_gists: Number,
+    // Not interested in storing these
+    // bio: String,
+    // created_at: String,
+    // updated_at: String,
+    // public_repos: Number,
+    // followers: Number,
+    // following: Number,
+    // public_gists: Number,
   }
 });
 
@@ -71,5 +77,4 @@ UserSchema.pre('save', function(next) {
   return next();
 });
 
-console.log('**********************************');
 module.exports = mongoose.model('User', UserSchema);
