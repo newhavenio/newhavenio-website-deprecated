@@ -47,7 +47,9 @@ module.exports = function (grunt) {
       },
       dev: {
         options: {
-          script: './server/app.js'
+          script: './server/app.js',
+          livereload: true,
+          serverreload: true
         }
       },
       dist: {
@@ -74,15 +76,8 @@ module.exports = function (grunt) {
         tasks: ['coffee:test']
       },
       express: {
-        files: [
-          '<%= yeoman.app %>/{,*/}*.html',
-          '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
-          '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
-        ],
-        options: {
-          nospawn: true
-        },
+        files: ['server/{,*/}*.js'],
+        options: {nospawn: true},
         tasks: ['express:dev']
       },
       livereload: {
