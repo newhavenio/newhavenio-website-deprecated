@@ -28,6 +28,7 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('static_dir', path.join(__dirname, process.env.STATIC_DIR))
 app.set('view engine', 'ejs');
+app.use(express.static(app.get('static_dir')));
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
@@ -38,7 +39,6 @@ app.use(express.session());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(app.router);
-app.use(express.static(app.get('static_dir')));
 
 // Database configuration
 mongoose.connect(process.env.MONGOHQ_URL);
