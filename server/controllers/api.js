@@ -19,8 +19,8 @@ ApiController.prototype.route = function()
 {
     var _this = this;
 
-    // Create new business entry
-    this.app.post('/business', function(req, res)
+    // Create new companies entry
+    this.app.post('/companies', function(req, res)
     {
 
         if( ! _this.validator.valid(req) )
@@ -33,7 +33,17 @@ ApiController.prototype.route = function()
         return;
     });
 
-    this.app.get('/business', function(req, res)
+    this.app.get('/companies', function(req, res)
+    {
+        res.send('listing of companies');
+    });
+
+    // Display a companies entry
+    this.app.get('/companies/:id', function(req, res)
+    {
+        res.send("show companies: "+req.param('id'));
+    });
+
     {
         res.send('listing of businesses');
     });
