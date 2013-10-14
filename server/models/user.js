@@ -66,6 +66,23 @@ var UserSchema = new Schema({
   }
 });
 
+// Instance method, is this user admin?
+UserSchema.methods.isAdmin = function () {
+  result = this.roles.indexOf('admin') == -1 ? false : true;
+  return result;
+}
+
+
+// Instance method, is this user admin or does this
+// user have the same id as that passed?
+UserSchema.methods.isAdminOrSameId = function (userId) {
+  var result = this.isAdmin();
+  if (!result && userId == this.id){
+    result = true;
+  }
+  return result;
+}
+
 // Our pre-save hooks for the user model.
 // 
 UserSchema.pre('save', function(next) {

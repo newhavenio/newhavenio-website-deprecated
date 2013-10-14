@@ -32,12 +32,14 @@ AuthController.prototype.init = function(passport)
      * @link https://github.com/jaredhanson/passport-github/blob/master/examples/login/app.js#L10
      */
     this.passport.serializeUser(function(user, done) {
+      console.log("serializing user with user_id", user._id);
       done(null, user._id);
     });
 
     this.passport.deserializeUser(function(user_id, done) {
       // The `done` callback here accepts err and user,
       // which are just what findOne will pass.
+      console.log("Trying to get user from user_id = ", user_id);
       User.findOne({'_id': mongoose.Types.ObjectId(user_id)}, done);
     });
 
@@ -102,11 +104,12 @@ AuthController.prototype.route = function()
         this.passport.authenticate('github', { failureRedirect: '/?error=yes' }),
         function(req, res) {
             // Successful authentication, redirect home.
-            res.redirect('/?error=no');
+            res.redirect('/');
     });
 
     this.app.get('/me', function(req, res)
     {
+        console.log("user is ", req.user);
         res.send(req.user);
     });
 

@@ -57,6 +57,14 @@ ApiController.prototype.route = function()
     // individual users.
     var userDetailRoute = '/users/:id([a-zA-Z0-9]{24})'
 
+    // Return JSON representation of the user that
+    // is currently logged in.
+    this.app.get('/users/me', function(req, res)
+    {
+        res.send(req.user);
+        // res.send((req.user == null) ? {} : req.user);
+    });
+
     // Display a user entry
     this.app.get(userDetailRoute, function(req, res)
     {
@@ -65,9 +73,9 @@ ApiController.prototype.route = function()
         // instead of Mongoose objects with all their special
         // methods and such, which we don't need.
 
-        var user_id = req.param('id');
+        var user_id = mongoose.Types.ObjectId(req.param('id'));
         User
-            .findOne({'_id': mongoose.Types.ObjectId(user_id)})
+            .findOne({'_id': user_id})
             .lean()
             .exec(function(err, user){
                 if (user != null){
@@ -76,6 +84,25 @@ ApiController.prototype.route = function()
                     res.status(404).send("No such user");
                 }
             });
+    });
+
+    // Delete a user
+    this.app.delete(userDetailRoute, function(req, res)
+    {
+        var user_id = mongoose.Types.ObjectId(req.param('id'));
+        if (req.user && req.user.isAdminOrSameId(user_id)){
+            User
+                .findByIdAndRemove(user_id, function(err, user){
+                    if (err){
+                        res.send(err);
+                    }else{
+                        res.send({'_id': req.param('id'), deleted: true});
+                    }
+                });
+        }else{
+            res.status(401).send("Not permitted");
+        }
+        return;
     });
 
     this.app.get('/users', function(req, res)

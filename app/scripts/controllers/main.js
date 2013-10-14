@@ -1,10 +1,5 @@
 'use strict';
 
 angular.module('nhvioApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('MainCtrl', ['$scope', 'UserService', function ($scope, UserService) {
+  }]);

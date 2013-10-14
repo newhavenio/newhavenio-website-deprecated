@@ -46,7 +46,7 @@
 
 <body data-ng-app="nhvioApp">
   <div class="main-wrapper">
-    <header class="navbar" id="main-nav">
+    <header class="navbar" id="main-nav" data-ng-controller="MenuCtrl">
       <a id="githubforkme" href="https://github.com/newhavenio/newhavenio-website"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
       <div class="row">
         <a class="toggle" gumby-trigger="#main-nav > .row > ul" href="#"><i class="icon-menu"></i></a>
@@ -54,9 +54,17 @@
           <a href="#">new<strong>haven</strong>.io</a>
         </h1>
         <ul class="seven columns">
-          <li><a href="#/irc">IRC</a></li>
+          <li><a href="#/developers">Developers</a></li>
+          <li><a href="#/companies">Companies</a></li>
           <li><a href="#/about">About</a></li>
-          <li class="last"><a href="http://groups.google.com/forum/?fromgroups#!forum/newhavenio">Contact</a></li>
+          <li data-ng-hide="me._id">
+            <form action="/auth">
+              <input type="submit" value="Login with GitHub">
+            </form>
+          </li>
+          <li class="last">
+            <a href="http://groups.google.com/forum/?fromgroups#!forum/newhavenio">Contact</a>
+          </li>
         </ul>
       </div>
     </header>
@@ -78,18 +86,24 @@
 
   <!-- JavaScript at the bottom for fast page loading -->
   <!-- build:js({.tmp,app}) scripts/scripts.js -->
-  <script src="/bower_components/modernizr/modernizr.js"></script>
+  <script src="bower_components/modernizr/modernizr.js"></script>
   <script src="bower_components/jquery/jquery.js"></script>
+  <script src="bower_components/lodash/lodash.js"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
   <script src="bower_components/angular-cookies/angular-cookies.js"></script>
   <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/restangular/dist/restangular.js"></script>
   <script src="scripts/lib/gumby.min.js"></script>
   <script src="scripts/app.js"></script>
   <script src="scripts/controllers/main.js"></script>
   <script src="scripts/controllers/meetup.js"></script>
   <script src="scripts/filters/ordinalFilter.js"></script>
   <script src="scripts/services/meetupService.js"></script>
+  <script src="scripts/controllers/users.js"></script>
+  <script src="scripts/services/userService.js"></script>
+  <script src="scripts/controllers/user.js"></script>
+  <script src="scripts/controllers/menu.js"></script>
   <!-- endbuild -->
 
 <script type="text/javascript">
