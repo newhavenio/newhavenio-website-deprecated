@@ -5,11 +5,6 @@
 //
 angular.module('nhvioApp')
   .controller('MeetupCtrl', ["$scope", "$http", "meetupService", function ($scope, $http, meetupService) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
 	  $scope.events = [];
 
     // Array of Meetup.com event feeds
@@ -24,12 +19,6 @@ angular.module('nhvioApp')
       }
     ];
     $scope.events = meetupService.getEvents(feeds);
-
-  //   // Watch the meetupService for changes
-  //   // and pull them into the current scope.
-		// $scope.$watch( meetupService.events, function ( drawing ) {
-		//   $scope.events = meetupService.events;
-		// });
 
   }]);
 

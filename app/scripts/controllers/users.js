@@ -1,5 +1,7 @@
 'use strict';
 
+// Users controller, in charge of the users list view.
+// 
 angular.module('nhvioApp')
   .controller('UsersCtrl', ['$scope', 'UserService', function ($scope, UserService) {
     $scope.users = UserService.getUsers();

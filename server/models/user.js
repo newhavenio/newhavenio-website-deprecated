@@ -1,9 +1,11 @@
 // 
-// Defines the MongoDB model for our users.
+// Defines the Mongoose/MongoDB model for our users.
 // 
-// Just to be safe, we're encrypting the OAuth
-// provider IDs and tokens. Based in part on
-// https://github.com/hiattp/express3-mongodb-bootstrap-demo/blob/master/models/user.js
+// Obviously, Mongodb is the database that we're using
+// and Mongoose is the ORM.
+// * Mongoose: http://mongoosejs.com/docs/guide.html
+// 
+// 
 // 
 var mongoose = require('mongoose')
   , Schema = mongoose.Schema;
@@ -66,15 +68,17 @@ var UserSchema = new Schema({
   }
 });
 
-// Instance method, is this user admin?
+// Instance method: is this user admin?
+// 
 UserSchema.methods.isAdmin = function () {
   result = this.roles.indexOf('admin') == -1 ? false : true;
   return result;
 }
 
 
-// Instance method, is this user admin or does this
+// Instance method: is this user admin or does this
 // user have the same id as that passed?
+// 
 UserSchema.methods.isAdminOrSameId = function (userId) {
   var result = this.isAdmin();
   if (!result && userId == this.id){

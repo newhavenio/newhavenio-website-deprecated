@@ -26,8 +26,13 @@ var app = express();
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
-app.set('static_dir', path.join(__dirname, process.env.STATIC_DIR))
 app.set('view engine', 'ejs');
+
+// Handle static content first
+app.set('static_dir', path.join(__dirname, process.env.STATIC_DIR))
+app.use(express.static(app.get('static_dir')));
+
+// Handle a bunch of other crap
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
@@ -37,8 +42,9 @@ app.use(express.cookieParser(process.env.COOKIE_SECRET));
 app.use(express.session());
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Attach our routes, which are mounted below
 app.use(app.router);
-app.use(express.static(app.get('static_dir')));
 
 // Database configuration
 mongoose.connect(process.env.MONGOHQ_URL);
@@ -80,7 +86,7 @@ auth = new AuthController(app);
 auth.init(passport).route();
 
 
-// Start server
+// Start the server
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });

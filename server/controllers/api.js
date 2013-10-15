@@ -3,7 +3,6 @@ var EventEmitter = require('events').EventEmitter,
     mongoose = require('mongoose'),
     passport = require('passport');
 
-var User = mongoose.model('User');
 
 function ApiController(app)
 {
@@ -23,6 +22,10 @@ ApiController.prototype.route = function()
 {
     var _this = this;
 
+    // *********************************************
+    // Company API
+    // *********************************************
+
     // Create new companies entry
     this.app.post('/companies', function(req, res)
     {
@@ -37,21 +40,28 @@ ApiController.prototype.route = function()
         return;
     });
 
+    // GET a list of companies
+    // 
     this.app.get('/companies', function(req, res)
     {
         res.send('listing of companies');
     });
 
-    // Display a companies entry
+    // GET a particular company
+    // 
     this.app.get('/companies/:id', function(req, res)
     {
         res.send("show companies: "+req.param('id'));
     });
 
-    // 
+    // *********************************************
     // User management API below here.
-    // 
-    var userSelect = ''
+    // *********************************************
+
+    // Get the User model.  This assumes that the model
+    // has already been registered on the mongoose object.
+    //
+    var User = mongoose.model('User');
 
     // This route uses Mongodb ids to identify our
     // individual users.
@@ -62,10 +72,10 @@ ApiController.prototype.route = function()
     this.app.get('/users/me', function(req, res)
     {
         res.send(req.user);
-        // res.send((req.user == null) ? {} : req.user);
     });
 
-    // Display a user entry
+    // GET a single user.
+    // 
     this.app.get(userDetailRoute, function(req, res)
     {
         // Get a user by their Mongodb ID.  Here, the .lean
@@ -87,13 +97,23 @@ ApiController.prototype.route = function()
     });
 
     // Delete a user
+    // 
     this.app.delete(userDetailRoute, function(req, res)
     {
         var user_id = mongoose.Types.ObjectId(req.param('id'));
+
+        // Deletion requires that the request comes from a user
+        // that is logged in and is either an admin user or 
+        // has the same id as the person who's being deleted.
+        //
         if (req.user && req.user.isAdminOrSameId(user_id)){
             User
                 .findByIdAndRemove(user_id, function(err, user){
                     if (err){
+
+                        // TODO: Figure out what kinds of errors
+                        // this can possibly return. Set HTTP status
+                        // appropriately.
                         res.send(err);
                     }else{
                         res.send({'_id': req.param('id'), deleted: true});
@@ -105,6 +125,8 @@ ApiController.prototype.route = function()
         return;
     });
 
+    // Get a list of users
+    //
     this.app.get('/users', function(req, res)
     {
         User.find().lean().exec(function(err, users){
@@ -115,22 +137,6 @@ ApiController.prototype.route = function()
             }
         });
     });
-
-    // TODO - we need API endpoints for user DELETE
-    // and PUT.  These would require that the currently
-    // logged in user has the same id as the user 
-    // they're trying to see.
-    this.app.get('/protected/',
-        function(req, res)
-        {
-            if (req.user == null) {
-                res.status(401);
-                return
-            };
-
-            res.send("kyle test");
-        }
-    );
 
     return this;
 };
