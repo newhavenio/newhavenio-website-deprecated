@@ -8,6 +8,7 @@ angular.module('nhvioApp')
   .service('UserService', ['Restangular', '$q', function UserService(Restangular, $q) {
     var cachedUserList = null;
 
+    // Get a list of all users from the server
     var getUsers = function(){
     	// Create a promise representing the result we'll return.
 		var deferred = $q.defer();
@@ -16,6 +17,8 @@ angular.module('nhvioApp')
     	});
     	return deferred.promise;
     }
+
+    // Get a particular user, by id, from the server
     var getUser = function(userId){
     	// Create a promise representing the result we'll return.
 		var deferred = $q.defer();
@@ -25,6 +28,11 @@ angular.module('nhvioApp')
     	});
     	return deferred.promise;
     }
+
+    // Get myself from the server.  Here, we don't need
+    // to specify an id because the server will know who
+    // we are by our session credentials in the cookie
+    // accompanying this request.
     var getMe = function(){
         return getUser('me');
     }
