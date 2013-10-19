@@ -37,7 +37,7 @@
   <div class="main-wrapper">
 
     <!-- The header is controlled by the MenuCtrl defined in  -->
-    <header class="navbar" id="main-nav" data-ng-controller="MenuCtrl">
+    <header class="navbar" id="main-nav">
       <a id="githubforkme" href="https://github.com/newhavenio/newhavenio-website"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
       <div class="row">
         <a class="toggle" gumby-trigger="#main-nav > .row > ul" href="#"><i class="icon-menu"></i></a>
@@ -48,16 +48,6 @@
           <li><a href="#/developers">Developers</a></li>
           <li><a href="#/companies">Companies</a></li>
           <li><a href="#/about">About</a></li>
-
-          <!--
-            If the "me" variable is "falsy" in the scope
-            show a login button that takes them to GitHub.
-           -->
-          <li data-ng-hide="me._id">
-            <form action="/auth">
-              <input type="submit" value="Login with GitHub">
-            </form>
-          </li>
 
           <li class="last">
             <a href="http://groups.google.com/forum/?fromgroups#!forum/newhavenio">Contact</a>
@@ -76,7 +66,19 @@
     </div>
     <div class="push"></div>
   </div>
-  <footer class="container">
+  <footer class="container" data-ng-controller="MenuCtrl">
+    <div class="row">
+      <!--
+        If the "me" variable is "falsy" in the scope
+        show a login button that takes them to GitHub.
+       -->
+      <div class="medium primary btn icon-left entypo icon-github" data-ng-hide="me._id">
+        <a href="/auth">Login with GitHub</a>
+      </div>
+      <div class="medium primary btn icon-left entypo icon-logout" data-ng-show="me._id">
+        <a href="">Logout</a>
+      </div>
+    </div>
   	<div class="row">
 	    <ul class="clearfix">
 	      <li><a href="#/irc">irc&#8194;</a>/</li>
