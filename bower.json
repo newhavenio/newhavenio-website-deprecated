@@ -11,7 +11,7 @@
     "angular-resource": "~1.0.7",
     "angular-cookies": "~1.0.7",
     "angular-sanitize": "~1.0.7",
-    "gumby": "~2.4.7",
+    "gumby": "~2.5.13",
     "restangular": "~1.1.6"
   },
   "devDependencies": {
