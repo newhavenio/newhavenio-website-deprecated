@@ -66,6 +66,17 @@ module.exports = function (grunt) {
       access: 'public-read'
     },
     yeoman: yeomanConfig,
+    sass: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/sass',
+          src: ['*.scss'],
+          dest: '<%= yeoman.app %>/css',
+          ext: '.css'
+        }]
+      }
+    },
     watch: {
       coffee: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
