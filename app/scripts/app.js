@@ -11,6 +11,10 @@ app.config(function ($routeProvider) {
         templateUrl: 'views/users.html',
         controller: 'UsersCtrl'
       })
+      .when('/developers/:developerId/edit', {
+        templateUrl: 'views/user-edit.html',
+        controller: 'UserEditCtrl'
+      })
       .when('/developers/:developerId', {
         templateUrl: 'views/user.html',
         controller: 'UserCtrl'

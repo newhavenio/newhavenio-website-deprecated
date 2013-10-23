@@ -1,8 +1,19 @@
-<p>This is the users view.</p>
-<ul>
-	<li data-ng-repeat="user in users">
-		<img data-ng-src="{{user.githubInfo.avatar_url}}">
-		{{user.githubInfo.name}}
-		<a href="#/developers/{{user._id}}">edit</a>
-	</li>
-</ul>
+<!-- <div class="about row">
+  <div class="sixteen columns">
+    <div class="brick">
+      <h2><strong>About</strong></h2>
+ -->
+<div class="about row">
+  <div class="sixteen columns brick">
+    <h2><strong>New Haven Developers</strong></h2>
+
+    <ul style="display:block" class="developers">
+      <li class="user" data-ng-repeat="user in users">
+        <img data-ng-src="{{user.githubInfo.avatar_url}}">
+        {{user.githubInfo.name}}
+        <!-- <a href="#/developers/{{user._id}}">edit</a> -->
+      </li>
+
+    </ul>
+  </div>
+</div>

@@ -32,14 +32,12 @@ AuthController.prototype.init = function(passport)
      * @link https://github.com/jaredhanson/passport-github/blob/master/examples/login/app.js#L10
      */
     this.passport.serializeUser(function(user, done) {
-      console.log("serializing user with user_id", user._id);
       done(null, user._id);
     });
 
     this.passport.deserializeUser(function(user_id, done) {
       // The `done` callback here accepts err and user,
       // which are just what findOne will pass.
-      console.log("Trying to get user from user_id = ", user_id);
       User.findOne({'_id': mongoose.Types.ObjectId(user_id)}, done);
     });
 
@@ -47,7 +45,6 @@ AuthController.prototype.init = function(passport)
      * Use Github Auth Strategy
      * @link https://github.com/jaredhanson/passport-github/blob/master/examples/login/app.js#L26
      */
-    console.log(this.app);
     this.passport.use(new GitHubStrategy({
         clientID: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
@@ -64,7 +61,7 @@ AuthController.prototype.init = function(passport)
           // If we could not find a user, create one.
           if (user === null){
 
-            console.log("Persisting new user");
+            console.log("Creating new user");
             user = new User;
             user.githubAccessToken = accessToken;
 
@@ -73,6 +70,10 @@ AuthController.prototype.init = function(passport)
             // based on our User model. 
             //
             user.githubInfo = profile._json;
+            user.populateFromGithub();
+
+            // Just testing this
+            user.isNew = true;
 
             // Save the user
             user.save(function(){
@@ -104,12 +105,12 @@ AuthController.prototype.route = function()
         this.passport.authenticate('github', { failureRedirect: '/?error=yes' }),
         function(req, res) {
             // Successful authentication, redirect home.
-            res.redirect('/');
+            var url = '/';
+            res.redirect(url);
     });
 
     this.app.get('/me', function(req, res)
     {
-        console.log("user is ", req.user);
         res.send(req.user);
     });
 

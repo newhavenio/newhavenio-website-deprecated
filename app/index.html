@@ -78,6 +78,9 @@
       <div class="medium primary btn icon-left entypo icon-logout" data-ng-show="me._id">
         <a href="">Logout</a>
       </div>
+      <div class="medium primary btn icon-left entypo icon-pencil" data-ng-show="me._id">
+        <a href="#/developers/{{me._id}}/edit">Edit Profile</a>
+      </div>
     </div>
   	<div class="row">
 	    <ul class="clearfix">
@@ -109,6 +112,7 @@
   <script src="scripts/services/userService.js"></script>
   <script src="scripts/controllers/user.js"></script>
   <script src="scripts/controllers/menu.js"></script>
+  <script src="scripts/controllers/useredit.js"></script>
   <!-- endbuild -->
 
 <script type="text/javascript">

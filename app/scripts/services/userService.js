@@ -6,15 +6,25 @@
 // 
 angular.module('nhvioApp')
   .service('UserService', ['Restangular', '$q', function UserService(Restangular, $q) {
+
+    // The user list may be fetched multiple times,
+    // but will unlikley change. Let's cache it in
+    // the client so that browsing back and forth
+    // is lickety-split.
     var cachedUserList = null;
 
     // Get a list of all users from the server
     var getUsers = function(){
     	// Create a promise representing the result we'll return.
 		var deferred = $q.defer();
-    	Restangular.one('users').getList().then(function(users){
-    		deferred.resolve(users);
-    	});
+        if (cachedUserList != null){
+        		deferred.resolve(cachedUserList);
+        }else{
+            Restangular.one('users').getList().then(function(users){
+                cachedUserList = users;
+                deferred.resolve(users);
+        	});            
+        }
     	return deferred.promise;
     }
 

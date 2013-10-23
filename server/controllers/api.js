@@ -1,7 +1,8 @@
 var EventEmitter = require('events').EventEmitter,
     BusinessValidator = require('../lib/validation/business'),
     mongoose = require('mongoose'),
-    passport = require('passport');
+    passport = require('passport'),
+    _ = require('underscore');
 
 
 function ApiController(app)
@@ -92,6 +93,42 @@ ApiController.prototype.route = function()
                     res.send(user);
                 }else{
                     res.status(404).send("No such user");
+                }
+            });
+    });
+
+    // PUT a single user.
+    // 
+    this.app.put(userDetailRoute, function(req, res)
+    {
+        // Get a user by their Mongodb ID.
+        var user_id = mongoose.Types.ObjectId(req.param('id'));
+
+        // Make sure the user is authorized
+        if (!req.user || !req.user.isAdminOrSameId(user_id)){
+            return res.status(401).send("Not permitted");
+        }
+
+        var editableFields = ['firstName', 'lastName', 'bio', 'languages', 'twitterHandle', 'linkedinUrl', 'blogUrl', 'email'],
+            payload = _.pick(req.body, editableFields);
+
+        User
+            .findOne({'_id': user_id})
+            .exec(function(err, user){
+                if (err || user == null){
+                    res.status(404).send("No such user");
+                }else{
+
+                    // Update the user and save
+                    //
+                    _.extend(user, payload);
+                    user.save(function(err, user){
+                        if (err) {
+                            res.status(400).send("Error saving");
+                        }else{
+                            res.send(user);
+                        }
+                    });
                 }
             });
     });

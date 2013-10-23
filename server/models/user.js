@@ -10,23 +10,145 @@
 var mongoose = require('mongoose')
   , Schema = mongoose.Schema;
 
+// This is a list of the top 100 languages on GitHub
+// in 2013 taken from the following website:
+// http://adambard.com/blog/top-github-languages-for-2013-so-far/
+// Until we figure out how to best share code between 
+// the client and the server, this list is duplicated
+// in the AngularJS client app.
+//
+var programmingLanguages = [
+  "JavaScript",
+  "Ruby",
+  "Java",
+  "PHP",
+  "Python",
+  "C++",
+  "C",
+  "Objective-C",
+  "C#",
+  "Shell",
+  "CSS",
+  "Perl",
+  "CoffeeScript",
+  "Scala",
+  "Go",
+  "Prolog",
+  "Clojure",
+  "Haskell",
+  "Lua",
+  "Rank",
+  "Puppet",
+  "Groovy",
+  "R",
+  "ActionScript",
+  "Matlab",
+  "Arduino",
+  "Erlang",
+  "OCaml",
+  "Visual Basic",
+  "ASP",
+  "Processing",
+  "Common Lisp",
+  "Assembly",
+  "TypeScript",
+  "Dart",
+  "D",
+  "Delphi",
+  "Scheme",
+  "FORTRAN",
+  "Racket",
+  "Elixir",
+  "ColdFusion",
+  "XSLT",
+  "Apex",
+  "F#",
+  "Haxe",
+  "Verilog",
+  "Julia",
+  "Tcl",
+  "Vala",
+  "Rust",
+  "LiveScript",
+  "AppleScript",
+  "DOT",
+  "Ada",
+  "Smalltalk",
+  "Kotlin",
+  "Lasso",
+  "Eiffel",
+  "Io",
+  "M",
+  "Nemerle",
+  "Scilab",
+  "Objective-J",
+  "Awk",
+  "Slash",
+  "XProc",
+  "Xtend",
+  "Nimrod",
+  "CLIPS",
+  "Boo",
+  "Ceylon",
+  "ooc",
+  "MoonScript",
+  "DCPU-16 ASM",
+  "Rebol",
+  "Factor",
+  "Bro",
+  "Dylan",
+  "Monkey",
+  "Nu",
+  "Arc",
+  "Augeas",
+  "PogoScript",
+  "Turing",
+  "XC",
+];
 
 var UserSchema = new Schema({
 
   // Housekeeping stuff
   createdAt : { type: Date, default: Date.now },
   modifiedAt : { type: Date, default: Date.now },
-  active: {type: Boolean, default: true},
+
+  // This allows admins to mark somebody as inactive,
+  // in which case they should not show up in search,
+  // etc.  By default, people are inactive.
+  active: {type: Boolean, default: false, index: true},
+  
+  // Did the user complete their registration, including
+  // filling our their languages, etc.?
+  complete: {type: Boolean, default: false},
+
+  // Roles include, most importantly "admin".
   roles: [String],
+
+  // Languages are the languages in which you code.
+  // This is an array of tags.  Valid tags should be
+  // limited by the client.
+  languages: [{type: String, enum: programmingLanguages}],
+
+  // Skills the person has.  These can be anything,
+  // but are limited to 25 characters each.
+  skills: [{type: String, match: /.{,25}/}],
 
   // Biographical information.  We're going to
   // pull this out of GitHub when the user first
   // registers, but maybe we'll let them edit
   // these values at nhv.io.
   // 
-  firstName : { type: String, required: false },
-  lastName : { type: String, required: false },
-  email : { type: String, required: false, index: { unique: true } },
+  firstName : { type: String, required: false, match: /.{1,50}/},
+  lastName : { type: String, required: false, match: /.{1,50}/ },
+  email : { type: String, required: false, index: { unique: true }, match: /.{1,50}/},
+
+  // Social URLs, those that aren't linked by OAuth
+  twitterHandle: { type: String, required: false, match: /.{3,50}/},
+  linkedinUrl: { type: String, required: false, match: /https?:\/\/www\.linkedin.com.{3,75}/},
+  blogUrl: { type: String, required: false, match: /https?:\/\/.{5,100}/},
+
+  // Bio, in plaintext.  Size of a tweet.
+  bio: { type: String, required: false, match: /.{,140}/},
 
   // OAuth info.  We're using GitHub, perhaps others
   // in the future.  Notice the `select` parameter here.
@@ -68,6 +190,7 @@ var UserSchema = new Schema({
   }
 });
 
+
 // Instance method: is this user admin?
 // 
 UserSchema.methods.isAdmin = function () {
@@ -85,6 +208,21 @@ UserSchema.methods.isAdminOrSameId = function (userId) {
     result = true;
   }
   return result;
+}
+
+// Method that is called when a user is first created.
+// Populates some fields like firstName, lastName, email
+// from related fields in githubInfo.
+//
+UserSchema.methods.populateFromGithub = function (cb) {
+  nameBits = this.githubInfo.name.split(/\s+/);
+  if (nameBits.length >= 2){
+    this.firstName = nameBits[0];
+    this.lastName = nameBits[nameBits.length-1];
+  }
+  this.email = this.githubInfo.email;
+  this.blogUrl = this.githubInfo.blog;
+  this.twitterHandle = 'fuck';
 }
 
 // Our pre-save hooks for the user model.

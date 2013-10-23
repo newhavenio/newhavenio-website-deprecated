@@ -1,0 +1,58 @@
+<div class="about row">
+  <div class="sixteen columns">
+    <div class="brick">
+      <h2><strong>Your Profile</strong></h2>
+  		<form>
+  			<fieldset>
+			  <legend>Name &amp; Email</legend>
+	  			<ul>
+	  				<li class="field">
+			  	        <input class="input narrow" id="user-firstName" type="text" data-ng-model="user.firstName" placeholder="First Name" required data-ng-minlength="3" data-ng-maxlength="50" data-ng-disabled="submitting"/>
+	  				</li>
+	  				<li class="field">
+			  	        <input class="input narrow" type="text" ng-model="user.lastName" placeholder="Last Name" required data-ng-minlength="3" data-ng-maxlength="50" data-ng-disabled="submitting"/>
+	  				</li>
+	  				<li class="field">
+			  	        <input class="input narrow email" type="text" ng-model="user.email" placeholder="Email" data-ng-minlength="3" data-ng-maxlength="50" data-ng-disabled="submitting"/>
+	  				</li>
+	  			</ul>
+			</fieldset>
+  			<fieldset>
+			  <legend>Social links</legend>
+	  				<li class="prepend field">
+  					    <span class="adjoined">@</span>
+			  	        <input class="input narrow" type="text" data-ng-model="user.twitterHandle" placeholder="Twitter Handle" required data-ng-minlength="3" data-ng-maxlength="50" data-ng-disabled="submitting"/>
+	  				</li>
+	  				<li class="prepend field">
+  					    <span class="adjoined">https://www.linkedin.com/</span>
+			  	        <input class="input narrow" type="text" ng-model="user.linkedinUrl" placeholder="LinkedIn URL" required data-ng-minlength="3" data-ng-maxlength="50" data-ng-disabled="submitting"/>
+	  				</li>
+	  				<li class="prepend field">
+  					    <span class="adjoined">http://</span>
+			  	        <input class="input narrow email" type="text" ng-model="user.blogUrl" placeholder="Blog URL" data-ng-minlength="3" data-ng-maxlength="50" data-ng-disabled="submitting"/>
+	  				</li>
+	  			</ul>
+			</fieldset>
+  			<fieldset>
+			  <legend>Bio &amp; languages</legend>
+	  			<ul>
+	  				<li class="field">
+  					    <textarea class="input textarea" rows="3" placeholder="Your bio here, 140 characters max." data-ng-maxlength="140" ng-model="user.bio" data-ng-disabled="submitting"></textarea>
+	  				</li>
+	  				<li class="field" data-ng-repeat="langNo in range(1,5)">
+	  					<div class="picker">
+				  	        <select ng-model="user.languages[langNo-1]" data-ng-options="lang for lang in programmingLanguages" data-ng-disabled="submitting">
+		  	        	          <option value="">-- Language #{{langNo}} --</option>
+				  	        </select>
+				  	    </div>
+	  				</li>
+	  			</ul>
+			</fieldset>
+
+  	        <button type="button" data-ng-click="put(user)">SAVE</button>
+  	  </form>
+  		<a data-ng-click="logUser()">log</a>
+  		<a data-ng-click="user.remove()">delete</a>
+		</div>
+	</div>
+</div>
