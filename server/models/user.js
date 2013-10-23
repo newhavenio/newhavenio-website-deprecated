@@ -143,12 +143,12 @@ var UserSchema = new Schema({
   email : { type: String, required: false, index: { unique: true }, match: /.{1,50}/},
 
   // Social URLs, those that aren't linked by OAuth
-  twitterHandle: { type: String, required: false, match: /.{3,50}/},
-  linkedinUrl: { type: String, required: false, match: /https?:\/\/www\.linkedin.com.{3,75}/},
+  twitterUrl: { type: String, required: false, match: /.{3,50}/},
+  linkedinUrl: { type: String, required: false, match: /.{3,75}/},
   blogUrl: { type: String, required: false, match: /https?:\/\/.{5,100}/},
 
   // Bio, in plaintext.  Size of a tweet.
-  bio: { type: String, required: false, match: /.{,140}/},
+  bio: { type: String, required: false, match: /.{0,140}/},
 
   // OAuth info.  We're using GitHub, perhaps others
   // in the future.  Notice the `select` parameter here.
@@ -222,7 +222,7 @@ UserSchema.methods.populateFromGithub = function (cb) {
   }
   this.email = this.githubInfo.email;
   this.blogUrl = this.githubInfo.blog;
-  this.twitterHandle = 'fuck';
+  this.twitterUrl = 'fuck';
 }
 
 // Our pre-save hooks for the user model.

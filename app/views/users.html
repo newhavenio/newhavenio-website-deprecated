@@ -11,6 +11,21 @@
       <li class="user" data-ng-repeat="user in users">
         <img data-ng-src="{{user.githubInfo.avatar_url}}">
         {{user.githubInfo.name}}
+        <div>
+          <a href="https://www.github.com/{{user.githubInfo.login}}"><i class="icon-github"></i></a>
+          <span data-ng-show="user.twitterUrl">
+            <a href="https://www.twitter.com/{{user.twitterUrl}}"><i class="icon-twitter"></i></a>
+          </span>
+          <span data-ng-show="user.linkedinUrl">
+            <a href="https://www.linkedin.com/{{user.linkedinUrl}}"><i class="icon-linkedin"></i></a>
+          </span>
+        </div>
+        <div>
+          <span data-ng-show="user.languages.length>0">
+            <strong>Languages:</strong> {{user.languages|filter:'!!'|niceList}}
+          </span>
+        </div>
+        <p>{{user.bio}}</p>
         <!-- <a href="#/developers/{{user._id}}">edit</a> -->
       </li>
 

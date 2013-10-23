@@ -109,7 +109,7 @@ ApiController.prototype.route = function()
             return res.status(401).send("Not permitted");
         }
 
-        var editableFields = ['firstName', 'lastName', 'bio', 'languages', 'twitterHandle', 'linkedinUrl', 'blogUrl', 'email'],
+        var editableFields = ['firstName', 'lastName', 'bio', 'languages', 'twitterUrl', 'linkedinUrl', 'blogUrl', 'email'],
             payload = _.pick(req.body, editableFields);
 
         User
@@ -124,6 +124,7 @@ ApiController.prototype.route = function()
                     _.extend(user, payload);
                     user.save(function(err, user){
                         if (err) {
+                            console.log("Error saving user: ", err);
                             res.status(400).send("Error saving");
                         }else{
                             res.send(user);
