@@ -427,4 +427,16 @@ module.exports = function (grunt) {
     'build',
     's3',
   ]);
+
+  // This task is run in our 'postinstall' script defined
+  // in package.json.  So, when heroku is building our image,
+  // when it runs 'npm install --production', at the end,
+  // this task will get called.  This task just runs 'build:dist'
+  // if it notices we're in production.
+  //
+  grunt.registerTask('postinstall', function (target) {
+    if (process.env.NODE_ENV == 'production') {
+      grunt.task.run(['build:dist']);
+    };
+  });
 };

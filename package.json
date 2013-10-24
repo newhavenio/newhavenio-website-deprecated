@@ -48,6 +48,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    "test": "grunt test"
+    "test": "grunt test",
+    "postinstall": "grunt postinstall"
   }
 }
