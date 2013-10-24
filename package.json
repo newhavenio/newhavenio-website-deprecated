@@ -53,6 +53,7 @@
   "scripts": {
     "start": "node app.js",
     "test": "grunt test",
+    "preinstall": "npm install -g lodash",
     "postinstall": "grunt postinstall"
   }
 }
