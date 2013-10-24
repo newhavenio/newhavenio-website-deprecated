@@ -10,7 +10,8 @@
     "express-validator": "~0.8.0",
     "mongoose": "~3.6.20",
     "underscore": "~1.5.2",
-    "lodash": "~2.2.1"
+    "lodash": "~2.2.1",
+    "lodash-cli": "~2.2.1"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
