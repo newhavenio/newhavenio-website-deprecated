@@ -222,7 +222,6 @@ UserSchema.methods.populateFromGithub = function (cb) {
   }
   this.email = this.githubInfo.email;
   this.blogUrl = this.githubInfo.blog;
-  this.twitterUrl = 'fuck';
 }
 
 // Our pre-save hooks for the user model.
