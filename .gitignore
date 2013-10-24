@@ -6,5 +6,4 @@
 .bundle
 _site/
 dist
-app/bower_components
 ._*
