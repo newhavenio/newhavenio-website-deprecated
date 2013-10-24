@@ -1,0 +1,118 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" itemscope="" itemtype="http://schema.org/Product"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/b/378 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>newhaven.io &mdash; the developer group for New Haven, CT</title>
+  <meta name="description" content="Developer group in New Haven, Connecticut">
+  <meta name="keywords" content="new haven, nhv, developer">
+  <meta name="author" content="newhaven.io">
+  <meta name="zipcode" content="06510, 06511, 06513, 06515, 06519">
+  <meta name="city" content="New Haven">
+  <meta name="state" content="Connecticut">
+  <meta name="ICBM" content="41.3081, 72.9286">
+
+  <link rel="shortcut icon" href="favicon.gif" type="image/x-icon">
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700|Source+Code+Pro:400,500,700" rel="stylesheet" type="text/css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+
+  <link rel="stylesheet" href="styles/0df5b00a.main.css">
+</head>
+
+<body data-ng-app="nhvioApp">
+  <div class="main-wrapper">
+
+    <!-- The header is controlled by the MenuCtrl defined in  -->
+    <header class="navbar" id="main-nav">
+      <a id="githubforkme" href="https://github.com/newhavenio/newhavenio-website"><img style="position: absolute; top: 0; right: 0; border: 0" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+      <div class="row">
+        <a class="toggle" gumby-trigger="#main-nav > .row > ul" href="#"><i class="icon-menu"></i></a>
+        <h1 class="five columns logo" id="logo">
+          <a href="#">new<strong>haven</strong>.io</a>
+        </h1>
+        <ul class="seven columns">
+          <li><a href="#/developers">Developers</a></li>
+          <li><a href="#/companies">Companies</a></li>
+          <li><a href="#/about">About</a></li>
+
+          <li class="last">
+            <a href="http://groups.google.com/forum/?fromgroups#!forum/newhavenio">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+   
+   <!--
+      The "ng-view" parameter here indicates that this
+      is the element into which our AngularJS application
+      will render the content specified each time there
+      is a route change.
+    -->
+    <div id="main" data-ng-view="">
+    </div>
+    <div class="push"></div>
+  </div>
+  <footer class="container" data-ng-controller="MenuCtrl">
+    <div class="row">
+      <!--
+        If the "me" variable is "falsy" in the scope
+        show a login button that takes them to GitHub.
+       -->
+      <div class="medium primary btn icon-left entypo icon-github" data-ng-hide="me._id">
+        <a href="/auth">Login with GitHub</a>
+      </div>
+      <div class="medium primary btn icon-left entypo icon-logout" data-ng-show="me._id">
+        <a href="">Logout</a>
+      </div>
+      <div class="medium primary btn icon-left entypo icon-pencil" data-ng-show="me._id">
+        <a href="#/developers/{{me._id}}/edit">Edit Profile</a>
+      </div>
+    </div>
+  	<div class="row">
+	    <ul class="clearfix">
+	      <li><a href="#/irc">irc&#8194;</a>/</li>
+	      <li><a href="#/about">about&#8194;</a>/</li>
+	      <li><a href="#">contact</a></li>
+	    </ul>
+	    <h3><strong>newhaven.io</strong></h3>
+  	</div>
+  </footer>
+
+  <!-- JavaScript at the bottom for fast page loading -->
+  <script src="scripts/52d4a172.scripts.js"></script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-42537303-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7 ]>
+    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+
+  </body>
+</html>

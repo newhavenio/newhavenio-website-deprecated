@@ -5,6 +5,5 @@
 .DS_Store
 .bundle
 _site/
-dist
 ._*
 npm-debug.log
