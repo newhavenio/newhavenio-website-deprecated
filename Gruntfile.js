@@ -32,12 +32,12 @@ module.exports = function (grunt) {
       // want to be running grunt with foreman or honcho in order
       // to get your environment variables in .env.  We may find
       // a better solution (js-only) later.
-      dev: {
-        STATIC_DIR: "../app",
-      },
-      dist: {
-        STATIC_DIR: "../dist",
-      }
+      // dev: {
+      //   STATIC_DIR: "dev",
+      // },
+      // dist: {
+      //   NODE_ENV: "production",
+      // }
     },
     express: {
       options: {
