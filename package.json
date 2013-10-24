@@ -48,7 +48,7 @@
     "grunt-contrib-sass": "~0.5.0"
   },
   "engines": {
-    "node": ">=0.8.0 <0.10.*"
+    "node": "0.10.21"
   },
   "scripts": {
     "start": "node app.js",
