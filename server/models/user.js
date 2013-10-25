@@ -215,13 +215,19 @@ UserSchema.methods.isAdminOrSameId = function (userId) {
 // from related fields in githubInfo.
 //
 UserSchema.methods.populateFromGithub = function (cb) {
-  nameBits = this.githubInfo.name.split(/\s+/);
-  if (nameBits.length >= 2){
-    this.firstName = nameBits[0];
-    this.lastName = nameBits[nameBits.length-1];
+  if (typeof(this.githubInfo) != 'undefined'){
+    if (this.githubInfo.name) {
+      nameBits = this.githubInfo.name.split(/\s+/);
+      if (nameBits.length >= 2){
+        this.firstName = nameBits[0];
+        this.lastName = nameBits[nameBits.length-1];
+      }    
+    };
+    this.email = this.githubInfo.email;
+    if (this.githubInfo.blog) {
+      this.blogUrl = this.githubInfo.blog.slice(0, 100);    
+    };
   }
-  this.email = this.githubInfo.email;
-  this.blogUrl = this.githubInfo.blog;
 }
 
 // Our pre-save hooks for the user model.
