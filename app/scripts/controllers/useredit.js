@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nhvioApp')
-  .controller('UserEditCtrl', ['$scope', '$routeParams', 'UserService', function ($scope, $routeParams, UserService) {
+  .controller('UserEditCtrl', ['$scope', '$routeParams', '$location', 'UserService', function ($scope, $routeParams, $location, UserService) {
 
   	// Note that, here we've got a callback on the promise instead
   	// of directly using the value of the promise because we'd like
@@ -110,6 +110,28 @@ angular.module('nhvioApp')
 	$scope.logUser = function(){
 		console.log($scope.user);
 	}
+
+	// Remove the current user
+	$scope.remove = function(){
+		console.log("Deleting user", $scope.user);
+		$scope.submitting = true;
+		$scope.user.remove().then(function(){
+			$scope.submitting = false;
+
+			// Remove user from current scope,
+			// clear our cache of users in the
+			// UserService.  Redirect to the 
+			// list of users.
+			$scope.user = null;
+			UserService.clearAll();
+			$location.path('/developers');
+		}, function(response) {
+			$scope.submitting = false;
+			console.log("Error with status code", response.status);
+		})
+	}
+
+	// Save the current user
 	$scope.put = function(){
 		console.log("submitting", $scope.user);
 		$scope.submitting = true;

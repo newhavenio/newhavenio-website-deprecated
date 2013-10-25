@@ -12,6 +12,7 @@ angular.module('nhvioApp')
     // the client so that browsing back and forth
     // is lickety-split.
     var cachedUserList = null;
+    var cachedMe = null;
 
     // Get a list of all users from the server
     var getUsers = function(){
@@ -44,12 +45,30 @@ angular.module('nhvioApp')
     // we are by our session credentials in the cookie
     // accompanying this request.
     var getMe = function(){
-        return getUser('me');
+        if (cachedMe != null) {
+            return cachedMe;
+        }else{
+            return getUser('me');
+        };
+    }
+
+    var clearMe = function(){
+        cachedMe = null;
+    }
+    var clearUserList = function(){
+        cachedUserList = null;
+    }
+    var clearAll = function(){
+        clearMe();
+        clearUserList();
     }
 
     return {
     	getUsers: getUsers,
     	getUser: getUser,
-        getMe: getMe
+        getMe: getMe,
+        clearMe: clearMe,
+        clearUserList: clearUserList,
+        clearAll: clearAll,
     }
   }]);
