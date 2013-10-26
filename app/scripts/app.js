@@ -21,6 +21,7 @@ app.config(function ($routeProvider) {
       })
       .when('/companies', {
         templateUrl: 'views/companies.html',
+        controller: 'BusinessesCtrl'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
