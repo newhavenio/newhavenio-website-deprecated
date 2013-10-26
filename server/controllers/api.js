@@ -27,29 +27,57 @@ ApiController.prototype.route = function()
     // Company API
     // *********************************************
 
+    var Business = mongoose.model('Business');
+
+    /*
+     * Example working Curl request:
+     * $ curl
+     *     -X POST
+     *     -d "name=Digital Surgeons&description=Digital marketing agency&technologies[]=PHP&technologies[]=LAMP"
+     *     http://172.16.27.146:9000/companies
+     */
+
     // Create new companies entry
     this.app.post('/companies', function(req, res)
     {
+        // Prepare Business Object
+        var editableFields = ['name', 'description', 'webUrl', 'twitterUrl', 'technologies', 'location'],
+            payload = _.pick(req.body, editableFields);
 
-        if( ! _this.validator.valid(req) )
-        {
-            res.json( {status:'error', messages:_this.validator.errors()}, 400 );
-            return;
-        }
+        // Business object to be created
+        var biz = new Business();
+        biz.active = true;
 
-        res.json({status:'success'});
-        return;
+        // Populate business object
+        _.extend(biz, payload);
+
+        // Save that business
+        // ...without making the tax-payers pay
+        biz.save(function(err, user){
+            if (err) {
+                console.log("Error saving business: ", err);
+                res.status(400).send("Error saving business");
+            }else{
+                res.send(biz);
+            }
+        });
     });
 
     // GET a list of companies
-    // 
+    //
     this.app.get('/companies', function(req, res)
     {
-        res.send('listing of companies');
+        Business.find().lean().exec(function(err, businesses){
+            if (businesses != null){
+                res.send(businesses);
+            }else{
+                res.status(404).send("No Businesses");
+            }
+        });
     });
 
     // GET a particular company
-    // 
+    //
     this.app.get('/companies/:id', function(req, res)
     {
         res.send("show companies: "+req.param('id'));
@@ -76,7 +104,7 @@ ApiController.prototype.route = function()
     });
 
     // GET a single user.
-    // 
+    //
     this.app.get(userDetailRoute, function(req, res)
     {
         // Get a user by their Mongodb ID.  Here, the .lean
@@ -98,7 +126,7 @@ ApiController.prototype.route = function()
     });
 
     // PUT a single user.
-    // 
+    //
     this.app.put(userDetailRoute, function(req, res)
     {
         // Get a user by their Mongodb ID.
@@ -135,13 +163,13 @@ ApiController.prototype.route = function()
     });
 
     // Delete a user
-    // 
+    //
     this.app.delete(userDetailRoute, function(req, res)
     {
         var user_id = mongoose.Types.ObjectId(req.param('id'));
 
         // Deletion requires that the request comes from a user
-        // that is logged in and is either an admin user or 
+        // that is logged in and is either an admin user or
         // has the same id as the person who's being deleted.
         //
         if (req.user && req.user.isAdminOrSameId(user_id)){
