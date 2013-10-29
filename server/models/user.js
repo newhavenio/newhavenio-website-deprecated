@@ -143,12 +143,13 @@ var UserSchema = new Schema({
   email : { type: String, required: false, index: { unique: true }, match: /.{1,50}/},
 
   // Social URLs, those that aren't linked by OAuth
-  twitterUrl: { type: String, required: false, match: /.{3,50}/},
-  linkedinUrl: { type: String, required: false, match: /.{3,75}/},
-  blogUrl: { type: String, required: false, match: /https?:\/\/.{5,100}/},
+  twitterUrl: { type: String, required: false, match: /^[A-Za-z0-9_]{3,50}$/},
+  linkedinUrl: { type: String, required: false, match: /^[A-Za-z0-9-\/]{5,75}$/},
+  // This also has a length validator, defined below.
+  blogUrl: { type: String, required: false, match: /^[A-Za-z0-9-\/~]+\.[A-Za-z]{2,}([\/.][A-Za-z0-9-~]+)*\/?$/},
 
   // Bio, in plaintext.  Size of a tweet.
-  bio: { type: String, required: false, match: /.{0,140}/},
+  bio: { type: String, required: false, match: /^.{0,140}$/},
 
   // OAuth info.  We're using GitHub, perhaps others
   // in the future.  Notice the `select` parameter here.
@@ -189,7 +190,6 @@ var UserSchema = new Schema({
     // public_gists: Number,
   }
 });
-
 
 // Instance method: is this user admin?
 // 
@@ -241,4 +241,19 @@ UserSchema.pre('save', function(next) {
   return next();
 });
 
-module.exports = mongoose.model('User', UserSchema);
+var User = mongoose.model('User', UserSchema)
+
+
+// Validation
+
+UserSchema.path('blogUrl').validate(function (value) {
+  if (value != null && value.length > 50){
+    return false
+  }else{
+    return true
+  }
+}, 'Too long');
+
+
+
+module.exports = User;
