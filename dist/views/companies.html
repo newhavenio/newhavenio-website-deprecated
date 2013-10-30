@@ -1,1 +1,27 @@
-<p>This is the companies view.</p>
+<div class="about row">
+  <div class="sixteen columns brick">
+    <h2><strong>New Haven Businesses</strong></h2>
+
+    <ul style="display:block" class="developers">
+      <li class="company" data-ng-repeat="business in businesses">
+        {{business.name}}
+        <div>
+          <span data-ng-show="business.twitterUrl">
+            <a href="https://www.twitter.com/{{business.twitterUrl}}"><i class="icon-twitter"></i></a>
+          </span>
+          <span data-ng-show="business.webUrl">
+            <a href="business.webUrl"><i class="icon-linkedin"></i></a>
+          </span>
+        </div>
+        <div>
+          <span data-ng-show="business.technologies.length>0">
+            <strong>Technologies:</strong> {{business.technologies|filter:'!!'|niceList}}
+          </span>
+        </div>
+        <p>{{business.description}}</p>
+        <p>{{business.location}}</p>
+      </li>
+
+    </ul>
+  </div>
+</div>
