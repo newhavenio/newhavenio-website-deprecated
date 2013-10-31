@@ -29,11 +29,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 // Handle static content first
-if (process.env.NODE_ENV == 'production') {
-	app.set('static_dir', 'dist');
-}else{
-	app.set('static_dir', 'app');
-};
+app.set('static_dir', 'app');
 app.use(express.static(app.get('static_dir')));
 
 // Handle a bunch of other crap
