@@ -12,7 +12,8 @@
     "express-validator": "~0.8.0",
     "mongoose": "~3.6.20",
     "underscore": "~1.5.2",
-    "nunjucks": "~1.0.0"
+    "nunjucks": "~1.0.0",
+    "connect": "~2.11.0"
   },
   "devDependencies": {
     "lodash": "~2.2.1",
