@@ -1,0 +1,11 @@
+{# This is the index view.  Right now it's empty #}
+{# because we're pulling in the Meetup.com events #}
+{# via Angular.js.  In the future, we'll render them #}
+{# server side. #}
+
+
+{% extends "layout.html" %}
+
+{% block bottom_js %}
+	{{ js.renderTags('all') | safe }}
+{% endblock %}

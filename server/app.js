@@ -4,6 +4,7 @@
  */
 var express = require('express');
 var fs = require('fs');
+var connect = require('connect');
 
 // Initialize our MongoDB connection
 // and our models
@@ -18,10 +19,14 @@ var expressValidator = require('express-validator');
 var http = require('http');
 var path = require('path');
 var passport = require('passport');
+var MeetupController = require('./controllers/meetup');
 var ApiController = require('./controllers/api');
 var AuthController = require('./controllers/auth');
 var app = express();
+var server = http.createServer(app);
 
+// Set up compression
+app.use(connect.compress());
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -31,6 +36,16 @@ app.set('view engine', 'ejs');
 // Handle static content first
 app.set('static_dir', 'app');
 app.use(express.static(app.get('static_dir')));
+
+var assetManager = require('./lib/assets')(app, server);
+
+// Set up nunjucks templating
+var nunjucks = require('nunjucks');
+nunjucks.configure('server/views', {
+    autoescape: true,
+    express: app,
+    watch: true
+});
 
 // Handle a bunch of other crap
 app.use(express.favicon());
@@ -56,12 +71,12 @@ if ('development' == app.get('env')) {
 
 
 /**
- * Application home page
+ * Setup Meetup routes
+ *
+ * GET  /       Show listing of meetups on front page
  */
-app.get('/',  function(req, res){
-  res.sendfile(app.get('static_dir') + "/index.html");
-});
-
+meetup = new MeetupController(app);
+meetup.route();
 
 /**
  * Setup Business API routes
@@ -87,6 +102,6 @@ auth.init(passport).route();
 
 
 // Start the server
-http.createServer(app).listen(app.get('port'), function(){
+server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
