@@ -3,10 +3,10 @@
 
 // I suck at node, so the way I did this might not be
 // kosher.  The AssetManager function takes an express
-// object and adds .js and .css objects to it.  These
-// are JS and CSS managers from Piler.  So, then other
-// controllers should have access to them.
-// 
+// object and adds .js and .css objects to app.locals
+// so that 'css' and 'js' objects are availabe in all
+// views that are rendered using the typical
+// 'res.render'.  So, any view can use them!
 
 // Set up asset management
 var piler = require("piler"),
@@ -18,13 +18,13 @@ function AssetManager(app, server){
     var _this = this;
 
     // Configure JS
-    app.js = piler.createJSManager();
-    app.js.bind(app, server);
+    app.locals.js = piler.createJSManager();
+    app.locals.js.bind(app, server);
 
     // Not sure why we have to do this binding inside
     // of the app.configure
     app.configure(function() {
-        app.js.bind(app, server);
+        app.locals.js.bind(app, server);
         var jsFiles = {
           'modernizr': [
             "app/bower_components/modernizr/modernizr.js",
@@ -64,15 +64,15 @@ function AssetManager(app, server){
           var key = keys[i],
               files = jsFiles[key];
           for (var j = 0; j < files.length; j++) {
-            app.js.addFile(key, files[j]);
+            app.locals.js.addFile(key, files[j]);
           };
         };
     });
 
     // Configure CSS
-    app.css = piler.createCSSManager();
-    app.css.addFile('app/css/foo.css');
-    app.css.bind(app, server);
+    app.locals.css = piler.createCSSManager();
+    app.locals.css.addFile('app/css/gumby.css');
+    app.locals.css.bind(app, server);
 }
 
 module.exports = AssetManager;

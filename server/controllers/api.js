@@ -38,7 +38,7 @@ ApiController.prototype.route = function()
      */
 
     // Create new companies entry
-    this.app.post('/companies', function(req, res)
+    this.app.post('/api/companies', function(req, res)
     {
         // Prepare Business Object
         var editableFields = ['name', 'description', 'webUrl', 'twitterUrl', 'technologies', 'location'],
@@ -65,7 +65,7 @@ ApiController.prototype.route = function()
 
     // GET a list of companies
     //
-    this.app.get('/companies', function(req, res)
+    this.app.get('/api/companies', function(req, res)
     {
         Business.find().lean().exec(function(err, businesses){
             if (businesses != null){
@@ -78,7 +78,7 @@ ApiController.prototype.route = function()
 
     // GET a particular company
     //
-    this.app.get('/companies/:id', function(req, res)
+    this.app.get('/api/companies/:id', function(req, res)
     {
         res.send("show companies: "+req.param('id'));
     });
@@ -94,11 +94,11 @@ ApiController.prototype.route = function()
 
     // This route uses Mongodb ids to identify our
     // individual users.
-    var userDetailRoute = '/users/:id([a-zA-Z0-9]{24})'
+    var userDetailRoute = '/api/users/:id([a-zA-Z0-9]{24})'
 
     // Return JSON representation of the user that
     // is currently logged in.
-    this.app.get('/users/me', function(req, res)
+    this.app.get('/api/users/me', function(req, res)
     {
         res.send(req.user);
     });
@@ -193,7 +193,7 @@ ApiController.prototype.route = function()
 
     // Get a list of users
     //
-    this.app.get('/users', function(req, res)
+    this.app.get('/api/users', function(req, res)
     {
         User.find().lean().exec(function(err, users){
             if (users != null){

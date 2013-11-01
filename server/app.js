@@ -19,10 +19,6 @@ var expressValidator = require('express-validator');
 var http = require('http');
 var path = require('path');
 var passport = require('passport');
-var MeetupController = require('./controllers/meetup');
-var ApiController = require('./controllers/api');
-var AuthController = require('./controllers/auth');
-var DevelopersController = require('./controllers/developers');
 var app = express();
 var server = http.createServer(app);
 
@@ -70,6 +66,14 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+// Add in our controllers
+var MeetupController = require('./controllers/meetup');
+var ApiController = require('./controllers/api');
+var AuthController = require('./controllers/auth');
+var DeveloperController = require('./controllers/developer');
+var CompanyController = require('./controllers/company');
+var AboutController = require('./controllers/about');
+
 
 /**
  * Setup Meetup routes
@@ -80,12 +84,26 @@ meetup = new MeetupController(app);
 meetup.route();
 
 /**
+ * GET  /about  Show about info
+ */
+about = new AboutController(app);
+about.route();
+
+/**
  * Setup Developer routes
  *
- * GET  /       Show listing of Developers on front page
+ * GET  /developers Show a list of developers
  */
-Developers = new DevelopersController(app);
-Developers.route();
+Developer = new DeveloperController(app);
+Developer.route();
+
+/**
+ * Setup Company routes
+ *
+ * GET  /companies Show a list of developers
+ */
+Company = new CompanyController(app);
+Company.route();
 
 /**
  * Setup Business API routes

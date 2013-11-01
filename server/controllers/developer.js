@@ -24,9 +24,7 @@ DevelopersController.prototype.route = function()
         User.find().lean().exec(function(err, users){
             if (users != null){
                 res.render('developers.html', {
-                    developers: users,
-                    js: _this.app.js,
-                    css: _this.app.css
+                    developers: users
                 });
             }else{
                 res.status(404).send("No users");

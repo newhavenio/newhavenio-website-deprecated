@@ -20,9 +20,7 @@ MeetupController.prototype.route = function()
     this.app.get('/', function(req, res)
     {
         res.render('index.html', {
-            meetups: {},
-            js: _this.app.js,
-            css: _this.app.css
+            meetups: {}
         });
     });
 

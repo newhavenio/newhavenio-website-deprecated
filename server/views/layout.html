@@ -45,9 +45,9 @@
           <a href="#">new<strong>haven</strong>.io</a>
         </h1>
         <ul class="seven columns">
-          <li><a href="#/developers">Developers</a></li>
-          <li><a href="#/companies">Companies</a></li>
-          <li><a href="#/about">About</a></li>
+          <li><a href="/developers">Developers</a></li>
+          <li><a href="/companies">Companies</a></li>
+          <li><a href="/about">About</a></li>
 
           <li class="last">
             <a href="http://groups.google.com/forum/?fromgroups#!forum/newhavenio">Contact</a>
@@ -62,6 +62,7 @@
         will render the content specified each time there
         is a route change.
       -->
+      {{app}}
       <div id="main" {% block ngview %}data-ng-view=""{% endblock %}>
         {% block main %}
         {% endblock %}
