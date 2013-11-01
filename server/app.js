@@ -106,11 +106,14 @@ Company = new CompanyController(app);
 Company.route();
 
 /**
- * Setup Business API routes
+ * Setup Company API routes
  *
- * POST /business       Create new business
- * GET  /business       Show listing of businesses
- * GET  /business/{id}  Show business by ID
+ * POST /api/user       Create new user
+ * GET  /api/user       Show listing of useres
+ * GET  /api/user/{id}  Show user by ID
+ * POST /api/company       Create new company
+ * GET  /api/company       Show listing of companyes
+ * GET  /api/company/{id}  Show company by ID
  */
 api = new ApiController(app);
 api.route();

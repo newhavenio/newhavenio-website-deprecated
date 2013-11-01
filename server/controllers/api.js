@@ -1,5 +1,5 @@
 var EventEmitter = require('events').EventEmitter,
-    BusinessValidator = require('../lib/validation/business'),
+    CompanyValidator = require('../lib/validation/business'),
     mongoose = require('mongoose'),
     passport = require('passport'),
     _ = require('underscore');
@@ -12,7 +12,7 @@ function ApiController(app)
     EventEmitter.call(this);
 
     this.app = app;
-    this.validator = new BusinessValidator();
+    this.validator = new CompanyValidator();
 }
 
 ApiController.prototype = Object.create(EventEmitter.prototype);
@@ -27,7 +27,7 @@ ApiController.prototype.route = function()
     // Company API
     // *********************************************
 
-    var Business = mongoose.model('Business');
+    var Company = mongoose.model('Company');
 
     /*
      * Example working Curl request:
@@ -40,12 +40,12 @@ ApiController.prototype.route = function()
     // Create new companies entry
     this.app.post('/api/companies', function(req, res)
     {
-        // Prepare Business Object
+        // Prepare Company Object
         var editableFields = ['name', 'description', 'webUrl', 'twitterUrl', 'technologies', 'location'],
             payload = _.pick(req.body, editableFields);
 
-        // Business object to be created
-        var biz = new Business();
+        // Company object to be created
+        var biz = new Company();
         biz.active = true;
 
         // Populate business object
@@ -67,11 +67,11 @@ ApiController.prototype.route = function()
     //
     this.app.get('/api/companies', function(req, res)
     {
-        Business.find().lean().exec(function(err, businesses){
+        Company.find().lean().exec(function(err, businesses){
             if (businesses != null){
                 res.send(businesses);
             }else{
-                res.status(404).send("No Businesses");
+                res.status(404).send("No Companyes");
             }
         });
     });

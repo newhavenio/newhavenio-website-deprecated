@@ -1,4 +1,6 @@
-var EventEmitter = require('events').EventEmitter;
+var EventEmitter = require('events').EventEmitter,
+    mongoose = require('mongoose'),
+    DeveloperController = require('./developer');
 
 function CompanyController(app){
     if (!(this instanceof CompanyController)) return new CompanyController(app);
@@ -6,25 +8,15 @@ function CompanyController(app){
     EventEmitter.call(this);
 
     this.app = app;
+    this.slug = 'companies';
+    this.Model = mongoose.model('Company');
+    this.template = 'company-list.html';
 }
 
 CompanyController.prototype = Object.create(EventEmitter.prototype);
 
 
 // Setup Routes
-CompanyController.prototype.route = function()
-{
-    var _this = this;
-
-    // Create new companies entry
-    this.app.get('/companies', function(req, res)
-    {
-        res.render('company-list.html', {
-            companies: {}
-        });
-    });
-
-    return this;
-};
+CompanyController.prototype.route = DeveloperController.prototype.route;
 
 module.exports = CompanyController;

@@ -1,11 +1,14 @@
 //
-// Defines the Mongoose/MongoDB model for Businesses.
+// Defines the Mongoose/MongoDB model for Companies.
 //
 //
 var mongoose = require('mongoose')
-  , Schema = mongoose.Schema;
+  , Schema = mongoose.Schema
+  , _ = require('underscore');
 
-var BusinessSchema = new Schema({
+var programmingLanguages = require('../lib/languages');
+
+var CompanySchema = new Schema({
 
     // Housekeeping stuff
     createdAt : { type: Date, default: Date.now },
@@ -16,10 +19,10 @@ var BusinessSchema = new Schema({
     // etc.  By default, businesses are inactive.
     active: {type: Boolean, default: false, index: true, required: true},
 
-    // Business name
+    // Company name
     name: {type: String, required: true},
 
-    // Business description
+    // Company description
     description: {type: String, required: false},
 
     // Web URL or
@@ -31,14 +34,14 @@ var BusinessSchema = new Schema({
 
     // Technology stack
     // Tech used within company
-    technologies: [{type: String, required: false}],
+    languages: [{type: String, enum: _.keys(programmingLanguages)}],
 
     // Address string (multi-line?)
     location: {type: String, required: false}
 
 });
 
-BusinessSchema.pre('save', function(next) {
+CompanySchema.pre('save', function(next) {
   var user = this;
 
   // Update when this user was last modified
@@ -47,4 +50,4 @@ BusinessSchema.pre('save', function(next) {
   return next();
 });
 
-module.exports = mongoose.model('Business', BusinessSchema);
+module.exports = mongoose.model('Company', CompanySchema);
