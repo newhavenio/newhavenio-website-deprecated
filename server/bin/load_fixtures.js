@@ -69,7 +69,7 @@ function addSocialLinks(user){
 		user.twitterUrl = getRandUsername(user.firstName);
 	}
 	if (Math.random() < 0.7){
-		user.linkedInUrl = 'http://www.linkedin.com/in/' + getRandUsername(user.firstName);
+		user.linkedinUrl = '/' + getRandUsername(user.firstName);
 	}
 	if (Math.random() < 0.7){
 		user.blog = 'http://www.' + getRandUsername(user.firstName) + '.com/';

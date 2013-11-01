@@ -71,7 +71,7 @@ function AssetManager(app, server){
 
     // Configure CSS
     app.css = piler.createCSSManager();
-    app.css.addFile('app/css/style.css');
+    app.css.addFile('app/css/foo.css');
     app.css.bind(app, server);
 }
 

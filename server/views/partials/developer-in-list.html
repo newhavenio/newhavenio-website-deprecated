@@ -1,0 +1,19 @@
+
+    <img src="{{developer.githubInfo.avatar_url}}" height="80" width="80">
+    {{developer.githubInfo.name}}
+    <div>
+      <a href="https://www.github.com/{{developer.githubInfo.login}}"><i class="icon-github"></i></a>
+      {% if developer.twitterUrl %}
+        <a href="https://www.twitter.com/{{developer.twitterUrl}}"><i class="icon-twitter"></i></a>
+      {% endif %}
+      {% if developer.linkedinUrl %}
+        <a href="https://www.linkedin.com/{{developer.linkedinUrl}}"><i class="icon-linkedin"></i></a>
+      {% endif %}
+    </div>
+    <div>
+      {% if developer.languages.length>0 %}
+        <strong>Languages:</strong> {{developer.languages}}
+      {% endif %}
+    </div>
+    <p>{{developer.bio}}</p>
+    <!-- <a href="#/developers/{{developer._id}}">edit</a> -->

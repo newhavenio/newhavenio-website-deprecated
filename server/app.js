@@ -22,6 +22,7 @@ var passport = require('passport');
 var MeetupController = require('./controllers/meetup');
 var ApiController = require('./controllers/api');
 var AuthController = require('./controllers/auth');
+var DevelopersController = require('./controllers/developers');
 var app = express();
 var server = http.createServer(app);
 
@@ -77,6 +78,14 @@ if ('development' == app.get('env')) {
  */
 meetup = new MeetupController(app);
 meetup.route();
+
+/**
+ * Setup Developer routes
+ *
+ * GET  /       Show listing of Developers on front page
+ */
+Developers = new DevelopersController(app);
+Developers.route();
 
 /**
  * Setup Business API routes
