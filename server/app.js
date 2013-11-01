@@ -41,7 +41,11 @@ var nunjucks = require('nunjucks');
 nunjucks.configure('server/views', {
     autoescape: true,
     express: app,
-    watch: true
+    watch: true,
+    tags: {
+    	variableStart: '{(',
+    	variableEnd: ')}',
+    }
 });
 
 // Handle a bunch of other crap

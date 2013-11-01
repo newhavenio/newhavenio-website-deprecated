@@ -15,7 +15,7 @@
 
   <title>{% block title %}newhaven.io &mdash; the developer group for New Haven, CT{% endblock %}</title>
   <meta name="description" content="Developer group in New Haven, Connecticut" />
-  <meta name="keywords" content="new haven, nhv, developer, programming{% if extraKeywords %}, {{ extraKeywords| join(', ')}}{% endif %}" />
+  <meta name="keywords" content="new haven, nhv, developer, programming{% if extraKeywords %}, {( extraKeywords| join(', '))}{% endif %}" />
   <meta name="author" content="newhaven.io">
   <meta name="zipcode" content="06510, 06511, 06513, 06515, 06519">
   <meta name="city" content="New Haven">
@@ -29,8 +29,8 @@
 
 
   <!-- Add CSS -->
-  {{ css.renderTags() | safe }}
-  {{ js.renderTags('modernizr') | safe }}
+  {( css.renderTags() | safe )}
+  {( js.renderTags('modernizr') | safe )}
 </head>
 
 <body data-ng-app="nhvioApp">
@@ -62,7 +62,6 @@
         will render the content specified each time there
         is a route change.
       -->
-      {{app}}
       <div id="main" {% block ngview %}data-ng-view=""{% endblock %}>
         {% block main %}
         {% endblock %}
@@ -82,6 +81,7 @@
         <a href="">Logout</a>
       </div>
       <div class="medium primary btn icon-left entypo icon-pencil" data-ng-show="me._id">
+        {# Note the Angular JS templating is "}}", the Nunjucks in ")}" #}
         <a href="#/developers/{{me._id}}/edit">Edit Profile</a>
       </div>
     </div>
@@ -97,7 +97,7 @@
 
   <!-- Add the javascript -->
   {% block bottom_js %}
-    {{ js.renderTags('gumby') | safe }}
+    {( js.renderTags('all') | safe )}
   {% endblock %}
 
 <script type="text/javascript">

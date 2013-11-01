@@ -1,15 +1,15 @@
 
-    {{company.name}}
+    {(company.name)}
     <div>
-      <a href="https://www.github.com/{{company.githubInfo.login}}"><i class="icon-github"></i></a>
+      <a href="https://www.github.com/{(company.githubInfo.login)}"><i class="icon-github"></i></a>
       {% if company.twitterUrl %}
-        <a href="https://www.twitter.com/{{company.twitterUrl}}"><i class="icon-twitter"></i></a>
+        <a href="https://www.twitter.com/{(company.twitterUrl)}"><i class="icon-twitter"></i></a>
       {% endif %}
       {% if company.linkedinUrl %}
-        <a href="https://www.linkedin.com/{{company.linkedinUrl}}"><i class="icon-linkedin"></i></a>
+        <a href="https://www.linkedin.com/{(company.linkedinUrl)}"><i class="icon-linkedin"></i></a>
       {% endif %}
       <p>
-        {{company.description}}
+        {(company.description)}
       </p>
     </div>
     <div>
@@ -19,9 +19,9 @@
         {# NOTE: The '-' in this for loop eliminates whitespace #}
 
         {% for key, lang in company.languagePairs -%}
-          <a href="/companies/{{key}}">{{lang}}</a>{% if not loop.last %}{% if loop.revindex == 2 and loop.length > 1 %} &amp;{% else %},{% endif %} {% endif %}
+          <a href="/companies/{(key)}">{(lang)}</a>{% if not loop.last %}{% if loop.revindex == 2 and loop.length > 1 %} &amp;{% else %},{% endif %} {% endif %}
         {%- endfor %}
       {% endif %}
     </div>
-    <p>{{company.bio}}</p>
-    <!-- <a href="#/developers/{{developer._id}}">edit</a> -->
+    <p>{(company.bio)}</p>
+    <!-- <a href="#/developers/{(developer._id)}">edit</a> -->

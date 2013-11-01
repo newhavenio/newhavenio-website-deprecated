@@ -39,4 +39,5 @@ app.config(function (RestangularProvider) {
     RestangularProvider.setRestangularFields({
       id: "_id",
     });
+    RestangularProvider.setBaseUrl('/api');
 });

@@ -6,14 +6,14 @@
 {% endblock %}
 
 {% block title%}
-	New Haven {% if language %}{{language}} {% endif %}Developers
+	New Haven {% if language %}{(language)} {% endif %}Developers
 {% endblock %}
 
 {% block main %}
 
 	<div class="about row">
 	  <div class="sixteen columns brick">
-	    <h2><strong>{% block subtitle %}New Haven {% if language %}{{language}} {% endif %}Developers{% endblock %}</strong></h2>
+	    <h2><strong>{% block subtitle %}New Haven {% if language %}{(language)} {% endif %}Developers{% endblock %}</strong></h2>
 
 	    {% block list %}
 		    <ul style="display:block" class="developers">
