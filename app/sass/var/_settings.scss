@@ -15,11 +15,11 @@ $document-width: $row-max-width;				// Default Document
 $max-device-width: 2880px;						// Max Document Size
 
 // Spacing
-$nav-distance: 0px; 							// Navigation distance from the top of the viewport
+$nav-distance: 0; 							// Navigation distance from the top of the viewport
 
 // Typography
-$font-family: 'Source Sans Pro', sans-serif;
-$font-family-heading: 'Source Code Pro', sans-serif;;
+$font-family: "Open Sans";
+$font-family-heading: "Open Sans";
 $font-style-italic: italic;
 $icons: entypo;
 $font-smoothing: antialiased;
@@ -68,17 +68,18 @@ $tremendous: ms(9);
 $absurd: ms(10);
 
 // Typography Colors
-$header-font-color: #ffffff !default;
+$header-font-color: #444444 !default;
 $header-link-color: #d04526 !default;
 $header-link-hover-color: #c03d20 !default;
-$body-font-color: #7d7d7d !default;
-$body-link-color: #ff7b1a !default;
+$body-font-color: #555555 !default;
+$body-link-color: #d04526 !default;
 $body-link-hover-color: #c03d20 !default;
 
 // User Interface Colors
 $global-bg-color: #eceef1;
 $navbar-color: #ff7b1a;
-$navbar-link-color: #ffffff;
+$navbar-link-color: #fff;
+
 $primary-color: #3085d6;
 $secondary-color: #42a35a;
 $default-color: #f2f2f2;
@@ -86,6 +87,7 @@ $info-color: #4a4d50;
 $danger-color: #ca3838;
 $warning-color: #f6b83f;
 $success-color: #58c026;
+
 $primary-hover-color: #58b2fa;
 $secondary-hover-color: #6dbb80;
 $default-hover-color: #ffffff;
@@ -93,7 +95,9 @@ $info-hover-color: #ffa766;
 $danger-hover-color: #f14f4f;
 $warning-hover-color: #fdd27f;
 $success-hover-color: #66d92f;
+
 $horizontal-rule-color: #ccc !default;
+
 $black: #000;
 $white: #fff;
 
@@ -113,8 +117,21 @@ $default-button-padding: $med;
 // Height
 $default-button-height: 36px;
 
+// Form Elements
+$form-text-input-stroke: #ccc;
+$form-text-input-background: $white;
+$form-text-input-placeholder-color: $default-color;
+$form-text-input-color: #555;
+
+$form-select-stroke: #ccc;
+$form-select-background: $white;
+$form-select-color: #555;
+
 // Tabs
 $tab-height: 42px;
+
+// Navigation
+$navcontain-height: 80px; // makes space at the top of a document for when using a fixed nav
 
 // Drawers & Modals
 $modal-overlay-color: rgba(0, 0, 0, 0.8);
@@ -139,6 +156,13 @@ $table-cell-border-style: solid;
 $table-border-radius: 4px;
 // .striped
 $table-stripe-bgcolor: #e5e5e5;
+
+// Tooltips
+$tt-min-width: 130px;
+$tt-bgcolor: $primary-color;
+$tt-position: top;					// position: top / bottom / left / right
+$tt-align: left;					// text and caret alignment: left / right
+$tt-pretty: yes;					// yes = pretty / no = flat
 
 // Floats
 $default-float: left;

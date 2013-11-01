@@ -13,5 +13,6 @@
     "commit": "92c13252b856440d6f107116a8efa22c3fb13efe"
   },
   "_source": "git://github.com/GumbyFramework/Gumby.git",
-  "_target": "~2.5.13"
+  "_target": "~2.5.15",
+  "_originalSource": "gumby"
 }
