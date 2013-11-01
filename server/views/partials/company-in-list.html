@@ -1,6 +1,5 @@
 
-    <img src="{{company.githubInfo.avatar_url}}" height="80" width="80">
-    {{company.githubInfo.name}}
+    {{company.name}}
     <div>
       <a href="https://www.github.com/{{company.githubInfo.login}}"><i class="icon-github"></i></a>
       {% if company.twitterUrl %}
@@ -9,6 +8,9 @@
       {% if company.linkedinUrl %}
         <a href="https://www.linkedin.com/{{company.linkedinUrl}}"><i class="icon-linkedin"></i></a>
       {% endif %}
+      <p>
+        {{company.description}}
+      </p>
     </div>
     <div>
       {% if company.languages.length > 0 %}

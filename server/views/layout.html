@@ -15,7 +15,7 @@
 
   <title>{% block title %}newhaven.io &mdash; the developer group for New Haven, CT{% endblock %}</title>
   <meta name="description" content="Developer group in New Haven, Connecticut" />
-  <meta name="keywords" content="new haven, nhv, developer, programming" />
+  <meta name="keywords" content="new haven, nhv, developer, programming{% if extraKeywords %}, {{ extraKeywords| join(', ')}}{% endif %}" />
   <meta name="author" content="newhaven.io">
   <meta name="zipcode" content="06510, 06511, 06513, 06515, 06519">
   <meta name="city" content="New Haven">
@@ -42,7 +42,7 @@
       <div class="row">
         <a class="toggle" gumby-trigger="#main-nav > .row > ul" href="#"><i class="icon-menu"></i></a>
         <h1 class="five columns logo" id="logo">
-          <a href="#">new<strong>haven</strong>.io</a>
+          <a href="/">new<strong>haven</strong>.io</a>
         </h1>
         <ul class="seven columns">
           <li><a href="/developers">Developers</a></li>

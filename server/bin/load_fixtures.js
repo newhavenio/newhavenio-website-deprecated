@@ -13,6 +13,10 @@ fs.readdirSync(models_path).forEach( function(file){
 console.log(process.env.MONGOHQ_URL);
 mongoose.connect(process.env.MONGOHQ_URL);
 
+function randInt(min, max){
+  return Math.floor(min + Math.random() * (max-min))
+}
+
 function getRand(arr){
 	return arr[Math.floor(Math.random() * arr.length)];
 }
@@ -92,18 +96,83 @@ function getRandLanguages(){
 	return _.keys(theseLanguages);
 }
 
-// Let's create some users!
-var User = mongoose.model('User');
+//  **************************************************************************
+//  Let's create some companies!
+function getRandCompanyName(){
+	function tc(str){
+  	return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+	}
+  var adjs = [
+    "autumn", "hidden", "bitter", "misty", "silent", "empty", "dry", "dark",
+    "summer", "icy", "delicate", "quiet", "white", "cool", "spring", "winter",
+    "patient", "twilight", "dawn", "crimson", "wispy", "weathered", "blue",
+    "billowing", "broken", "cold", "damp", "falling", "frosty", "green",
+    "long", "late", "lingering", "bold", "little", "morning", "muddy", "old",
+    "red", "rough", "still", "small", "sparkling", "throbbing", "shy",
+    "wandering", "withered", "wild", "black", "young", "holy", "solitary",
+    "fragrant", "aged", "snowy", "proud", "floral", "restless", "divine",
+    "polished", "ancient", "purple", "lively", "nameless"
+  ];
+  var nouns = [
+    "waterfall", "river", "breeze", "moon", "rain", "wind", "sea", "morning",
+    "snow", "lake", "sunset", "pine", "shadow", "leaf", "dawn", "glitter",
+    "forest", "hill", "cloud", "meadow", "sun", "glade", "bird", "brook",
+    "butterfly", "bush", "dew", "dust", "field", "fire", "flower", "firefly",
+    "feather", "grass", "haze", "mountain", "night", "pond", "darkness",
+    "snowflake", "silence", "sound", "sky", "shape", "surf", "thunder",
+    "violet", "water", "wildflower", "wave", "water", "resonance", "sun",
+    "wood", "dream", "cherry", "tree", "fog", "frost", "voice", "paper",
+    "frog", "smoke", "star"
+  ];
+  var suffixes = [
+  	'Inc.', 'Co.', 'Company', 'LLC', 'Ventures', "Partners"
+  ];
+  return tc(getRand(adjs)) + ' ' + tc(getRand(nouns)) + ' ' + getRand(suffixes);
+}
+function getCompanyURL(name){
+  return 'http://www.' + name.toLowerCase().replace('.', '').replace(' ', '-') + '.com';
+}
+function getRandomBio(){
+  return lorem.slice(0, randInt(90, 138)) + '.';
+}
 
-var numUsers = 20;
-var j = 0;
+var objectsCreated = 0;
 function tryExit(){
-	j += 1;
-	if (j == numUsers){
+	objectsCreated += 1;
+	if (objectsCreated == numUsers + numCompanies){
+    console.log("Created ", numCompanies, "companies");
 		console.log("Created ", numUsers, "users");
 		process.exit();
 	}
 }
+
+var numCompanies = 10;
+var Company = mongoose.model('Company');
+for (var i = 0; i < numCompanies; i++) {
+  var name = getRandCompanyName();
+  var url = getCompanyURL(name);
+  console.log(name);
+  company = new Company;
+  company.name = getRandCompanyName();
+  company.webUrl = getCompanyURL(name);
+  addSocialLinks(company);
+  company.languages = getRandLanguages();
+  company.location = '50 W. WTF St., New Haven, CT 06511';
+  company.description = getRandomBio();
+
+  // Save the company
+  company.save(tryExit, function(err){
+    console.log("there was an error:", err);
+    tryExit();
+  });
+
+};
+
+//  **************************************************************************
+//  Let's create some users!
+var User = mongoose.model('User');
+
+var numUsers = 20;
 for (var i = 0; i < numUsers; i++) {
 	user = new User;
 	firstName = getRand(firstNames);
@@ -116,14 +185,15 @@ for (var i = 0; i < numUsers; i++) {
 		avatar_url: gravatars[i],
 		email: getRandEmail(firstName)
 	};
-    user.populateFromGithub();
-    user.languages = getRandLanguages();
-    addSocialLinks(user);
+  user.populateFromGithub();
+  user.languages = getRandLanguages();
+  addSocialLinks(user);
+  user.bio = getRandomBio();
 
-    // Save the user
-    user.save(tryExit, function(err){
-    	console.log("there was an error:", err);
-    	tryExit();
-    });
+  // Save the user
+  user.save(tryExit, function(err){
+  	console.log("there was an error:", err);
+  	tryExit();
+  });
 };
 

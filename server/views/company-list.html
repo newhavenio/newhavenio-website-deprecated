@@ -1,7 +1,7 @@
 
 {% extends "developer-list.html" %}
 
-{% block subtitle %}New Haven {% if language %}{{language}} {% endif %}Companies{% endblock %}
+{% block subtitle %}New Haven Companies{% if language %} using {{language}}{% endif %}{% endblock %}
 
 {% block list %}
     <ul style="display:block" class="companies">

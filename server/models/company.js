@@ -50,4 +50,13 @@ CompanySchema.pre('save', function(next) {
   return next();
 });
 
+// Return a list of the languages this person uses,
+// in pairs like ['python', 'Python'], etc.
+// 
+CompanySchema.virtual('languagePairs').get(function () {
+  return _.map(this.languages, function(l){
+    return [l, programmingLanguages[l]]
+  });
+});
+
 module.exports = mongoose.model('Company', CompanySchema);

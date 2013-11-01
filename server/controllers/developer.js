@@ -32,7 +32,10 @@ DevelopersController.prototype.route = function()
         }        
         q.exec(function(err, objects){
             if (objects != null){
-                var context = {language: languages[langKey]};
+                var context = {
+                    language: languages[langKey],
+                    extraKeywords: [languages[langKey]],
+                };
                 context[_this.slug] = objects;
                 res.render(_this.template, context)
             }else{
