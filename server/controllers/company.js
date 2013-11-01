@@ -19,7 +19,7 @@ CompanyController.prototype.route = function()
     // Create new companies entry
     this.app.get('/companies', function(req, res)
     {
-        res.render('companies.html', {
+        res.render('company-list.html', {
             companies: {}
         });
     });

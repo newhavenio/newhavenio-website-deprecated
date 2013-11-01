@@ -11,8 +11,14 @@
       {% endif %}
     </div>
     <div>
-      {% if developer.languages.length>0 %}
-        <strong>Languages:</strong> {{developer.languages}}
+      {% if developer.languages.length > 0 %}
+        <strong>Languages:</strong>
+
+        {# NOTE: The '-' in this for loop eliminates whitespace #}
+
+        {% for key, lang in developer.languagePairs -%}
+          <a href="/developers/{{key}}">{{lang}}</a>{% if not loop.last %}{% if loop.revindex == 2 and loop.length > 1 %} &amp;{% else %},{% endif %} {% endif %}
+        {%- endfor %}
       {% endif %}
     </div>
     <p>{{developer.bio}}</p>

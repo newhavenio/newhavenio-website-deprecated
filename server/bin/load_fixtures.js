@@ -76,6 +76,22 @@ function addSocialLinks(user){
 	}
 }
 
+
+// Grab up to 5 random languages
+var languages = require('../lib/languages');
+function getRandLanguages(){
+	var languageKeys = _.keys(languages);
+	var theseLanguages = {}
+	for (var i = 0; i < 5; i++) {
+		if (i > 0 && Math.random() < 0.2) {
+			break;
+		};
+		theseLanguages[getRand(languageKeys)] = true;
+	};
+	console.log(theseLanguages);
+	return _.keys(theseLanguages);
+}
+
 // Let's create some users!
 var User = mongoose.model('User');
 
@@ -101,6 +117,7 @@ for (var i = 0; i < numUsers; i++) {
 		email: getRandEmail(firstName)
 	};
     user.populateFromGithub();
+    user.languages = getRandLanguages();
     addSocialLinks(user);
 
     // Save the user

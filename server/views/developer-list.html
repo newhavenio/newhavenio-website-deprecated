@@ -9,7 +9,7 @@
 
 	<div class="about row">
 	  <div class="sixteen columns brick">
-	    <h2><strong>New Haven Developers</strong></h2>
+	    <h2><strong>New Haven {% if language %}{{language}} {% endif %}Developers</strong></h2>
 
 	    <ul style="display:block" class="developers">
 	    	{% for developer in developers %}

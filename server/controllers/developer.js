@@ -1,5 +1,7 @@
 var EventEmitter = require('events').EventEmitter,
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    languages = require('../lib/languages'),
+    _ = require('underscore');
 
 function DevelopersController(app){
     if (!(this instanceof DevelopersController)) return new DevelopersController(app);
@@ -18,18 +20,36 @@ DevelopersController.prototype.route = function()
     var _this = this;
     var User = mongoose.model('User');
 
-    // Create new companies entry
-    this.app.get('/developers', function(req, res)
-    {
-        User.find().lean().exec(function(err, users){
+    function renderUserList(res, langKey){
+        var q = User;
+        console.log(langKey);
+        console.log(languages[langKey]);
+        if (langKey){
+            q = q.find({languages: langKey});
+        }else{
+            q = q.find();
+        }        
+        q.exec(function(err, users){
             if (users != null){
-                res.render('developers.html', {
-                    developers: users
+                res.render('developer-list.html', {
+                    developers: users,
+                    language: languages[langKey],
                 });
             }else{
                 res.status(404).send("No users");
-            }
+            }                    
         });
+    }
+
+    // Get users (developers)
+    this.app.get('/developers', function(req, res){
+        renderUserList(res);
+    });
+
+    // Get users to program a particular language
+    var langRoute = '/developers/:langKey(' + _.keys(languages).join('|') + ')?';
+    this.app.get(langRoute, function(req, res){
+        renderUserList(res, req.params.langKey);
     });
 
     return this;

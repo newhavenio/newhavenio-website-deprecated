@@ -8,7 +8,8 @@
 // 
 // 
 var mongoose = require('mongoose')
-  , Schema = mongoose.Schema;
+  , Schema = mongoose.Schema
+  , _ = require('underscore');
 
 // This is a list of the top 100 languages on GitHub
 // in 2013 taken from the following website:
@@ -17,94 +18,7 @@ var mongoose = require('mongoose')
 // the client and the server, this list is duplicated
 // in the AngularJS client app.
 //
-var programmingLanguages = [
-  "JavaScript",
-  "Ruby",
-  "Java",
-  "PHP",
-  "Python",
-  "C++",
-  "C",
-  "Objective-C",
-  "C#",
-  "Shell",
-  "CSS",
-  "Perl",
-  "CoffeeScript",
-  "Scala",
-  "Go",
-  "Prolog",
-  "Clojure",
-  "Haskell",
-  "Lua",
-  "Rank",
-  "Puppet",
-  "Groovy",
-  "R",
-  "ActionScript",
-  "Matlab",
-  "Arduino",
-  "Erlang",
-  "OCaml",
-  "Visual Basic",
-  "ASP",
-  "Processing",
-  "Common Lisp",
-  "Assembly",
-  "TypeScript",
-  "Dart",
-  "D",
-  "Delphi",
-  "Scheme",
-  "FORTRAN",
-  "Racket",
-  "Elixir",
-  "ColdFusion",
-  "XSLT",
-  "Apex",
-  "F#",
-  "Haxe",
-  "Verilog",
-  "Julia",
-  "Tcl",
-  "Vala",
-  "Rust",
-  "LiveScript",
-  "AppleScript",
-  "DOT",
-  "Ada",
-  "Smalltalk",
-  "Kotlin",
-  "Lasso",
-  "Eiffel",
-  "Io",
-  "M",
-  "Nemerle",
-  "Scilab",
-  "Objective-J",
-  "Awk",
-  "Slash",
-  "XProc",
-  "Xtend",
-  "Nimrod",
-  "CLIPS",
-  "Boo",
-  "Ceylon",
-  "ooc",
-  "MoonScript",
-  "DCPU-16 ASM",
-  "Rebol",
-  "Factor",
-  "Bro",
-  "Dylan",
-  "Monkey",
-  "Nu",
-  "Arc",
-  "Augeas",
-  "PogoScript",
-  "Turing",
-  "XC",
-];
+var programmingLanguages = require('../lib/languages');
 
 var UserSchema = new Schema({
 
@@ -127,7 +41,7 @@ var UserSchema = new Schema({
   // Languages are the languages in which you code.
   // This is an array of tags.  Valid tags should be
   // limited by the client.
-  languages: [{type: String, enum: programmingLanguages}],
+  languages: [{type: String, enum: _.keys(programmingLanguages)}],
 
   // Skills the person has.  These can be anything,
   // but are limited to 25 characters each.
@@ -197,6 +111,15 @@ UserSchema.methods.isAdmin = function () {
   result = this.roles.indexOf('admin') == -1 ? false : true;
   return result;
 }
+
+// Return a list of the languages this person uses,
+// in pairs like ['python', 'Python'], etc.
+// 
+UserSchema.virtual('languagePairs').get(function () {
+  return _.map(this.languages, function(l){
+    return [l, programmingLanguages[l]]
+  });
+});
 
 
 // Instance method: is this user admin or does this
