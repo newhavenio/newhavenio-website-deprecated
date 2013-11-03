@@ -25,9 +25,9 @@ AuthController.prototype.init = function(passport)
     /**
      * Passport session setup.
      * To support persistent login sessions, Passport needs to be able to
-     * serialize users into and deserialize users out of the session. 
+     * serialize users into and deserialize users out of the session.
      * This is as simple as storing the user '_id' when serializing, and finding
-     * the user by '_id' when deserializing. 
+     * the user by '_id' when deserializing.
      *
      * @link https://github.com/jaredhanson/passport-github/blob/master/examples/login/app.js#L10
      */
@@ -67,16 +67,18 @@ AuthController.prototype.init = function(passport)
 
             // Note that, only some of the attributes
             // of GitHub's `_json` attribute will be persisted,
-            // based on our User model. 
+            // based on our User model.
             //
             user.githubInfo = profile._json;
             user.populateFromGithub();
 
-            // Just testing this
-            user.isNew = true;
-
             // Save the user
-            user.save(function(){
+            user.save(function(err){
+              if( err )
+              {
+                console.log("USER SAVE ERROR: ", err)
+              }
+              user.isNew = true;
               return done(err, user);
             });
 
@@ -84,6 +86,7 @@ AuthController.prototype.init = function(passport)
 
             // We found a user with this Github ID
             // in our database.  Return the user object.
+            user.isNew = false;
             return done(err, user);
 
           };
@@ -104,9 +107,15 @@ AuthController.prototype.route = function()
     this.app.get('/auth/callback',
         this.passport.authenticate('github', { failureRedirect: '/?error=yes' }),
         function(req, res) {
-            // Successful authentication, redirect home.
-            var url = '/';
-            res.redirect(url);
+              // Successful authentication, redirect home.
+
+              var url = '/';
+              if( req.user.isNew )
+              {
+                url = '/developers/'+req.user._id+'/edit';
+              }
+
+              res.redirect(url);
     });
 
     this.app.get('/me', function(req, res)
