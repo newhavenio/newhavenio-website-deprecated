@@ -96,6 +96,14 @@ function getRandLanguages(){
 	return _.keys(theseLanguages);
 }
 
+function convertToSlug(Text) {
+    return Text
+        .toLowerCase()
+        .replace(/ /g,'-')
+        .replace(/[^\w-]+/g,'')
+        ;
+}
+
 //  **************************************************************************
 //  Let's create some companies!
 function getRandCompanyName(){
@@ -129,8 +137,9 @@ function getRandCompanyName(){
   ];
   return tc(getRand(adjs)) + ' ' + tc(getRand(nouns)) + ' ' + getRand(suffixes);
 }
+
 function getCompanyURL(name){
-  return 'http://www.' + name.toLowerCase().replace('.', '').replace(' ', '-') + '.com';
+  return 'http://www.' + convertToSlug(name) + '.com';
 }
 function getRandomBio(){
   return lorem.slice(0, randInt(90, 138)) + '.';
@@ -147,6 +156,7 @@ function tryExit(){
 }
 
 var numCompanies = 10;
+var companies = [];
 var Company = mongoose.model('Company');
 for (var i = 0; i < numCompanies; i++) {
   var name = getRandCompanyName();
@@ -159,6 +169,9 @@ for (var i = 0; i < numCompanies; i++) {
   company.languages = getRandLanguages();
   company.location = '50 W. WTF St., New Haven, CT 06511';
   company.description = getRandomBio();
+  company.active = true;
+  company.slug = convertToSlug(name);
+  companies.push(company);
 
   // Save the company
   company.save(tryExit, function(err){
@@ -189,6 +202,8 @@ for (var i = 0; i < numUsers; i++) {
   user.languages = getRandLanguages();
   addSocialLinks(user);
   user.bio = getRandomBio();
+  user.active = true;
+  user.company_ids.push(getRand(companies)._id)
 
   // Save the user
   user.save(tryExit, function(err){

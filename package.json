@@ -13,7 +13,8 @@
     "mongoose": "~3.6.20",
     "underscore": "~1.5.2",
     "nunjucks": "~1.0.0",
-    "connect": "~2.11.0"
+    "connect": "~2.11.0",
+    "async": "~0.2.9"
   },
   "devDependencies": {
     "lodash": "~2.2.1",

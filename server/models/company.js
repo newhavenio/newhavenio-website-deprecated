@@ -29,6 +29,8 @@ var CompanySchema = new Schema({
     // Careers page link
     webUrl: {type: String, required: false},
 
+    slug: {type: String, required: false},
+
     // Company Twitter Acct
     twitterUrl: {type: String, required: false},
 

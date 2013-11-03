@@ -1,27 +1,36 @@
+{% from "macros.html" import semanticComma %}
 
-    {(company.name)}
-    <div>
-      <a href="https://www.github.com/{(company.githubInfo.login)}"><i class="icon-github"></i></a>
-      {% if company.twitterUrl %}
-        <a href="https://www.twitter.com/{(company.twitterUrl)}"><i class="icon-twitter"></i></a>
-      {% endif %}
-      {% if company.linkedinUrl %}
-        <a href="https://www.linkedin.com/{(company.linkedinUrl)}"><i class="icon-linkedin"></i></a>
-      {% endif %}
-      <p>
-        {(company.description)}
-      </p>
-    </div>
-    <div>
-      {% if company.languages.length > 0 %}
-        <strong>Languages:</strong>
+{(company.name)}
+<div>
+  <a href="https://www.github.com/{(company.githubInfo.login)}"><i class="icon-github"></i></a>
+  {% if company.twitterUrl %}
+    <a href="https://www.twitter.com/{(company.twitterUrl)}"><i class="icon-twitter"></i></a>
+  {% endif %}
+  {% if company.linkedinUrl %}
+    <a href="https://www.linkedin.com/{(company.linkedinUrl)}"><i class="icon-linkedin"></i></a>
+  {% endif %}
+  <p>
+    {(company.description)}
+  </p>
+</div>
+<div>
+  {% if company.languages.length > 0 %}
+    <strong>Languages:</strong>
 
-        {# NOTE: The '-' in this for loop eliminates whitespace #}
+    {# NOTE: The '-' in this for loop eliminates whitespace #}
 
-        {% for key, lang in company.languagePairs -%}
-          <a href="/companies/{(key)}">{(lang)}</a>{% if not loop.last %}{% if loop.revindex == 2 and loop.length > 1 %} &amp;{% else %},{% endif %} {% endif %}
-        {%- endfor %}
-      {% endif %}
-    </div>
-    <p>{(company.bio)}</p>
-    <!-- <a href="#/developers/{(developer._id)}">edit</a> -->
+    {% for key, lang in company.languagePairs -%}
+      <a href="/companies/{(key)}">{(lang)}</a>{(semanticComma(loop.last, loop.revindex, loop.length))}
+    {%- endfor %}
+  {% endif %}
+</div>
+<div>
+  {% if company.developers %}
+    <strong>Developers:</strong><br>
+    {% for developer in company.developers %}
+      <img src="{(developer.githubInfo.avatar_url)}" height="80" width="80" alt="{(developer.githubInfo.name)}">
+    {% endfor %}
+  {% endif %}
+</div>
+<p>{(company.bio)}</p>
+<!-- <a href="#/developers/{(developer._id)}">edit</a> -->

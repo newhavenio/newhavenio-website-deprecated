@@ -1,0 +1,4 @@
+
+{% macro semanticComma(last, revindex, length) %}
+  {% if not last %}{% if revindex == 2 and length > 1 %} &amp;{% else %},{% endif %} {% endif %}
+{% endmacro %}

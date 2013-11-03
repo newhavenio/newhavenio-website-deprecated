@@ -22,6 +22,9 @@ var programmingLanguages = require('../lib/languages');
 
 var UserSchema = new Schema({
 
+  // The companies where this user (developer) works
+  company_ids: [{ type: Schema.Types.ObjectId, ref: 'Company' }],
+
   // Housekeeping stuff
   createdAt : { type: Date, default: Date.now },
   modifiedAt : { type: Date, default: Date.now },
