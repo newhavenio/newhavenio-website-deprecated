@@ -48,7 +48,7 @@ $rhythm-height: .711;
 // http://www.modularscale.com by Tim Brown
 // https://github.com/scottkellum/modular-scale
 $ratio: golden();						// Ratio for Modular Scale
-$base-font-size: 16px !default;
+$base-font-size: 14px !default;
 $importantNum: 78px !default;
 $base-size: $base-font-size $importantNum;
 // Gumby Default Scale Values: 16, 18, 26, 30, 42, 48, 68, 78, 110, 126;
@@ -71,7 +71,8 @@ $absurd: ms(10);
 $header-font-color: #444444 !default;
 $header-link-color: #d04526 !default;
 $header-link-hover-color: #c03d20 !default;
-$body-font-color: #555555 !default;
+$body-font-color: #7d7d7d !default;
+$body-font-color-light: #b0b0b0 !default;
 $body-link-color: #d04526 !default;
 $body-link-hover-color: #c03d20 !default;
 
