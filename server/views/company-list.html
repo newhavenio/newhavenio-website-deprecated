@@ -1,14 +1,34 @@
 
 {% extends "developer-list.html" %}
 
-{% block subtitle %}New Haven Companies{% if language %} using {(language)}{% endif %}{% endblock %}
+
+<div class="searchbar">
+  <div class="row">
+    <div class="field">
+      <input class="text fleft" type="search" placeholder="Search developers">
+      <i class="icon-search fright"></i>
+    </div>
+  </div> 
+</div>
 
 {% block list %}
-    <ul style="display:block" class="companies">
-    	{% for company in companies %}
-	      <li class="company">
-	      	{% include "partials/company-in-list.html" %}
-	      </li>
-    	{% endfor %}
-    </ul>
+  <div class="directory companies">
+    <div class="searchbar">
+      <div class="row">
+        <div class="field">
+          <input class="text fleft" type="search" placeholder="Search {% block subtitle %}New Haven Companies{% if language %} using {(language)}{% endif %}{% endblock %}">
+          <a href="#" class="btn-search"><img src="/images/icon_search.png" alt="search"/></a>
+        </div>
+      </div> 
+    </div>
+    <div class="row">
+      <ul>
+        {% for company in companies %}
+        <li class="brick company">
+          {% include "partials/company-in-list.html" %}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
 {% endblock %}

@@ -11,21 +11,26 @@
 
 {% block main %}
 
-	<div class="about row">
-	  <div class="sixteen columns brick">
-	    <h2><strong>{% block subtitle %}New Haven {% if language %}{(language)} {% endif %}Developers{% endblock %}</strong></h2>
-
-	    {% block list %}
-		    <ul style="display:block" class="developers">
-		    	{% for developer in developers %}
-			      <li class="developer">
-			      	{% include "partials/developer-in-list.html" %}
-			      </li>
-		    	{% endfor %}
-		    </ul>
-	    {% endblock %}
-	  </div>
-	</div>
-
-
+  {% block list %}
+    <div class="directory developers">
+      <div class="searchbar">
+        <div class="row">
+          <div class="field">
+            <input class="text fleft" type="search" placeholder="Search {% block subtitle %}New Haven {% if language %}{(language)} {% endif %}Developers{% endblock %}">
+            <a href="#" class="btn-search"><img src="/images/icon_search.png" alt="search"/></a>
+          </div>
+        </div> 
+      </div>
+      <div class="row">
+        <ul>
+          {% for developer in developers %}
+          <li class="brick developer">
+            {% include "partials/developer-in-list.html" %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+  	</div>
+  {% endblock %}
+  
 {% endblock %}

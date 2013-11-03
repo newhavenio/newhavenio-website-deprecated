@@ -1,34 +1,41 @@
 {% from "macros.html" import semanticComma %}
+<div class="content">
+  <div class="item-header">
+    <img class="avatar" src="{(developer.githubInfo.avatar_url)}">
+    <span class="name fleft">{(developer.githubInfo.name)}</span>
+    <ul class="social-icons">
+      <li><a href="https://www.github.com/{(developer.githubInfo.login)}"><i class="icon-github"></i></a></li>
+      {% if developer.twitterUrl %}
+      <li>
+        <a href="https://www.twitter.com/{(developer.twitterUrl)}"><i class="icon-twitter"></i></a>
+      </li>
+      {% endif %}
+      {% if developer.linkedinUrl %}
+      <li>
+        <a href="https://www.linkedin.com/{(developer.linkedinUrl)}"><i class="icon-linkedin"></i></a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+  <p>{(developer.bio)}</p>
+  <p class="item-companies">
+    {% if developer.companies %}
+      <strong>Local {% if developer.companies.length == 1 %}company{% else %}companies{% endif %}:</strong>
+      {% for company in developer.companies %}
+        {(company.name)}{(semanticComma(loop.last, loop.revindex, loop.length))}
+      {% endfor %}
+    {% endif %}
+  </p>
+  <p class="item-languages">
+    {% if developer.languages.length > 0 %}
+  
+      {# NOTE: The '-' in this for loop eliminates whitespace #}
 
-<img src="{(developer.githubInfo.avatar_url)}" height="80" width="80">
-{(developer.githubInfo.name)}
-<div>
-  <a href="https://www.github.com/{(developer.githubInfo.login)}"><i class="icon-github"></i></a>
-  {% if developer.twitterUrl %}
-    <a href="https://www.twitter.com/{(developer.twitterUrl)}"><i class="icon-twitter"></i></a>
-  {% endif %}
-  {% if developer.linkedinUrl %}
-    <a href="https://www.linkedin.com/{(developer.linkedinUrl)}"><i class="icon-linkedin"></i></a>
-  {% endif %}
-</div>
-<div>
-  {% if developer.languages.length > 0 %}
-    <strong>Languages:</strong>
+      {% for key, lang in developer.languagePairs -%}
+        <a href="/developers/{(key)}" class="tag">{(lang)}</a>
+      {%- endfor %}
+    {% endif %}
+  </p>
 
-    {# NOTE: The '-' in this for loop eliminates whitespace #}
-
-    {% for key, lang in developer.languagePairs -%}
-      <a href="/developers/{(key)}">{(lang)}</a>{(semanticComma(loop.last, loop.revindex, loop.length))}
-    {%- endfor %}
-  {% endif %}
+  <!-- <a href="#/developers/{(developer._id)}">edit</a> -->
 </div>
-<div>
-  {% if developer.companies %}
-    <strong>Local {% if developer.companies.length == 1 %}company{% else %}companies{% endif %}:</strong>
-    {% for company in developer.companies %}
-      {(company.name)}{(semanticComma(loop.last, loop.revindex, loop.length))}
-    {% endfor %}
-  {% endif %}
-</div>
-<p>{(developer.bio)}</p>
-<!-- <a href="#/developers/{(developer._id)}">edit</a> -->
