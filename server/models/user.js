@@ -33,7 +33,18 @@ var UserSchema = new Schema({
   // in which case they should not show up in search,
   // etc.  By default, people are inactive.
   active: {type: Boolean, default: false, index: true},
-  
+
+  // This boolean indicates, when true, that a user has
+  // just registered and has not yet edited their profile.
+  // The first time we receive a PUT editing this user's
+  // profile, we'll mark them as isNew = false.
+  newlyRegistered: {type: Boolean, default: false},
+
+  // This boolean indicates, when true, that a user has
+  // will allow people to contact them via the website
+  // using a form that has a captcha.
+  allowsContact: {type: Boolean, default: true},
+
   // Did the user complete their registration, including
   // filling our their languages, etc.?
   complete: {type: Boolean, default: false},
