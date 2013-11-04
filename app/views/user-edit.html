@@ -1,10 +1,19 @@
 <div class="about row">
   <div class="sixteen columns">
     <div class="brick">
-      <h2><strong>Your Profile</strong></h2>
+      <h2 data-ng-show='user.newlyRegistered'><strong>Complete your registration</strong></h2>
+		<div class="alert warning" data-ng-show='user.newlyRegistered' style="margin-bottom:2em">
+			We've populated part of your profile based on 
+			the OAuth info that GitHub sent over.  To complete
+			your registration, please review the information
+			below and hit submit.
+		</div>
+	    <h2><strong>Your Profile</strong></h2>
+
   		<form name="userEditForm">
   			<fieldset>
 			  <legend>Name &amp; Email</legend>
+		      	<img class="avatar" data-ng-src="{{user.githubInfo.avatar_url}}">
 	  			<ul>
 	  				<li class="field" data-ng-class="{'danger': userEditForm.firstName.$invalid}">
 			  	        <input class="input narrow" name="firstName" type="text" data-ng-model="user.firstName" placeholder="First Name" required data-ng-minlength="3" data-ng-maxlength="50" data-ng-disabled="submitting"/>
@@ -23,6 +32,23 @@
 
 	  			</ul>
 			</fieldset>
+  			<fieldset>
+			  <legend>Visibility</legend>
+	  			<ul>
+	  				<li data-ng-class="{'danger': userEditForm.active.$invalid}">
+	  					<label class="checkbox" for="active">
+				  	        <input class="input" name="active" type="checkbox" data-ng-model="user.active" />
+						    <span></span> Show me as a "developer" on the NewHaven.io website
+						</label>
+	  				</li>
+	  				<li data-ng-class="{'danger': userEditForm.allowsContact.$invalid}">
+	  					<label class="checkbox" for="allowsContact">
+				  	        <input class="input" name="allowsContact" type="checkbox" data-ng-model="user.allowsContact" />
+						    <span></span> Allow people to contact me using a form that has a captcha
+						</label>
+	  				</li>
+	  			</ul>
+	  		</fieldset>
   			<fieldset>
 			  <legend>Social links</legend>
 	  				<li class="prepend field"  data-ng-class="{'danger': userEditForm.twitterUrl.$invalid}">
@@ -60,7 +86,7 @@
 	  			</ul>
 			</fieldset>
   			<fieldset>
-			  <legend>Languages</legend>
+			  <legend>Programming languages</legend>
 	  			<ul>
 	  				<li class="field" data-ng-repeat="langNo in range(1,5)">
 	  					<div class="picker">
@@ -71,8 +97,18 @@
 	  				</li>
 	  			</ul>
 			</fieldset>
-			<div class="medium primary btn icon-left entypo icon-right-bold"><a data-ng-click="put()">Save</a></div>
-			<div class="medium danger btn icon-left entypo icon-cancel"><a data-ng-click="remove()" data-confirm-click="Delete this user?">Delete</a></div>
+			<div class="medium btn icon-left entypo icon-right-bold" data-ng-class="(user.newlyRegistered && 'success' || !user.newlyRegistered && 'primary')"><a data-ng-click="put()">
+				<span data-ng-hide="user.newlyRegistered">
+					Save
+				</span>
+				<span data-ng-show="user.newlyRegistered">
+					Complete registration
+				</span>
+			</a></div>
+			<div class="medium danger btn icon-left entypo icon-cancel">
+				<a data-ng-hide="user.newlyRegistered" data-ng-click="remove()" data-confirm-click="Delete yourself?">Delete</a>
+				<a data-ng-show="user.newlyRegistered" data-ng-click="remove()" data-confirm-click="Cancel registration?">Cancel registration</a>
+			</div>
   	  </form>
 		</div>
 	</div>

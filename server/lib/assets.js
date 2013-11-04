@@ -37,7 +37,7 @@ function AssetManager(app, server){
             "app/bower_components/angular-cookies/angular-cookies.js",
             "app/bower_components/angular-sanitize/angular-sanitize.js",
             "app/bower_components/restangular/dist/restangular.js",
-            "app/scripts/lib/gumby.min.js",
+            "app/scripts/lib/gumby.js",
             "app/scripts/app.js",
             "app/scripts/controllers/main.js",
             "app/scripts/controllers/meetup.js",

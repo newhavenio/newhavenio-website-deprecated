@@ -72,8 +72,8 @@ AuthController.prototype.init = function(passport)
             user.githubInfo = profile._json;
             user.populateFromGithub();
 
-            // Just testing this
-            user.isNew = true;
+            // Mark the user as new.
+            user.newlyRegistered = true;
 
             // Save the user
             user.save(function(){
@@ -104,8 +104,12 @@ AuthController.prototype.route = function()
     this.app.get('/auth/callback',
         this.passport.authenticate('github', { failureRedirect: '/?error=yes' }),
         function(req, res) {
-            // Successful authentication, redirect home.
-            var url = '/';
+
+            // Successful authentication, redirect home for
+            // existing users, and to profile completion/edit
+            // for new users.
+            //
+            var url = req.user.newlyRegistered ? '/#/developers/' + req.user._id +'/edit' : '/';
             res.redirect(url);
     });
 

@@ -1,102 +1,78 @@
 'use strict';
 
 angular.module('nhvioApp')
-  .controller('UserEditCtrl', ['$scope', '$routeParams', '$location', 'UserService', function ($scope, $routeParams, $location, UserService) {
+  .controller('UserEditCtrl', ['$scope', '$routeParams', '$window', 'UserService', function ($scope, $routeParams, $window, UserService) {
 
   	// Note that, here we've got a callback on the promise instead
   	// of directly using the value of the promise because we'd like
   	// to enable two-way binding in the user-edit form.
+  	var wasNewlyRegistered = false;
     UserService.getUser($routeParams.developerId).then(function(user){
     	$scope.user = user;	
+    	if (user.newlyRegistered) {
+    		wasNewlyRegistered = true;
+    		// Set them to active by default in the interface.
+    		user.active = true;
+    	};
     });
 
     $scope.programmingLanguages = [
-		  "JavaScript",
-		  "Ruby",
-		  "Java",
-		  "PHP",
-		  "Python",
-		  "C++",
-		  "C",
-		  "Objective-C",
-		  "C#",
-		  "Shell",
-		  "CSS",
-		  "Perl",
-		  "CoffeeScript",
-		  "Scala",
-		  "Go",
-		  "Prolog",
-		  "Clojure",
-		  "Haskell",
-		  "Lua",
-		  "Rank",
-		  "Puppet",
-		  "Groovy",
-		  "R",
-		  "ActionScript",
-		  "Matlab",
-		  "Arduino",
-		  "Erlang",
-		  "OCaml",
-		  "Visual Basic",
-		  "ASP",
-		  "Processing",
-		  "Common Lisp",
-		  "Assembly",
-		  "TypeScript",
-		  "Dart",
-		  "D",
-		  "Delphi",
-		  "Scheme",
-		  "FORTRAN",
-		  "Racket",
-		  "Elixir",
-		  "ColdFusion",
-		  "XSLT",
-		  "Apex",
-		  "F#",
-		  "Haxe",
-		  "Verilog",
-		  "Julia",
-		  "Tcl",
-		  "Vala",
-		  "Rust",
-		  "LiveScript",
-		  "AppleScript",
-		  "DOT",
-		  "Ada",
-		  "Smalltalk",
-		  "Kotlin",
-		  "Lasso",
-		  "Eiffel",
-		  "Io",
-		  "M",
-		  "Nemerle",
-		  "Scilab",
-		  "Objective-J",
-		  "Awk",
-		  "Slash",
-		  "XProc",
-		  "Xtend",
-		  "Nimrod",
-		  "CLIPS",
-		  "Boo",
-		  "Ceylon",
-		  "ooc",
-		  "MoonScript",
-		  "DCPU-16 ASM",
-		  "Rebol",
-		  "Factor",
-		  "Bro",
-		  "Dylan",
-		  "Monkey",
-		  "Nu",
-		  "Arc",
-		  "Augeas",
-		  "PogoScript",
-		  "Turing",
-		  "XC",
+			"Processing", 
+			"Rank", 
+			"C#", 
+			"Racket", 
+			"Objective-C", 
+			"Haskell", 
+			"Puppet", 
+			"Go", 
+			"Objective-J", 
+			"Visual Basic", 
+			"Smalltalk", 
+			"Java", 
+			"Lua", 
+			"Apex", 
+			"Delphi", 
+			"Perl", 
+			"CoffeeScript", 
+			"Common Lisp", 
+			"Matlab", 
+			"ActionScript", 
+			"Haxe", 
+			"Erlang", 
+			"CSS", 
+			"Verilog", 
+			"F#", 
+			"Shell", 
+			"Assembly", 
+			"XSLT", 
+			"Python", 
+			"LiveScript", 
+			"Vala", 
+			"JavaScript", 
+			"Dart", 
+			"Julia", 
+			"Elixir", 
+			"Ada", 
+			"PHP", 
+			"Ruby", 
+			"Groovy", 
+			"C", 
+			"Scheme", 
+			"D", 
+			"C++", 
+			"ColdFusion", 
+			"Arduino", 
+			"Scala", 
+			"OCaml", 
+			"TypeScript", 
+			"R", 
+			"FORTRAN", 
+			"ASP", 
+			"Tcl", 
+			"Clojure", 
+			"AppleScript", 
+			"Rust", 
+			"Prolog"
 		];
 
 	$scope.range = function(min, max, step){
@@ -124,10 +100,10 @@ angular.module('nhvioApp')
 			// list of users.
 			$scope.user = null;
 			UserService.clearAll();
-			$location.path('/developers');
+			$window.location.href = '/developers';
 		}, function(response) {
 			$scope.submitting = false;
-			console.log("Error with status code", response.status);
+			alert('Error removing user!');
 		})
 	}
 
@@ -137,9 +113,15 @@ angular.module('nhvioApp')
 		$scope.submitting = true;
 		$scope.user.put().then(function(){
 			$scope.submitting = false;
+
+			// If they were just registering,
+			// redirect them to the developer page
+			if (wasNewlyRegistered) {
+				$window.location.href = '/developers';		
+			};
 		}, function(response) {
 			$scope.submitting = false;
-			console.log("Error with status code", response.status);
+			alert('Error saving!');
 		})
 	}
   }]);

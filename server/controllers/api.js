@@ -137,7 +137,7 @@ ApiController.prototype.route = function()
             return res.status(401).send("Not permitted");
         }
 
-        var editableFields = ['firstName', 'lastName', 'bio', 'languages', 'twitterUrl', 'linkedinUrl', 'blogUrl', 'email'],
+        var editableFields = ['firstName', 'lastName', 'bio', 'languages', 'twitterUrl', 'linkedinUrl', 'blogUrl', 'email', 'active'],
             payload = _.pick(req.body, editableFields);
 
         User
@@ -150,6 +150,13 @@ ApiController.prototype.route = function()
                     // Update the user and save
                     //
                     _.extend(user, payload);
+
+                    // Once a person has edited their profile,
+                    // they're not longer newly registered.
+                    if (user.newlyRegistered == true) {
+                        user.newlyRegistered = false;
+                    };
+
                     user.save(function(err, user){
                         if (err) {
                             console.log("Error saving user: ", err);

@@ -53,8 +53,10 @@ app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(expressValidator());
 app.use(express.methodOverride());
-app.use(express.cookieParser(process.env.COOKIE_SECRET));
-app.use(express.session());
+app.use(express.cookieParser());
+app.use(express.cookieSession({ secret: process.env.COOKIE_SECRET }));
+
+// app.use(express.session());
 app.use(passport.initialize());
 app.use(passport.session());
 
