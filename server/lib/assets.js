@@ -45,11 +45,11 @@ function AssetManager(app, server){
             "app/scripts/services/meetupService.js",
             "app/scripts/controllers/users.js",
             "app/scripts/services/userService.js",
-            "app/scripts/services/businessService.js",
+            "app/scripts/services/companyService.js",
             "app/scripts/controllers/user.js",
             "app/scripts/controllers/menu.js",
             "app/scripts/controllers/useredit.js",
-            "app/scripts/controllers/business.js",
+            "app/scripts/controllers/company.js",
             "app/scripts/filters/niceListFilter.js",
             "app/scripts/directives/confirmClick.js"
           ],
