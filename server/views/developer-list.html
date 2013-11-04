@@ -23,8 +23,9 @@
       </div>
       <div class="row">
         <ul>
+          {% set cls = cycler("alpha", "omega") %}
           {% for developer in developers %}
-          <li class="brick developer">
+          <li class="eight columns {( cls.next() )}">
             {% include "partials/developer-in-list.html" %}
           </li>
           {% endfor %}
