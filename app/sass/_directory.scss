@@ -2,6 +2,16 @@
   .brick {
     min-height: 170px;
   }
+  &.developers {
+   .brick {
+     min-height: 301px;
+   } 
+   .tag {
+     float: left;
+     margin-bottom: 5px;
+     padding: 0 10px;
+   }
+  }
   .searchbar {
     height: 60px;
     background: #fff;
@@ -30,10 +40,13 @@
     padding: 3px 10px;
     border: 1px solid $body-font-color-light;
     font-size: 12px;
+    float: left;
+    margin-bottom: 5px;
+    padding: 0 10px;
   }
 
   .content {
-    margin-left: 145px;
+    margin-left: 105px;
     p {
       margin-bottom: 5px;
     }
@@ -42,11 +55,10 @@
     }
     .avatar {
       float: left;
-      margin-top: 3px;
-      margin-left: -140px;
+      margin-left: -105px;
       width: 80px;
       height: 80px;
-
+      margin-top: 3px;
     }
     span.name {
       font-size: 22px;
@@ -69,8 +81,8 @@
     }
     .item-developers {
       img {
-        width: 75px;
-        height: 75px;
+        width: 65px;
+        height: 65px;
       }
     }
     .item-languages {

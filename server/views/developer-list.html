@@ -23,7 +23,7 @@
       </div>
       <div class="row">
         <ul>
-          {% set cls = cycler("alpha", "omega") %}
+          {% set cls = cycler("alpha", "") %}
           {% for developer in developers %}
           <li class="eight columns {( cls.next() )}">
             {% include "partials/developer-in-list.html" %}
