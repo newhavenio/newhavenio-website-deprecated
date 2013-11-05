@@ -21,19 +21,36 @@ var passport = require('passport');
 var app = express();
 var server = http.createServer(app);
 
+// Set the port.  Heroku will set the env var
+app.set('port', process.env.PORT || 3000);
+
+// Set a global 5s timeout on requests
+// http://www.senchalabs.org/connect/timeout.html
+app.use(express.timeout(5000));
+
+// Limit incoming request size.  This will need
+// to be increased if we ever start accepting images
+// or something.  For now, requests should be very small.
+// http://www.senchalabs.org/connect/limit.html
+app.use(express.limit('0.25mb'));
+
 // Set up compression
 app.use(connect.compress());
 
-// all environments
-app.set('port', process.env.PORT || 3000);
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
-
 // Handle static content first
+// http://www.senchalabs.org/connect/static.html
 app.set('static_dir', 'app');
 app.use(express.static(app.get('static_dir')));
 
+// Cache popular static content in memory
+// http://www.senchalabs.org/connect/staticCache.html
+app.use(express.staticCache());
+
 var assetManager = require('./lib/assets')(app, server);
+
+// Set the location of our views.  We'll use
+// nunjucks, as below.
+// app.set('views', __dirname + '/views');
 
 // Set up nunjucks templating
 var nunjucks = require('nunjucks');
