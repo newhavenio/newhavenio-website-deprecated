@@ -86,11 +86,22 @@
 	  			</ul>
 			</fieldset>
   			<fieldset>
+			  <legend>Local (Connecticut) companies with whom you're affiliated</legend>
+	  			<ul>
+	  				<li class="field" data-ng-repeat="coNo in range(1,3)">
+	  					<div class="picker">
+				  	        <select ng-model="user.company_ids[coNo-1]" data-ng-options="co._id as co.name for co in companies" data-ng-disabled="submitting">
+		  	        	          <option value="">-- Company #{{coNo}} --</option>
+				  	        </select>
+				  	    </div>
+	  				</li>
+	  			</ul>
+			</fieldset>  			<fieldset>
 			  <legend>Programming languages</legend>
 	  			<ul>
 	  				<li class="field" data-ng-repeat="langNo in range(1,5)">
 	  					<div class="picker">
-				  	        <select ng-model="user.languages[langNo-1]" data-ng-options="lang for lang in programmingLanguages" data-ng-disabled="submitting">
+				  	        <select ng-model="user.languages[langNo-1]" data-ng-options="key as lang.name for (key, lang) in programmingLanguages" data-ng-disabled="submitting">
 		  	        	          <option value="">-- Language #{{langNo}} --</option>
 				  	        </select>
 				  	    </div>

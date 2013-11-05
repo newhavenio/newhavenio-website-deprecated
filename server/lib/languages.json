@@ -1,58 +1,282 @@
 {
-    "processing": "Processing", 
-    "rank": "Rank", 
-    "c-sharp": "C#", 
-    "racket": "Racket", 
-    "objective-c": "Objective-C", 
-    "haskell": "Haskell", 
-    "puppet": "Puppet", 
-    "go": "Go", 
-    "objective-j": "Objective-J", 
-    "visual-basic": "Visual Basic", 
-    "smalltalk": "Smalltalk", 
-    "java": "Java", 
-    "lua": "Lua", 
-    "apex": "Apex", 
-    "delphi": "Delphi", 
-    "perl": "Perl", 
-    "coffeescript": "CoffeeScript", 
-    "common-lisp": "Common Lisp", 
-    "matlab": "Matlab", 
-    "actionscript": "ActionScript", 
-    "haxe": "Haxe", 
-    "erlang": "Erlang", 
-    "css": "CSS", 
-    "verilog": "Verilog", 
-    "f-sharp": "F#", 
-    "shell": "Shell", 
-    "assembly": "Assembly", 
-    "xslt": "XSLT", 
-    "python": "Python", 
-    "livescript": "LiveScript", 
-    "vala": "Vala", 
-    "javascript": "JavaScript", 
-    "dart": "Dart", 
-    "julia": "Julia", 
-    "elixir": "Elixir", 
-    "ada": "Ada", 
-    "php": "PHP", 
-    "ruby": "Ruby", 
-    "groovy": "Groovy", 
-    "c": "C", 
-    "scheme": "Scheme", 
-    "d": "D", 
-    "c-plus-plus": "C++", 
-    "coldfusion": "ColdFusion", 
-    "arduino": "Arduino", 
-    "scala": "Scala", 
-    "ocaml": "OCaml", 
-    "typescript": "TypeScript", 
-    "r": "R", 
-    "fortran": "FORTRAN", 
-    "asp": "ASP", 
-    "tcl": "Tcl", 
-    "clojure": "Clojure", 
-    "applescript": "AppleScript", 
-    "rust": "Rust", 
-    "prolog": "Prolog"
+    "rank": {
+        "priority": 190, 
+        "name": "Rank", 
+        "key": "rank"
+    }, 
+    "c-sharp": {
+        "priority": 80, 
+        "name": "C#", 
+        "key": "c-sharp"
+    }, 
+    "racket": {
+        "priority": 390, 
+        "name": "Racket", 
+        "key": "racket"
+    }, 
+    "objective-c": {
+        "priority": 70, 
+        "name": "Objective-C", 
+        "key": "objective-c"
+    }, 
+    "haskell": {
+        "priority": 170, 
+        "name": "Haskell", 
+        "key": "haskell"
+    }, 
+    "puppet": {
+        "priority": 200, 
+        "name": "Puppet", 
+        "key": "puppet"
+    }, 
+    "go": {
+        "priority": 140, 
+        "name": "Go", 
+        "key": "go"
+    }, 
+    "objective-j": {
+        "priority": 630, 
+        "name": "Objective-J", 
+        "key": "objective-j"
+    }, 
+    "visual-basic": {
+        "priority": 280, 
+        "name": "Visual Basic", 
+        "key": "visual-basic"
+    }, 
+    "smalltalk": {
+        "priority": 550, 
+        "name": "Smalltalk", 
+        "key": "smalltalk"
+    }, 
+    "java": {
+        "priority": 20, 
+        "name": "Java", 
+        "key": "java"
+    }, 
+    "lua": {
+        "priority": 180, 
+        "name": "Lua", 
+        "key": "lua"
+    }, 
+    "apex": {
+        "priority": 430, 
+        "name": "Apex", 
+        "key": "apex"
+    }, 
+    "delphi": {
+        "priority": 360, 
+        "name": "Delphi", 
+        "key": "delphi"
+    }, 
+    "perl": {
+        "priority": 110, 
+        "name": "Perl", 
+        "key": "perl"
+    }, 
+    "coffeescript": {
+        "priority": 120, 
+        "name": "CoffeeScript", 
+        "key": "coffeescript"
+    }, 
+    "common-lisp": {
+        "priority": 310, 
+        "name": "Common Lisp", 
+        "key": "common-lisp"
+    }, 
+    "matlab": {
+        "priority": 240, 
+        "name": "Matlab", 
+        "key": "matlab"
+    }, 
+    "actionscript": {
+        "priority": 230, 
+        "name": "ActionScript", 
+        "key": "actionscript"
+    }, 
+    "haxe": {
+        "priority": 450, 
+        "name": "Haxe", 
+        "key": "haxe"
+    }, 
+    "erlang": {
+        "priority": 260, 
+        "name": "Erlang", 
+        "key": "erlang"
+    }, 
+    "css": {
+        "priority": 100, 
+        "name": "CSS", 
+        "key": "css"
+    }, 
+    "verilog": {
+        "priority": 460, 
+        "name": "Verilog", 
+        "key": "verilog"
+    }, 
+    "f-sharp": {
+        "priority": 440, 
+        "name": "F#", 
+        "key": "f-sharp"
+    }, 
+    "shell": {
+        "priority": 90, 
+        "name": "Shell", 
+        "key": "shell"
+    }, 
+    "assembly": {
+        "priority": 320, 
+        "name": "Assembly", 
+        "key": "assembly"
+    }, 
+    "xslt": {
+        "priority": 420, 
+        "name": "XSLT", 
+        "key": "xslt"
+    }, 
+    "python": {
+        "priority": 40, 
+        "name": "Python", 
+        "key": "python"
+    }, 
+    "livescript": {
+        "priority": 510, 
+        "name": "LiveScript", 
+        "key": "livescript"
+    }, 
+    "vala": {
+        "priority": 490, 
+        "name": "Vala", 
+        "key": "vala"
+    }, 
+    "processing": {
+        "priority": 300, 
+        "name": "Processing", 
+        "key": "processing"
+    }, 
+    "dart": {
+        "priority": 340, 
+        "name": "Dart", 
+        "key": "dart"
+    }, 
+    "julia": {
+        "priority": 470, 
+        "name": "Julia", 
+        "key": "julia"
+    }, 
+    "elixir": {
+        "priority": 400, 
+        "name": "Elixir", 
+        "key": "elixir"
+    }, 
+    "asp": {
+        "priority": 290, 
+        "name": "ASP", 
+        "key": "asp"
+    }, 
+    "php": {
+        "priority": 30, 
+        "name": "PHP", 
+        "key": "php"
+    }, 
+    "ruby": {
+        "priority": 10, 
+        "name": "Ruby", 
+        "key": "ruby"
+    }, 
+    "groovy": {
+        "priority": 210, 
+        "name": "Groovy", 
+        "key": "groovy"
+    }, 
+    "c": {
+        "priority": 60, 
+        "name": "C", 
+        "key": "c"
+    }, 
+    "scheme": {
+        "priority": 370, 
+        "name": "Scheme", 
+        "key": "scheme"
+    }, 
+    "d": {
+        "priority": 350, 
+        "name": "D", 
+        "key": "d"
+    }, 
+    "c-plus-plus": {
+        "priority": 50, 
+        "name": "C++", 
+        "key": "c-plus-plus"
+    }, 
+    "coldfusion": {
+        "priority": 410, 
+        "name": "ColdFusion", 
+        "key": "coldfusion"
+    }, 
+    "ada": {
+        "priority": 540, 
+        "name": "Ada", 
+        "key": "ada"
+    }, 
+    "scala": {
+        "priority": 130, 
+        "name": "Scala", 
+        "key": "scala"
+    }, 
+    "ocaml": {
+        "priority": 270, 
+        "name": "OCaml", 
+        "key": "ocaml"
+    }, 
+    "typescript": {
+        "priority": 330, 
+        "name": "TypeScript", 
+        "key": "typescript"
+    }, 
+    "r": {
+        "priority": 220, 
+        "name": "R", 
+        "key": "r"
+    }, 
+    "fortran": {
+        "priority": 380, 
+        "name": "FORTRAN", 
+        "key": "fortran"
+    }, 
+    "javascript": {
+        "priority": 0, 
+        "name": "JavaScript", 
+        "key": "javascript"
+    }, 
+    "arduino": {
+        "priority": 250, 
+        "name": "Arduino", 
+        "key": "arduino"
+    }, 
+    "tcl": {
+        "priority": 480, 
+        "name": "Tcl", 
+        "key": "tcl"
+    }, 
+    "clojure": {
+        "priority": 160, 
+        "name": "Clojure", 
+        "key": "clojure"
+    }, 
+    "applescript": {
+        "priority": 520, 
+        "name": "AppleScript", 
+        "key": "applescript"
+    }, 
+    "rust": {
+        "priority": 500, 
+        "name": "Rust", 
+        "key": "rust"
+    }, 
+    "prolog": {
+        "priority": 150, 
+        "name": "Prolog", 
+        "key": "prolog"
+    }
 }

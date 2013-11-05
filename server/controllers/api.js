@@ -2,6 +2,7 @@ var EventEmitter = require('events').EventEmitter,
     CompanyValidator = require('../lib/validation/business'),
     mongoose = require('mongoose'),
     passport = require('passport'),
+    path = require('path'),
     _ = require('underscore');
 
 
@@ -22,6 +23,10 @@ ApiController.prototype = Object.create(EventEmitter.prototype);
 ApiController.prototype.route = function()
 {
     var _this = this;
+
+    this.app.get('/api/languages', function(req, res){
+        res.sendfile(path.resolve('server/lib/languages.json'));
+    });
 
     // *********************************************
     // Company API
@@ -137,8 +142,17 @@ ApiController.prototype.route = function()
             return res.status(401).send("Not permitted");
         }
 
-        var editableFields = ['firstName', 'lastName', 'bio', 'languages', 'twitterUrl', 'linkedinUrl', 'blogUrl', 'email', 'active'],
-            payload = _.pick(req.body, editableFields);
+        var editableFields = [
+            'firstName', 'lastName', 'bio', 'languages', 'twitterUrl',
+            'linkedinUrl', 'blogUrl', 'email', 'active', 'company_ids'
+        ];
+        var arrayFields = {
+            'languages': 5,
+            'company_ids': 3,
+        };
+        var payload = _.pick(req.body, editableFields);
+        payload.languages = payload.languages.slice(0,5);
+        payload.company_ids = payload.company_ids.slice(0,3);
 
         User
             .findOne({'_id': user_id})

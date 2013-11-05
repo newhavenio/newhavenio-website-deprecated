@@ -1,14 +1,15 @@
 'use strict';
 
 angular.module('nhvioApp')
-  .controller('UserEditCtrl', ['$scope', '$routeParams', '$window', 'UserService', function ($scope, $routeParams, $window, UserService) {
+  .controller('UserEditCtrl', ['$scope', '$routeParams', '$window', 'UserService', 'CompanyService', 'LanguageService', function ($scope, $routeParams, $window, UserService, CompanyService, LanguageService) {
 
   	// Note that, here we've got a callback on the promise instead
   	// of directly using the value of the promise because we'd like
   	// to enable two-way binding in the user-edit form.
   	var wasNewlyRegistered = false;
     UserService.getUser($routeParams.developerId).then(function(user){
-    	$scope.user = user;	
+    	$scope.user = user;
+
     	if (user.newlyRegistered) {
     		wasNewlyRegistered = true;
     		// Set them to active by default in the interface.
@@ -16,64 +17,16 @@ angular.module('nhvioApp')
     	};
     });
 
-    $scope.programmingLanguages = [
-			"Processing", 
-			"Rank", 
-			"C#", 
-			"Racket", 
-			"Objective-C", 
-			"Haskell", 
-			"Puppet", 
-			"Go", 
-			"Objective-J", 
-			"Visual Basic", 
-			"Smalltalk", 
-			"Java", 
-			"Lua", 
-			"Apex", 
-			"Delphi", 
-			"Perl", 
-			"CoffeeScript", 
-			"Common Lisp", 
-			"Matlab", 
-			"ActionScript", 
-			"Haxe", 
-			"Erlang", 
-			"CSS", 
-			"Verilog", 
-			"F#", 
-			"Shell", 
-			"Assembly", 
-			"XSLT", 
-			"Python", 
-			"LiveScript", 
-			"Vala", 
-			"JavaScript", 
-			"Dart", 
-			"Julia", 
-			"Elixir", 
-			"Ada", 
-			"PHP", 
-			"Ruby", 
-			"Groovy", 
-			"C", 
-			"Scheme", 
-			"D", 
-			"C++", 
-			"ColdFusion", 
-			"Arduino", 
-			"Scala", 
-			"OCaml", 
-			"TypeScript", 
-			"R", 
-			"FORTRAN", 
-			"ASP", 
-			"Tcl", 
-			"Clojure", 
-			"AppleScript", 
-			"Rust", 
-			"Prolog"
-		];
+    CompanyService.getCompanies().then(function(companies){
+    	$scope.companies = companies;
+    	console.log(companies);
+    });
+
+    LanguageService.getLanguages().then(function(languages){
+    	$scope.programmingLanguages = languages;
+    	console.log(languages);
+    });
+
 
 	$scope.range = function(min, max, step){
 		step = (step == undefined) ? 1 : step;

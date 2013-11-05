@@ -3,7 +3,7 @@
 // A service that handles interaction with our API for Companies.
 
 angular.module('nhvioApp')
-  .service('CompanyService', ['Restangular', '$q', function UserService(Restangular, $q) {
+  .service('CompanyService', ['Restangular', '$q', function CompanyService(Restangular, $q) {
 
     // The Company list may be fetched multiple times,
     // but will unlikley change. Let's cache it in

@@ -56,8 +56,12 @@ DevelopersController.prototype.route = function()
       // and should correspond to our keys in the async.parallel
       // call above.
       if (typeof langKey !== 'undefined') {
-        context.extraKeywords = [languages[langKey]];
-        context.language = languages[langKey];
+
+        // Add language info to the context
+        context.extraKeywords = [languages[langKey].name];
+        context.language = languages[langKey].name;
+
+        // Get only those developers/companies that match the language
         context[_this.slug] = _.filter(
           context[_this.slug],
           function(entity){return entity.languages.indexOf(langKey) != -1 }

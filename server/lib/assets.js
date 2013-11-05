@@ -46,6 +46,7 @@ function AssetManager(app, server){
             "app/scripts/controllers/users.js",
             "app/scripts/services/userService.js",
             "app/scripts/services/companyService.js",
+            "app/scripts/services/languageService.js",
             "app/scripts/controllers/user.js",
             "app/scripts/controllers/menu.js",
             "app/scripts/controllers/useredit.js",
