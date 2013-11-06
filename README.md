@@ -11,6 +11,22 @@ find fellow New Haven hackers via
 * the [newhaven.io Twitter account](http://twitter.com/newhavenio)
 * the #newhavenio IRC channel on Freenode.
 
+## Quickstart (OS X)
+
+```
+git clone https://github.com/newhavenio/newhavenio-website
+cd newhavenio-website
+
+brew install node
+brew install mongodb
+brew install phantomjs
+
+gem install bundler
+bundle
+
+foreman start -f Procfile.dev
+```
+
 ## Requirements
 
 The newhaven.io website is a single-page
@@ -62,7 +78,7 @@ To install the dependencies do
 
 from the copy of the repo that you checked out.  That will create
 a directory called `node_modules`, which is ignored via our `.gitignore`
-file.  The `node_modules` directory contains a subdirectory called 
+file.  The `node_modules` directory contains a subdirectory called
 `.bin` into which a number of executable scripts are placed.  We
 need to run some of these during
 our build process, so we want to make sure they're in our path.
