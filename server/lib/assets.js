@@ -29,20 +29,16 @@ function AssetManager(app, server){
           'modernizr': [
             "app/bower_components/modernizr/modernizr.js",
           ],
-          'all': [        
+          'admin-app': [   
             "app/bower_components/jquery/jquery.js",
+            "app/scripts/lib/gumby.min.js",     
             "app/bower_components/lodash/lodash.js",
             "app/bower_components/angular/angular.js",
             "app/bower_components/angular-resource/angular-resource.js",
             "app/bower_components/angular-cookies/angular-cookies.js",
             "app/bower_components/angular-sanitize/angular-sanitize.js",
             "app/bower_components/restangular/dist/restangular.js",
-            "app/scripts/lib/gumby.js",
-            "app/scripts/app.js",
-            "app/scripts/controllers/main.js",
-            "app/scripts/controllers/meetup.js",
-            "app/scripts/filters/ordinalFilter.js",
-            "app/scripts/services/meetupService.js",
+            "app/scripts/apps/admin-app.js",
             "app/scripts/controllers/users.js",
             "app/scripts/services/userService.js",
             "app/scripts/services/companyService.js",
@@ -53,6 +49,22 @@ function AssetManager(app, server){
             "app/scripts/controllers/company.js",
             "app/scripts/filters/niceListFilter.js",
             "app/scripts/directives/confirmClick.js"
+          ],
+          'meetup-app': [   
+            "app/bower_components/jquery/jquery.js",
+            "app/scripts/lib/gumby.min.js",     
+            "app/bower_components/lodash/lodash.js",
+            "app/bower_components/angular/angular.js",
+            "app/bower_components/angular-resource/angular-resource.js",
+            "app/bower_components/angular-cookies/angular-cookies.js",
+            "app/bower_components/angular-sanitize/angular-sanitize.js",
+            "app/bower_components/restangular/dist/restangular.js",
+            "app/scripts/apps/meetup-app.js",
+            "app/scripts/controllers/main.js",
+            "app/scripts/controllers/meetup.js",
+            "app/scripts/filters/ordinalFilter.js",
+            "app/scripts/services/meetupService.js",
+
           ],
           'gumby': [
             "app/bower_components/jquery/jquery.js",

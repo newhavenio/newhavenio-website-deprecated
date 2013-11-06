@@ -112,6 +112,13 @@ about = new AboutController(app);
 about.route();
 
 /**
+ * GET  /admin  Show admin page
+ */
+app.get('/admin', function(req, res){
+  res.render('admin.html');
+})
+
+/**
  * Setup Developer routes
  *
  * GET  /developers Show a list of developers

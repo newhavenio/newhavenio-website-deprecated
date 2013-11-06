@@ -5,29 +5,15 @@ app.config(function ($routeProvider) {
     $routeProvider
       .when('', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/developers', {
-        templateUrl: 'views/users.html',
-        controller: 'UsersCtrl'
+        controller: 'AdminCtrl'
       })
       .when('/developers/:developerId/edit', {
         templateUrl: 'views/user-edit.html',
         controller: 'UserEditCtrl'
       })
-      .when('/developers/:developerId', {
-        templateUrl: 'views/user.html',
-        controller: 'UserCtrl'
-      })
-      .when('/companies', {
-        templateUrl: 'views/companies.html',
-        controller: 'BusinessesCtrl'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-      })
-      .when('/irc', {
-        templateUrl: 'views/irc.html',
+      .when('/companies/add', {
+        templateUrl: 'views/company-edit.html',
+        controller: 'CompanyEditCtrl'
       })
       .otherwise({
         redirectTo: ''

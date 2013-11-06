@@ -68,24 +68,8 @@
       </div>
     <div class="push"></div>
   </div>
-  <footer class="container" data-ng-controller="MenuCtrl">
-    <div class="row">
-      <!--
-        If the "me" variable is "falsy" in the scope
-        show a login button that takes them to GitHub.
-       -->
-      <div class="medium primary btn icon-left entypo icon-github" data-ng-hide="me._id">
-        <a href="/auth">Login with GitHub</a>
-      </div>
-      
-<!--       <div class="medium primary btn icon-left entypo icon-logout" data-ng-show="me._id">
-        <a href="">Logout</a>
-      </div>
- -->
-      <div class="medium primary btn icon-left entypo icon-pencil" data-ng-show="me._id">
-        {# Note the Angular JS templating is "}}", the Nunjucks in ")}" #}
-        <a href="/#/developers/me/edit">Edit Profile</a>
-      </div>
+  <footer class="container">
+    <div class="row" id="login-holder">
     </div>
   	<div class="row">
 	    <ul class="clearfix">
@@ -99,7 +83,27 @@
 
   <!-- Add the javascript -->
   {% block bottom_js %}
-    {( js.renderTags('all') | safe )}
+    {( js.renderTags('gumby') | safe )}
+  {% endblock %}
+
+  {% block load_user_js %}
+    {# Trying to get angular off the non-admin pages #}
+    {# Gumby already relies on jQuery, so use that.  #}
+    <script type="text/javascript">
+      $.ajax({
+        type: "GET",
+        url: "/api/users/me",
+      }).done(function(response){
+         if(typeof response !== 'undefined' && response != null && response._id){
+          markup = '<div class="medium primary btn icon-left entypo icon-pencil"><a href="/admin#/developers/me/edit">Edit Profile</a> </div>';
+         }else{
+          markup = '<div class="medium primary btn icon-left entypo icon-github"><a href="/auth">Login with GitHub</a> </div>';
+          
+         };
+        $('#login-holder').prepend(markup);
+      });
+    </script>
+
   {% endblock %}
 
 <script type="text/javascript">
