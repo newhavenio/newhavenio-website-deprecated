@@ -1,12 +1,12 @@
-// 
+//
 // Defines the Mongoose/MongoDB model for our users.
-// 
+//
 // Obviously, Mongodb is the database that we're using
 // and Mongoose is the ORM.
 // * Mongoose: http://mongoosejs.com/docs/guide.html
-// 
-// 
-// 
+//
+//
+//
 var mongoose = require('mongoose')
   , Schema = mongoose.Schema
   , _ = require('underscore');
@@ -14,7 +14,7 @@ var mongoose = require('mongoose')
 // This is a list of the top 100 languages on GitHub
 // in 2013 taken from the following website:
 // http://adambard.com/blog/top-github-languages-for-2013-so-far/
-// Until we figure out how to best share code between 
+// Until we figure out how to best share code between
 // the client and the server, this list is duplicated
 // in the AngularJS client app.
 //
@@ -65,34 +65,34 @@ var UserSchema = new Schema({
   // pull this out of GitHub when the user first
   // registers, but maybe we'll let them edit
   // these values at nhv.io.
-  // 
+  //
   firstName : { type: String, required: false, match: /.{1,50}/},
   lastName : { type: String, required: false, match: /.{1,50}/ },
   email : { type: String, required: false, index: { unique: true }, match: /.{1,50}/},
 
   // Social URLs, those that aren't linked by OAuth
   twitterUrl: { type: String, required: false, match: /^[A-Za-z0-9_]{3,50}$/},
-  linkedinUrl: { type: String, required: false, match: /^[A-Za-z0-9-\/]{5,75}$/},
+  linkedinUrl: { type: String, required: false, match: /^[\.A-Za-z0-9-\/]{5,75}$/},
   // This also has a length validator, defined below.
-  blogUrl: { type: String, required: false, match: /^[A-Za-z0-9-\/~]+\.[A-Za-z]{2,}([\/.][A-Za-z0-9-~]+)*\/?$/},
+  blogUrl: { type: String, required: false, match: /((http|ftp|https):\/\/)?[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/},
 
   // Bio, in plaintext.  Size of a tweet.
   bio: { type: String, required: false, match: /^.{0,140}$/},
 
   // OAuth info.  We're using GitHub, perhaps others
   // in the future.  Notice the `select` parameter here.
-  // By setting this to false, we won't get the 
+  // By setting this to false, we won't get the
   // `githubAccess___` attributes back in queries
-  // by default.  This is to better protect this 
+  // by default.  This is to better protect this
   // information and not accidently return it in an
   // API response.
-  // 
+  //
   githubAccessToken : { type: String, required: true, select: false},
   githubAccessTokenExpired : { type: String, required: true, default: false, select: false},
 
   // Info we receive from GitHub after successful
   // OAuth callback.
-  // 
+  //
   githubInfo : {
 
     // Core deets
@@ -120,7 +120,7 @@ var UserSchema = new Schema({
 });
 
 // Instance method: is this user admin?
-// 
+//
 UserSchema.methods.isAdmin = function () {
   result = this.roles.indexOf('admin') == -1 ? false : true;
   return result;
@@ -128,7 +128,7 @@ UserSchema.methods.isAdmin = function () {
 
 // Return a list of the languages this person uses,
 // in pairs like ['python', 'Python'], etc.
-// 
+//
 UserSchema.virtual('languagePairs').get(function () {
   return _.map(this.languages, function(l){
     return [l, programmingLanguages[l]]
@@ -138,7 +138,7 @@ UserSchema.virtual('languagePairs').get(function () {
 
 // Instance method: is this user admin or does this
 // user have the same id as that passed?
-// 
+//
 UserSchema.methods.isAdminOrSameId = function (userId) {
   var result = this.isAdmin();
   if (!result && userId == this.id){
@@ -158,11 +158,11 @@ UserSchema.methods.populateFromGithub = function (cb) {
       if (nameBits.length >= 2){
         this.firstName = nameBits[0];
         this.lastName = nameBits[nameBits.length-1];
-      }    
+      }
     };
     this.email = this.githubInfo.email;
     if (this.githubInfo.blog) {
-      this.blogUrl = this.githubInfo.blog.slice(0, 100);    
+      this.blogUrl = this.githubInfo.blog.slice(0, 100);
     };
 
     // There are some people that we know should be
@@ -175,7 +175,7 @@ UserSchema.methods.populateFromGithub = function (cb) {
 }
 
 // Our pre-save hooks for the user model.
-// 
+//
 UserSchema.pre('save', function(next) {
   var user = this;
 

@@ -3,7 +3,7 @@
     <div class="brick">
       <h2 data-ng-show='user.newlyRegistered'><strong>Complete your registration</strong></h2>
 		<div class="alert warning" data-ng-show='user.newlyRegistered' style="margin-bottom:2em">
-			We've populated part of your profile based on 
+			We've populated part of your profile based on
 			the OAuth info that GitHub sent over.  To complete
 			your registration, please review the information
 			below and hit submit.
@@ -59,13 +59,13 @@
 
 	  				<li class="prepend field" data-ng-class="{'danger': userEditForm.linkedinUrl.$invalid}">
   					    <span class="adjoined">https://linkedin.com/</span>
-			  	        <input class="input wide" type="text" name="linkedinUrl" ng-model="user.linkedinUrl" placeholder="LinkedIn URL" data-ng-minlength="3" data-ng-maxlength="50" data-ng-disabled="submitting" data-ng-pattern="/^[A-Za-z0-9-\/]{5,75}$/"/>
+			  	        <input class="input wide" type="text" name="linkedinUrl" ng-model="user.linkedinUrl" placeholder="LinkedIn URL" data-ng-minlength="3" data-ng-maxlength="50" data-ng-disabled="submitting" data-ng-pattern="/^[\.A-Za-z0-9-\/]{5,75}$/"/>
 	  				</li>
 					<li class="danger alert" data-ng-show="userEditForm.linkedinUrl.$invalid">Invalid LinkedIn URL</li>
 
 	  				<li class="prepend field" data-ng-class="{'danger': userEditForm.blogUrl.$invalid}">
   					    <span class="adjoined">http://</span>
-			  	        <input class="input wide email" type="text" name="blogUrl" ng-model="user.blogUrl" placeholder="Blog URL" data-ng-minlength="3" data-ng-maxlength="50" data-ng-disabled="submitting" data-ng-pattern="/^[A-Za-z0-9-\/~]+\.[A-Za-z]{2,}([\/.][A-Za-z0-9-~]+)*\/?$/"/>
+			  	        <input class="input wide email" type="text" name="blogUrl" ng-model="user.blogUrl" placeholder="Blog URL" data-ng-minlength="3" data-ng-maxlength="50" data-ng-disabled="submitting" data-ng-pattern="/((http|ftp|https):\/\/)?[\w-]+(\.[\w-]+)+([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])?/"/>
 	  				</li>
 					<li class="danger alert" data-ng-show="userEditForm.blogUrl.$invalid">Invalid URL</li>
 
