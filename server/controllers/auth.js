@@ -25,9 +25,9 @@ AuthController.prototype.init = function(passport)
     /**
      * Passport session setup.
      * To support persistent login sessions, Passport needs to be able to
-     * serialize users into and deserialize users out of the session. 
+     * serialize users into and deserialize users out of the session.
      * This is as simple as storing the user '_id' when serializing, and finding
-     * the user by '_id' when deserializing. 
+     * the user by '_id' when deserializing.
      *
      * @link https://github.com/jaredhanson/passport-github/blob/master/examples/login/app.js#L10
      */
@@ -67,7 +67,7 @@ AuthController.prototype.init = function(passport)
 
             // Note that, only some of the attributes
             // of GitHub's `_json` attribute will be persisted,
-            // based on our User model. 
+            // based on our User model.
             //
             user.githubInfo = profile._json;
             user.populateFromGithub();
@@ -76,7 +76,11 @@ AuthController.prototype.init = function(passport)
             user.newlyRegistered = true;
 
             // Save the user
-            user.save(function(){
+            user.save(function(saveerr){
+              if(saveerr)
+              {
+                console.log("save error:", saveerr)
+              }
               return done(err, user);
             });
 
