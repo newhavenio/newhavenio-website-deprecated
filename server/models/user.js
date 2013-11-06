@@ -72,9 +72,9 @@ var UserSchema = new Schema({
 
   // Social URLs, those that aren't linked by OAuth
   twitterUrl: { type: String, required: false, match: /^[A-Za-z0-9_]{3,50}$/},
-  linkedinUrl: { type: String, required: false, match: /^[A-Za-z0-9-\/]{5,75}$/},
+  linkedinUrl: { type: String, required: false, match: /^[\.A-Za-z0-9-\/]{5,75}$/},
   // This also has a length validator, defined below.
-  blogUrl: { type: String, required: false, match: /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi},
+  blogUrl: { type: String, required: false, match: /((http|ftp|https):\/\/)?[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/},
 
   // Bio, in plaintext.  Size of a tweet.
   bio: { type: String, required: false, match: /^.{0,140}$/},
