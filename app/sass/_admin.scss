@@ -1,0 +1,14 @@
+
+table.admin tr{
+	td.name{
+		font-size: 18px;
+	}
+	td{
+	    vertical-align: middle;
+	}
+}
+table.user-admin tr{
+	td:first-child{
+		width:60px;
+	}
+}

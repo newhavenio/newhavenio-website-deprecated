@@ -31,21 +31,34 @@ angular.module('nhvioApp')
 
     // Get a particular user, by id, from the server
     var getUser = function(userId){
-    	
+        
         // Create a promise representing the result we'll return.
-		var deferred = $q.defer();
+        var deferred = $q.defer();
         if (userId === 'me' && cachedMe != null) {
             console.log("me from cache");
             deferred.resolve(cachedMe);
         }else{
-        	Restangular.one('users', userId).get().then(function(user){
+            Restangular.one('users', userId).get().then(function(user){
                 if (userId === 'me') {
                     cachedMe = user;
                 };
                 console.log('User = ', user);
-        		deferred.resolve(user);
-        	});
+                deferred.resolve(user);
+            });
         };
+        return deferred.promise;
+    }
+
+    // Get a particular user, by id, from the server
+    var removeUserById = function(userId){
+    	
+        // Create a promise representing the result we'll return.
+		var deferred = $q.defer();
+    	Restangular.one('users', userId).remove().then(function(user){
+    		deferred.resolve(user);
+    	}, function(err){
+            deferred.reject(err);
+        });
     	return deferred.promise;
     }
 
@@ -75,5 +88,6 @@ angular.module('nhvioApp')
         clearMe: clearMe,
         clearUserList: clearUserList,
         clearAll: clearAll,
+        removeUserById: removeUserById
     }
   }]);

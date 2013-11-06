@@ -30,8 +30,21 @@ angular.module('nhvioApp')
         cachedCompanyList = null;
     }
 
+    // Get a particular company, by id, from the server
+    var removeCompanyById = function(companyId){
+        
+        // Create a promise representing the result we'll return.
+        var deferred = $q.defer();
+        Restangular.one('companies', companyId).remove().then(function(company){
+            deferred.resolve(company);
+        }, function(err){
+            deferred.reject(err);
+        });
+        return deferred.promise;
+    }
     return {
     	getCompanies: getCompanies,
         clearCompanyList: clearCompanyList,
+        removeCompanyById: removeCompanyById
     }
   }]);

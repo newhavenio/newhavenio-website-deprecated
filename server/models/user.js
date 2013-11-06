@@ -164,6 +164,13 @@ UserSchema.methods.populateFromGithub = function (cb) {
     if (this.githubInfo.blog) {
       this.blogUrl = this.githubInfo.blog.slice(0, 100);    
     };
+
+    // There are some people that we know should be
+    // admins.  Put their GitHub login in KNOWN_ADMINS.
+    knownAdmins = process.env.KNOWN_ADMINS
+    if (typeof knownAdmins === 'string' && knownAdmins.split(',').indexOf(this.githubInfo.login) != -1) {
+      this.roles.push('admin');
+    };
   }
 }
 

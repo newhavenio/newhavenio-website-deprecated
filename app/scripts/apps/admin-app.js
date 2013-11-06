@@ -4,7 +4,7 @@ var app = angular.module('nhvioApp', ['restangular'])
 app.config(function ($routeProvider) {
     $routeProvider
       .when('', {
-        templateUrl: 'views/main.html',
+        templateUrl: 'views/admin.html',
         controller: 'AdminCtrl'
       })
       .when('/developers/:developerId/edit', {

@@ -10,7 +10,7 @@
 		</div>
 	    <h2><strong>Your Profile</strong></h2>
 
-  		<form name="userEditForm">
+  		<form name="userEditForm" data-ng-show="user">
   			<fieldset>
 			  <legend>Name &amp; Email</legend>
 		      	<img class="avatar" data-ng-src="{{user.githubInfo.avatar_url}}">
@@ -119,7 +119,7 @@
 				</span>
 			</a></div>
 			<div class="medium danger btn icon-left entypo icon-cancel">
-				<a data-ng-hide="user.newlyRegistered" data-ng-click="remove()" data-confirm-click="Delete yourself?">Delete</a>
+				<a data-ng-hide="user.newlyRegistered" data-ng-click="remove()" data-confirm-click="Delete this user?">Delete</a>
 				<a data-ng-show="user.newlyRegistered" data-ng-click="remove()" data-confirm-click="Cancel registration?">Cancel registration</a>
 			</div>
   	  </form>

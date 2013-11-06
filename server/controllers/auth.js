@@ -109,7 +109,7 @@ AuthController.prototype.route = function()
             // existing users, and to profile completion/edit
             // for new users.
             //
-            var url = req.user.newlyRegistered ? '/#/developers/' + req.user._id +'/edit' : '/';
+            var url = req.user.newlyRegistered ? 'admin#/developers/me/edit' : '/';
             res.redirect(url);
     });
 
