@@ -26,6 +26,16 @@ angular.module('nhvioApp')
     	return deferred.promise;
     }
 
+    // Get a list of all users from the server
+    var getCompany = function(companyId){
+        // Create a promise representing the result we'll return.
+        var deferred = $q.defer();
+        Restangular.one('companies', companyId).get().then(function(company){
+            deferred.resolve(company);
+        });
+        return deferred.promise;
+    }
+
     var clearCompanyList = function(){
         cachedCompanyList = null;
     }
@@ -42,9 +52,24 @@ angular.module('nhvioApp')
         });
         return deferred.promise;
     }
+    
+    var createCompany = function(company){
+        var deferred = $q.defer();
+        var base = Restangular.all('companies');
+        base.post(company).then(function(company){
+            console.log(company);
+            deferred.resolve(company);
+        }, function(err){
+            deferred.reject(err);
+        })
+        return deferred.promise;
+    }
+
     return {
+        getCompany: getCompany,
     	getCompanies: getCompanies,
         clearCompanyList: clearCompanyList,
-        removeCompanyById: removeCompanyById
+        removeCompanyById: removeCompanyById,
+        createCompany: createCompany
     }
   }]);

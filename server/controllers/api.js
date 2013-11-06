@@ -42,30 +42,90 @@ ApiController.prototype.route = function()
      *     http://172.16.27.146:9000/companies
      */
 
-    // Create new companies entry
-    this.app.post('/api/companies', function(req, res)
-    {
+    updateCompany = function(req, res, company){
+
         // Prepare Company Object
         var editableFields = ['name', 'description', 'webUrl', 'twitterUrl', 'technologies', 'location'],
             payload = _.pick(req.body, editableFields);
 
-        // Company object to be created
-        var biz = new Company();
-        biz.active = true;
 
         // Populate business object
-        _.extend(biz, payload);
+        _.extend(company, payload);
 
         // Save that business
         // ...without making the tax-payers pay
-        biz.save(function(err, user){
+        company.save(function(err, user){
             if (err) {
                 console.log("Error saving business: ", err);
                 res.status(400).send("Error saving business");
             }else{
-                res.send(biz);
+                res.send(company);
             }
         });
+
+    }
+
+    // Create new companies entry
+    this.app.put('/api/companies/:id', function(req, res){
+
+        // Make sure the user is authorized
+        if (!req.user){
+            return res.status(401).send("Not permitted");
+        }
+
+        var co_id = mongoose.Types.ObjectId(req.param('id'));
+        Company
+            .findOne({'_id': co_id})
+            .exec(function(err, company){
+                console.log('Company =', company);
+                if (company === null ) {
+                    res.status(404).send("No such company")
+                }else{
+                    updateCompany(req, res, company);
+                };
+            })
+
+
+    });
+
+    // Create new companies entry
+    this.app.post('/api/companies', function(req, res){
+
+        // Make sure the user is authorized
+        if (!req.user){
+            return res.status(401).send("Not permitted");
+        }
+
+        // Company object to be created
+        var company = new Company();
+        company.active = true;
+        updateCompany(req, res, company);
+
+    });
+
+    // Delete a user
+    //
+    this.app.delete('/api/companies/:id', function(req, res)
+    {
+        var co_id = mongoose.Types.ObjectId(req.param('id'));
+
+        // Deletion requires that the request comes from a user
+        // that is logged in and is either an admin user or
+        // has the same id as the person who's being deleted.
+        //
+        if (req.user && req.user.isAdmin()){
+            Company
+                .findByIdAndRemove(co_id, function(err, company){
+                    if (err){
+                        res.status(500).send(err);
+                    }else{
+                        res.send({'_id': req.param('id'), deleted: true});
+                    }
+                });
+        }else{
+            res.status(401).send("Not permitted");
+        }
+        return;
     });
 
     // GET a list of companies
@@ -85,7 +145,17 @@ ApiController.prototype.route = function()
     //
     this.app.get('/api/companies/:id', function(req, res)
     {
-        res.send("show companies: "+req.param('id'));
+        var co_id = mongoose.Types.ObjectId(req.param('id'));
+        Company
+            .findOne({'_id': co_id})
+            .lean()
+            .exec(function(err, company){
+                if (company != null){
+                    res.send(company);
+                }else{
+                    res.status(404).send("No such company");
+                }
+            });
     });
 
     // *********************************************

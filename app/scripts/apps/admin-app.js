@@ -15,6 +15,10 @@ app.config(function ($routeProvider) {
         templateUrl: 'views/company-edit.html',
         controller: 'CompanyEditCtrl'
       })
+      .when('/companies/:companyId/edit', {
+        templateUrl: 'views/company-edit.html',
+        controller: 'CompanyEditCtrl'
+      })
       .otherwise({
         redirectTo: ''
       });

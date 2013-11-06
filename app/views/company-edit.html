@@ -1,51 +1,27 @@
 <div class="about row">
   <div class="sixteen columns">
     <div class="brick">
-      <h2 data-ng-show='company.newlyRegistered'><strong>Complete your registration</strong></h2>
-		<div class="alert warning" data-ng-show='company.newlyRegistered' style="margin-bottom:2em">
-			We've populated part of your profile based on 
-			the OAuth info that GitHub sent over.  To complete
-			your registration, please review the information
-			below and hit submit.
-		</div>
-	    <h2><strong>Your Profile</strong></h2>
+	    <h2><strong data-ng-hide='data.isNew'>Create company</strong><strong data-ng-show='data.isNew'>Edit company</strong></h2>
 
-  		<form name="companyEditForm">
+  		<form name="companyEditForm" novalidate>
   			<fieldset>
-			  <legend>Name &amp; Email</legend>
-		      	<img class="avatar" data-ng-src="{{company.githubInfo.avatar_url}}">
+			  <legend>Company name &amp; location</legend>
 	  			<ul>
 	  				<li class="field" data-ng-class="{'danger': companyEditForm.name.$invalid}">
-			  	        <input class="input narrow" name="name" type="text" data-ng-model="company.name" placeholder="First Name" required data-ng-minlength="3" data-ng-maxlength="50" data-ng-disabled="submitting"/>
+			  	        <input class="input narrow" name="name" type="text" data-ng-model="company.name" placeholder="Company Name" required data-ng-minlength="3" data-ng-maxlength="50" data-ng-disabled="submitting"/>
 	  				</li>
 					<li class="danger alert" data-ng-show="companyEditForm.name.$invalid">Invalid first name.  Should be 3-50 characters.</li>
 
-	  				<li class="field" data-ng-class="{'danger': companyEditForm.email.$invalid}">
-			  	        <input class="input narrow email" name="email" type="email" ng-model="company.email" placeholder="Email" data-ng-minlength="3" data-ng-maxlength="50" data-ng-disabled="submitting"/>
+	  				<li class="field" data-ng-class="{'danger': companyEditForm.location.$invalid}">
+			  	        <input class="input narrow" name="location" type="text" data-ng-model="company.location" placeholder="Company Location" required data-ng-minlength="3" data-ng-maxlength="50" data-ng-disabled="submitting"/>
 	  				</li>
-					<li class="danger alert" data-ng-show="companyEditForm.email.$invalid">Invalid email address</li>
+					<li class="danger alert" data-ng-show="companyEditForm.location.$invalid">Invalid first name.  Should be 3-50 characters.</li>
 
 	  			</ul>
 			</fieldset>
+
   			<fieldset>
-			  <legend>Visibility</legend>
-	  			<ul>
-	  				<li data-ng-class="{'danger': companyEditForm.active.$invalid}">
-	  					<label class="checkbox" for="active">
-				  	        <input class="input" name="active" type="checkbox" data-ng-model="company.active" />
-						    <span></span> Show me as a "developer" on the NewHaven.io website
-						</label>
-	  				</li>
-	  				<li data-ng-class="{'danger': companyEditForm.allowsContact.$invalid}">
-	  					<label class="checkbox" for="allowsContact">
-				  	        <input class="input" name="allowsContact" type="checkbox" data-ng-model="company.allowsContact" />
-						    <span></span> Allow people to contact me using a form that has a captcha
-						</label>
-	  				</li>
-	  			</ul>
-	  		</fieldset>
-  			<fieldset>
-			  <legend>Social links</legend>
+			  <legend>Web links<span data-ng-show="company.name"> for {{company.name}}</span></legend>
 	  				<li class="prepend field"  data-ng-class="{'danger': companyEditForm.twitterUrl.$invalid}">
   					    <span class="adjoined">https://twitter.com/</span>
 			  	        <input class="input wide" type="text" name="twitterUrl" data-ng-model="company.twitterUrl" placeholder="Twitter Handle" data-ng-minlength="3" data-ng-maxlength="50" data-ng-disabled="submitting" data-ng-pattern="/^[A-Za-z0-9_]{3,50}$/"/>
@@ -58,43 +34,30 @@
 	  				</li>
 					<li class="danger alert" data-ng-show="companyEditForm.linkedinUrl.$invalid">Invalid LinkedIn URL</li>
 
-	  				<li class="prepend field" data-ng-class="{'danger': companyEditForm.blogUrl.$invalid}">
+	  				<li class="prepend field" data-ng-class="{'danger': companyEditForm.webUrl.$invalid}">
   					    <span class="adjoined">http://</span>
-			  	        <input class="input wide email" type="text" name="blogUrl" ng-model="company.blogUrl" placeholder="Blog URL" data-ng-minlength="3" data-ng-maxlength="50" data-ng-disabled="submitting" data-ng-pattern="/^[A-Za-z0-9-\/~]+\.[A-Za-z]{2,}([\/.][A-Za-z0-9-~]+)*\/?$/"/>
+			  	        <input class="input wide email" type="text" name="webUrl" ng-model="company.webUrl" placeholder="Company URL" data-ng-minlength="3" data-ng-maxlength="50" data-ng-disabled="submitting" data-ng-pattern="/^[A-Za-z0-9-\/~]+\.[A-Za-z]{2,}([\/.][A-Za-z0-9-~]+)*\/?$/"/>
 	  				</li>
-					<li class="danger alert" data-ng-show="companyEditForm.blogUrl.$invalid">Invalid URL</li>
+					<li class="danger alert" data-ng-show="companyEditForm.webUrl.$invalid">Invalid URL</li>
 
 	  			</ul>
 			</fieldset>
   			<fieldset>
-			  <legend>Your bio</legend>
+			  <legend>Company description<span data-ng-show="company.name">for {{company.name}}</span></legend>
 	  			<ul>
-	  				<li class="field" data-ng-class="{'danger': companyEditForm.bio.$invalid}">
-  					    <textarea class="input textarea" rows="3" name="bio" placeholder="Your bio here, 140 characters max." data-ng-maxlength="140" ng-model="company.bio" data-ng-disabled="submitting"></textarea>
+	  				<li class="field" data-ng-class="{'danger': companyEditForm.description.$invalid}">
+  					    <textarea class="input textarea" rows="3" name="description" placeholder="Your description here, 140 characters max." data-ng-maxlength="140" ng-model="company.description" data-ng-disabled="submitting"></textarea>
 	  				</li>
-					<li class="alert" data-ng-class="{'danger': companyEditForm.bio.$invalid}" style="text-align:right;">
-  					    {{140 - companyEditForm.bio.$viewValue.length}} remaining.
-  					    <span data-ng-show="companyEditForm.bio.$invalid">
+					<li class="alert" data-ng-class="{'danger': companyEditForm.description.$invalid}" style="text-align:right;">
+  					    {{140 - companyEditForm.description.$viewValue.length}} remaining.
+  					    <span data-ng-show="companyEditForm.description.$invalid">
   					    	Should be &lt;140 characters!
   					    </span>
 					</li>
 	  			</ul>
 			</fieldset>
-  			<fieldset>
-			  <legend>Local (Connecticut) companies with whom you're affiliated</legend>
-	  			<ul>
-	  				<li class="field" data-ng-repeat="coNo in range(1,3)">
-	  					<div class="picker">
-				  	        <select ng-model="company.company_ids[coNo-1]" data-ng-options="co._id as co.name for co in companies" data-ng-disabled="submitting">
-		  	        	          <option value="">-- Company #{{coNo}} --</option>
-				  	        </select>
-				  	    </div>
-	  				</li>
-	  			</ul>
-	  			<a href="#/companies/add">+ Add a company</a>
-			</fieldset>
 			<fieldset>
-			  <legend>Programming languages</legend>
+			  <legend>Programming languages used<span data-ng-show="company.name">at {{company.name}}</span></legend>
 	  			<ul>
 	  				<li class="field" data-ng-repeat="langNo in range(1,5)">
 	  					<div class="picker">
@@ -105,19 +68,21 @@
 	  				</li>
 	  			</ul>
 			</fieldset>
-			<div class="medium btn icon-left entypo icon-right-bold" data-ng-class="(company.newlyRegistered && 'success' || !company.newlyRegistered && 'primary')"><a data-ng-click="put()">
-				<span data-ng-hide="company.newlyRegistered">
+			<div class="medium btn icon-left entypo icon-right-bold" data-ng-class="(company.isNew && 'success' || !company.isNew && 'primary')"><a data-ng-click="put()">
+				<span data-ng-hide="company.isNew">
 					Save
 				</span>
-				<span data-ng-show="company.newlyRegistered">
-					Complete registration
+				<span data-ng-show="company.isNew">
+					Complete creation
 				</span>
 			</a></div>
 			<div class="medium danger btn icon-left entypo icon-cancel">
-				<a data-ng-hide="company.newlyRegistered" data-ng-click="remove()" data-confirm-click="Delete yourself?">Delete</a>
-				<a data-ng-show="company.newlyRegistered" data-ng-click="remove()" data-confirm-click="Cancel registration?">Cancel registration</a>
+				<a data-ng-hide="company.isNew" data-ng-click="remove()" data-confirm-click="Delete {{company.name}}?">Delete</a>
+				<a data-ng-show="company.isNew" data-ng-click="remove()" data-confirm-click="Cancel registration?">Cancel creation</a>
 			</div>
   	  </form>
 		</div>
 	</div>
 </div>
+
+<a data-ng-click="logCompany()">Log company</a>
