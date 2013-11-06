@@ -48,6 +48,7 @@ function AssetManager(app, server){
             "app/scripts/controllers/companyEdit.js",
             "app/scripts/controllers/useredit.js",
             "app/scripts/controllers/admin.js",
+            "app/scripts/controllers/profile.js",
             "app/scripts/controllers/company.js",
             "app/scripts/filters/niceListFilter.js",
             "app/scripts/directives/confirmClick.js"

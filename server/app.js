@@ -117,6 +117,9 @@ about.route();
 app.get('/admin', function(req, res){
   res.render('admin.html');
 })
+app.get('/profile', function(req, res){
+  res.render('admin.html');
+})
 
 /**
  * Setup Developer routes
