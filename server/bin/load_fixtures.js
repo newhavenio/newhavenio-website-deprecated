@@ -1,8 +1,3 @@
-process.env["GITHUB_CLIENT_ID"] = "b7a2910ba6a82510417a";
-process.env["GITHUB_CLIENT_SECRET"] = "c6b1b459d901bac4adfd2ae4d6037dd64936bd51";
-process.env["GITHUB_CALLBACK_URL"] = "http://localhost:9000/auth/callback";
-process.env["MONGOHQ_URL"] = "mongodb://localhost/newhaven-io";
-process.env["COOKIE_SECRET"] = "blah";
 var mongoose = require('mongoose'),
 	fs = require('fs'),
 	path = require('path'),
