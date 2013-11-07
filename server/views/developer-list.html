@@ -16,16 +16,16 @@
       <div class="searchbar">
         <div class="row">
           <div class="field">
-            <input class="text fleft" type="search" placeholder="Search {% block subtitle %}New Haven {% if language %}{(language)} {% endif %}Developers{% endblock %}">
+            <input class="js-shuffle-search text fleft" type="text" placeholder="Search {% block subtitle %}New Haven {% if language %}{(language)} {% endif %}Developers{% endblock %}">
             <a href="#" class="btn-search"><img src="/images/icon_search.png" alt="search"/></a>
           </div>
         </div> 
       </div>
       <div class="row">
-        <ul>
+        <ul id="grid">
           {% set cls = cycler("alpha", "") %}
           {% for developer in developers %}
-          <li class="eight columns {( cls.next() )}">
+          <li class="brick-item">
             {% include "partials/developer-in-list.html" %}
           </li>
           {% endfor %}

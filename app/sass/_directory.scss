@@ -1,11 +1,23 @@
 .directory {
   .brick {
     min-height: 170px;
+    margin-bottom: 20px;
   }
   &.developers {
-   .brick {
-     min-height: 301px;
-   } 
+    .brick {
+      margin-bottom: 0;
+      min-height: 301px;
+      @include respond(tablets) {
+        min-height: inherit;
+      }
+      @include respond(all-phones) {
+        min-height: inherit;
+      }
+    }
+  .searchbar {
+    margin-bottom: 0;
+  } 
+   
    .tag {
      float: left;
      margin-bottom: 5px;
@@ -93,6 +105,28 @@
           margin-right: 0;
         }
       }
+    }
+  }
+  .shuffle-item.concealed {
+    display: none;
+  }
+  .shuffle__sizer {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+  }
+  .brick-item { 
+    width: 450px;
+    display: block;
+    float: left;
+    margin-top: 20px;
+    margin-right: 20px; 
+    padding-bottom: 0;
+    @include respond(tablets) {
+      width: 100%;
+    }
+    @include respond(all-phones) {
+      width: 100%;
     }
   }
   
