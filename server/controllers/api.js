@@ -47,6 +47,7 @@ ApiController.prototype.route = function()
     // *********************************************
     // Company API
     // *********************************************
+    var companyDetailRoute = '/api/companies/:id([a-zA-Z0-9]{24})'
 
     var Company = mongoose.model('Company');
 
@@ -87,7 +88,7 @@ ApiController.prototype.route = function()
     }
 
     // Create new companies entry
-    this.app.put('/api/companies/:id', checkAuth, function(req, res){
+    this.app.put(companyDetailRoute, checkAuth, function(req, res){
 
         // Make sure the user is authorized
         if (!req.user){
@@ -129,7 +130,7 @@ ApiController.prototype.route = function()
 
     // Delete a user
     //
-    this.app.delete('/api/companies/:id', checkAuth, function(req, res)
+    this.app.delete(companyDetailRoute, checkAuth, function(req, res)
     {
         var co_id = mongoose.Types.ObjectId(req.param('id'));
 
@@ -167,7 +168,7 @@ ApiController.prototype.route = function()
 
     // GET a particular company
     //
-    this.app.get('/api/companies/:id', checkAuth, function(req, res)
+    this.app.get(companyDetailRoute, checkAuth, function(req, res)
     {
         var co_id = mongoose.Types.ObjectId(req.param('id'));
         Company
@@ -177,6 +178,7 @@ ApiController.prototype.route = function()
                 if (company != null){
                     res.send(company);
                 }else{
+                    console.log('Could not find company w/ id', co_id);
                     res.status(404).send("No such company");
                 }
             });
