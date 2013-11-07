@@ -95,7 +95,7 @@
         url: "/api/users/me",
       }).done(function(response){
         if(typeof response !== 'undefined' && response != null && response._id){
-          markup = '<div class="medium primary btn icon-left entypo icon-pencil"><a href="/admin#/developers/me/edit">Edit Profile</a> </div>';
+          markup = '<div class="medium primary btn icon-left entypo icon-pencil"><a href="/profile">Edit Profile</a> </div>';
           $('#login-holder').prepend(markup);
         }
       }).error(function(){
