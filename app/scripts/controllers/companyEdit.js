@@ -7,20 +7,13 @@ angular.module('nhvioApp')
     // of directly using the value of the promise because we'd like
     // to enable two-way binding in the user-edit form.
     var wasNewlyRegistered = false;
-    UserService.getUser($routeParams.developerId).then(function(user){
-      $scope.user = user;
-
-      if (user.newlyRegistered) {
-        wasNewlyRegistered = true;
-        // Set them to active by default in the interface.
-        user.active = true;
-      };
-    });
-
-    CompanyService.getCompanies().then(function(companies){
-      $scope.companies = companies;
-      console.log(companies);
-    });
+    if (typeof $routeParams.companyId !== 'undefined') {
+      CompanyService.getCompany($routeParams.companyId).then(function(company){
+        $scope.company = company;
+      });
+    }else{
+      $scope.company = {isNew: true, languages: []};
+    };
 
     LanguageService.getLanguages().then(function(languages){
       $scope.programmingLanguages = languages;
@@ -28,53 +21,57 @@ angular.module('nhvioApp')
     });
 
 
-  $scope.range = function(min, max, step){
-    step = (step == undefined) ? 1 : step;
-    var input = [];
-    for (var i=min; i<=max; i+=step){
-      input.push(i);
+    $scope.range = function(min, max, step){
+      step = (step == undefined) ? 1 : step;
+      var input = [];
+      for (var i=min; i<=max; i+=step){
+        input.push(i);
+      }
+      return input;
+    };
+    $scope.logCompany = function(){
+      console.log($scope.company);
     }
-    return input;
-  };
-  $scope.logUser = function(){
-    console.log($scope.user);
-  }
 
-  // Remove the current user
-  $scope.remove = function(){
-    console.log("Deleting user", $scope.user);
-    $scope.submitting = true;
-    $scope.user.remove().then(function(){
-      $scope.submitting = false;
+    // Remove the current user
+    $scope.remove = function(){
+      console.log("Deleting company", $scope.company);
+      $scope.submitting = true;
+      $scope.company.remove().then(function(){
+        $scope.submitting = false;
 
-      // Remove user from current scope,
-      // clear our cache of users in the
-      // UserService.  Redirect to the 
-      // list of users.
-      $scope.user = null;
-      UserService.clearAll();
-      $window.location.href = '/developers';
-    }, function(response) {
-      $scope.submitting = false;
-      alert('Error removing user!');
-    })
-  }
+        // Remove company from current scope,
+        // clear our cache of companys in the
+        // companyService.  Redirect to the 
+        // list of companys.
+        $scope.company = null;
+        CompanyService.clearAll();
+        $window.location.href = '/developers';
+      }, function(response) {
+        $scope.submitting = false;
+        alert('Error removing company!');
+      })
+    }
 
-  // Save the current user
-  $scope.put = function(){
-    console.log("submitting", $scope.user);
-    $scope.submitting = true;
-    $scope.user.put().then(function(){
-      $scope.submitting = false;
+    // Save the current company
+    $scope.put = function(){
+      console.log("submitting", $scope.company);
+      $scope.submitting = true;
+      if ($scope.company.isNew) {
+        CompanyService.createCompany($scope.company).then(function(){
+          $scope.submitting = false;
+        }, function(response) {
+          $scope.submitting = false;
+          alert('Error saving!');
+        })
 
-      // If they were just registering,
-      // redirect them to the developer page
-      if (wasNewlyRegistered) {
-        $window.location.href = '/developers';    
-      };
-    }, function(response) {
-      $scope.submitting = false;
-      alert('Error saving!');
-    })
-  }
+      }else{
+        $scope.company.put().then(function(){
+          $scope.submitting = false;
+        }, function(response) {
+          $scope.submitting = false;
+          alert('Error saving!');
+        })
+      }
+    }
   }]);

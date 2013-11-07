@@ -48,7 +48,7 @@ angular.module('nhvioApp')
         return company._id == companyId;
       })
       var company = $scope.companies[companyIndex];
-      companyService.removeCompanyById(companyId).then(function(){
+      CompanyService.removeCompanyById(companyId).then(function(){
         // Remove the company from the list of companies
         $scope.companies.splice(companyIndex, 1);
       }, function(err){
