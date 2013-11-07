@@ -1,7 +1,7 @@
 'use strict';
 
 var app = angular.module('nhvioApp', [])
-app.config(function ($routeProvider) {
+app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('', {
         templateUrl: 'views/main.html',
@@ -10,4 +10,4 @@ app.config(function ($routeProvider) {
       .otherwise({
         redirectTo: ''
       });
-});
+}]);

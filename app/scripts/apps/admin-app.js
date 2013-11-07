@@ -1,7 +1,7 @@
 'use strict';
 
 var app = angular.module('nhvioApp', ['restangular'])
-app.config(function ($routeProvider) {
+app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('', {
         templateUrl: 'views/admin.html',
@@ -22,7 +22,7 @@ app.config(function ($routeProvider) {
       .otherwise({
         redirectTo: ''
       });
-});
+}]);
 app.config(function (RestangularProvider) {
     // In this case we are mapping the id of each element to the _id field.
     // See http://www.ng-newsletter.com/posts/restangular.html
