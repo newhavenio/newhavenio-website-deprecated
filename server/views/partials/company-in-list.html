@@ -28,7 +28,9 @@
       {# NOTE: The '-' in this for loop eliminates whitespace #}
       <strong>Languages:</strong><br>
       {% for key in company.languages -%}
-        <a href="/companies/{(key)}" class="tag">{(programmingLanguages[key].name)}</a>
+        {% if key and programmingLanguages[key] %}
+          <a href="/companies/{(key)}" class="tag">{(programmingLanguages[key].name)}</a>
+        {% endif %}
       {%- endfor %}
     </p>
     <div class="clearfix"></div>
