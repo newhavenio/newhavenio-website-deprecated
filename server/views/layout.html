@@ -44,15 +44,20 @@
         <h1 class="four columns logo" id="logo">
           <a href="/">new<strong>haven</strong>.io</a>
         </h1>
-        <ul class="ten columns">
+        <ul class="twelve columns">
           <li><a href="/developers">Developers</a></li>
           <li><a href="/companies">Companies</a></li>
           <li><a href="/about">About</a></li>
 
-          <li class="last">
+          <li class="">
             <a href="http://groups.google.com/forum/?fromgroups#!forum/newhavenio">Contact</a>
           </li>
+
+          <li class="last">
+            <div id="login-holder"></div>
+          </li>
         </ul>
+
       </div>
     </header>
 
@@ -69,8 +74,6 @@
     <div class="push"></div>
   </div>
   <footer class="container">
-    <div class="row" id="login-holder">
-    </div>
   	<div class="row">
 	    <ul class="clearfix">
 	      <li><a href="#/irc">irc&#8194;</a>/</li>
@@ -95,10 +98,10 @@
         url: "/api/users/me",
       }).done(function(response){
          if(typeof response !== 'undefined' && response != null && response._id){
-          markup = '<div class="medium primary btn icon-left entypo icon-pencil"><a href="/admin#/developers/me/edit">Edit Profile</a> </div>';
+          markup = '<div class="medium default btn icon-left entypo icon-pencil"><a href="/admin#/developers/me/edit">Edit Profile</a> </div>';
          }else{
-          markup = '<div class="medium primary btn icon-left entypo icon-github"><a href="/auth">Login with GitHub</a> </div>';
-          
+          markup = '<div class="medium default btn icon-left entypo icon-github"><a href="/auth">Login with GitHub</a> </div>';
+
          };
         $('#login-holder').prepend(markup);
       });
