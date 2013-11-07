@@ -126,16 +126,6 @@ UserSchema.methods.isAdmin = function () {
   return result;
 }
 
-// Return a list of the languages this person uses,
-// in pairs like ['python', 'Python'], etc.
-//
-UserSchema.virtual('languagePairs').get(function () {
-  return _.map(this.languages, function(l){
-    return [l, programmingLanguages[l]]
-  });
-});
-
-
 // Instance method: is this user admin or does this
 // user have the same id as that passed?
 //

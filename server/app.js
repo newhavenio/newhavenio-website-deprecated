@@ -3,7 +3,6 @@
  */
 var express = require('express');
 var fs = require('fs');
-var connect = require('connect');
 
 // Initialize our MongoDB connection
 // and our models
@@ -35,7 +34,7 @@ app.use(express.timeout(5000));
 app.use(express.limit('0.25mb'));
 
 // Set up compression
-app.use(connect.compress());
+app.use(express.compress());
 
 // Handle static content first
 // http://www.senchalabs.org/connect/static.html
@@ -88,6 +87,12 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+// Make the programmingLanguages available
+// throughout the application, particularly
+// in our views.
+app.locals.programmingLanguages = require('./lib/languages');
+
+
 // Add in our controllers
 var MeetupController = require('./controllers/meetup');
 var ApiController = require('./controllers/api');
@@ -115,6 +120,9 @@ about.route();
  * GET  /admin  Show admin page
  */
 app.get('/admin', function(req, res){
+  res.render('admin.html');
+})
+app.get('/profile', function(req, res){
   res.render('admin.html');
 })
 

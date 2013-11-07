@@ -17,8 +17,23 @@ function AssetManager(app, server){
     if (!(this instanceof AssetManager)) return new AssetManager(app, server);
     var _this = this;
 
+    // Set up a little middleware that will add
+    // cache-control headers to pile assets in production
+    // with a max-age of 480 weeks.
+    //
+    app.configure('production', function(){
+        app.use('/pile/min', function(req, res, next){
+            if (!res.getHeader('Cache-Control')){
+                res.setHeader('Cache-Control', 'public, max-age=290304000');
+            }
+            next();
+        });        
+    })
+
     // Configure JS
-    app.locals.js = piler.createJSManager();
+    app.locals.js = piler.createJSManager({
+        disableGlobal: true
+    });
     app.locals.js.bind(app, server);
 
     // Not sure why we have to do this binding inside
@@ -48,6 +63,7 @@ function AssetManager(app, server){
             "app/scripts/controllers/companyEdit.js",
             "app/scripts/controllers/useredit.js",
             "app/scripts/controllers/admin.js",
+            "app/scripts/controllers/profile.js",
             "app/scripts/controllers/company.js",
             "app/scripts/filters/niceListFilter.js",
             "app/scripts/directives/confirmClick.js"
