@@ -87,6 +87,12 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+// Make the programmingLanguages available
+// throughout the application, particularly
+// in our views.
+app.locals.programmingLanguages = require('./lib/languages');
+
+
 // Add in our controllers
 var MeetupController = require('./controllers/meetup');
 var ApiController = require('./controllers/api');
