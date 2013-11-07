@@ -43,7 +43,7 @@
 	  			</ul>
 			</fieldset>
   			<fieldset>
-			  <legend>Company description<span data-ng-show="company.name">for {{company.name}}</span></legend>
+			  <legend>Company description<span data-ng-show="company.name"> for {{company.name}}</span></legend>
 	  			<ul>
 	  				<li class="field" data-ng-class="{'danger': companyEditForm.description.$invalid}">
   					    <textarea class="input textarea" rows="3" name="description" placeholder="Your description here, 140 characters max." data-ng-maxlength="140" ng-model="company.description" data-ng-disabled="submitting"></textarea>
@@ -57,7 +57,7 @@
 	  			</ul>
 			</fieldset>
 			<fieldset>
-			  <legend>Programming languages used<span data-ng-show="company.name">at {{company.name}}</span></legend>
+			  <legend>Programming languages used<span data-ng-show="company.name"> at {{company.name}}</span></legend>
 	  			<ul>
 	  				<li class="field" data-ng-repeat="langNo in range(1,5)">
 	  					<div class="picker">
