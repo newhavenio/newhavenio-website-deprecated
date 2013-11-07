@@ -1,7 +1,17 @@
 'use strict';
 
 angular.module('nhvioApp')
-  .controller('CompanyEditCtrl', ['$scope', '$routeParams', '$window', 'UserService', 'CompanyService', 'LanguageService', function ($scope, $routeParams, $window, UserService, CompanyService, LanguageService) {
+  .controller('CompanyEditCtrl', ['$scope', '$routeParams', '$window', 'UserService', 'CompanyService', 'LanguageService', '$location', function ($scope, $routeParams, $window, UserService, CompanyService, LanguageService, $location) {
+
+    var setCompany = function(company){
+        if (typeof company.languages === 'undefined') {
+          company.languages = [];
+        };
+        if (typeof company.admin_ids === 'undefined') {
+          company.admin_ids = [];
+        };
+        $scope.company = company;
+    }
 
     // Note that, here we've got a callback on the promise instead
     // of directly using the value of the promise because we'd like
@@ -9,10 +19,13 @@ angular.module('nhvioApp')
     var wasNewlyRegistered = false;
     if (typeof $routeParams.companyId !== 'undefined') {
       CompanyService.getCompany($routeParams.companyId).then(function(company){
-        $scope.company = company;
+        setCompany(company);
+      }, function(err){
+        $location.path('/');
       });
     }else{
-      $scope.company = {isNew: true, languages: []};
+      var company = {isNew: true};
+      setCompany(company);
     };
 
     LanguageService.getLanguages().then(function(languages){
@@ -20,6 +33,10 @@ angular.module('nhvioApp')
       console.log(languages);
     });
 
+    // Grab the list of users
+    UserService.getUsers().then(function(users){
+      $scope.users = users;
+    });
 
     $scope.range = function(min, max, step){
       step = (step == undefined) ? 1 : step;
@@ -35,22 +52,22 @@ angular.module('nhvioApp')
 
     // Remove the current user
     $scope.remove = function(){
-      console.log("Deleting company", $scope.company);
       $scope.submitting = true;
-      $scope.company.remove().then(function(){
+      var finishUp = function(){
         $scope.submitting = false;
-
-        // Remove company from current scope,
-        // clear our cache of companys in the
-        // companyService.  Redirect to the 
-        // list of companys.
         $scope.company = null;
         CompanyService.clearAll();
-        $window.location.href = '/developers';
-      }, function(response) {
-        $scope.submitting = false;
-        alert('Error removing company!');
-      })
+        $window.location.href = '/companies';
+      }
+      if ($scope.company.isNew) {
+        finishUp();
+      }else{
+        $scope.company.remove().then(finishUp, function(response) {
+          $scope.submitting = false;
+          alert('Error removing company!');
+        })
+      };
+
     }
 
     // Save the current company
@@ -60,6 +77,8 @@ angular.module('nhvioApp')
       if ($scope.company.isNew) {
         CompanyService.createCompany($scope.company).then(function(){
           $scope.submitting = false;
+          CompanyService.clearAll();
+          $location.path('/');
         }, function(response) {
           $scope.submitting = false;
           alert('Error saving!');
@@ -67,6 +86,8 @@ angular.module('nhvioApp')
 
       }else{
         $scope.company.put().then(function(){
+          CompanyService.clearAll();
+          $location.path('/');
           $scope.submitting = false;
         }, function(response) {
           $scope.submitting = false;

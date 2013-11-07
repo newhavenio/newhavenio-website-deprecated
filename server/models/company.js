@@ -39,7 +39,9 @@ var CompanySchema = new Schema({
     languages: [{type: String, enum: _.keys(programmingLanguages)}],
 
     // Address string (multi-line?)
-    location: {type: String, required: false}
+    location: {type: String, required: false},
+
+    admin_ids: [{ type: Schema.Types.ObjectId, ref: 'User'}]
 
 });
 

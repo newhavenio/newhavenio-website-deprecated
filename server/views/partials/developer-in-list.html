@@ -32,8 +32,8 @@
   
       {# NOTE: The '-' in this for loop eliminates whitespace #}
 
-      {% for key, lang in developer.languagePairs -%}
-        <a href="/developers/{(key)}" class="tag">{(lang.name)}</a>
+      {% for key in developer.languages -%}
+        <a href="/developers/{(key)}" class="tag">{(programmingLanguages[key].name)}</a>
       {%- endfor %}
     {% endif %}
   </p>

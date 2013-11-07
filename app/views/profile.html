@@ -1,0 +1,26 @@
+<div class="about row">
+  <div class="sixteen columns brick">
+    <h2><strong>Your account</strong></h2>
+    <hr>
+    <h2>Developer profile:</h2>
+    <ul>
+      <li>
+        {{user.firstName}} {{user.lastName}} &mdash; <a href="#/developers/me/edit">Edit</a>
+      </li>
+    </ul>
+
+    <h2>Companies on which you're admin:</h2>
+    <ul>
+      <li data-ng-repeat="co in userCompanies">
+        {{co.name}} &mdash; <a href="#/companies/{{co._id}}/edit">Edit</a>
+      </li>
+    </ul>
+    <h2><strong>Actions</strong></h2>
+    <hr>
+    <div class="medium primary btn icon-left entypo icon-pencil">
+      <a href="#/companies/add">Create a company</a>
+    </div>
+
+  </div>
+</div>
+

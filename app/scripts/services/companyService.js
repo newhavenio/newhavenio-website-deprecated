@@ -32,6 +32,8 @@ angular.module('nhvioApp')
         var deferred = $q.defer();
         Restangular.one('companies', companyId).get().then(function(company){
             deferred.resolve(company);
+        }, function(err){
+            deferred.reject(err);
         });
         return deferred.promise;
     }
@@ -69,6 +71,7 @@ angular.module('nhvioApp')
         getCompany: getCompany,
     	getCompanies: getCompanies,
         clearCompanyList: clearCompanyList,
+        clearAll: clearCompanyList,
         removeCompanyById: removeCompanyById,
         createCompany: createCompany
     }

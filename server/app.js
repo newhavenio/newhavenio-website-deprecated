@@ -3,7 +3,6 @@
  */
 var express = require('express');
 var fs = require('fs');
-var connect = require('connect');
 
 // Initialize our MongoDB connection
 // and our models
@@ -35,7 +34,7 @@ app.use(express.timeout(5000));
 app.use(express.limit('0.25mb'));
 
 // Set up compression
-app.use(connect.compress());
+app.use(express.compress());
 
 // Handle static content first
 // http://www.senchalabs.org/connect/static.html
@@ -77,6 +76,18 @@ app.use(express.cookieSession({ secret: process.env.COOKIE_SECRET }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Use CSRF protection for our API, which is the
+// only way in which data comes in.  See:
+// http://mircozeiss.com/using-csrf-with-express-and-angular/
+// This must be done before calling app.router, below.
+// 
+// We expect all API requests will come from the AngularJS
+// client-side application via its $http library.  It puts
+// the token into 
+app.use('/api/', express.csrf({
+  value: function(req){return req.headers['x-xsrf-token']}
+}));
+
 // Attach our routes, which are mounted below
 app.use(app.router);
 
@@ -87,6 +98,12 @@ mongoose.connect(process.env.MONGOHQ_URL);
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
+
+// Make the programmingLanguages available
+// throughout the application, particularly
+// in our views.
+app.locals.programmingLanguages = require('./lib/languages');
+
 
 // Add in our controllers
 var MeetupController = require('./controllers/meetup');
@@ -115,7 +132,24 @@ about.route();
  * GET  /admin  Show admin page
  */
 app.get('/admin', function(req, res){
-  res.render('admin.html');
+  // Clearly nothing is hidden on this site since it's
+  // open source.  But, protect this nonetheless.
+  if (req.user) {
+    if (req.user.isAdmin()) {
+      res.render('admin.html');
+    }else{
+      return res.status(401).send("Forbidden");
+    };
+  }else{
+    return res.status(403).send("Authentication required");
+  };
+})
+app.get('/profile', function(req, res){
+  if (req.user) {
+    res.render('admin.html');
+  }else{
+    return res.status(403).send("Authentication required");
+  };
 })
 
 /**

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nhvioApp')
-  .controller('UserEditCtrl', ['$scope', '$routeParams', '$window', 'UserService', 'CompanyService', 'LanguageService', function ($scope, $routeParams, $window, UserService, CompanyService, LanguageService) {
+  .controller('UserEditCtrl', ['$scope', '$routeParams', '$window', '$location', 'UserService', 'CompanyService', 'LanguageService', function ($scope, $routeParams, $window, $location, UserService, CompanyService, LanguageService) {
 
   	// Note that, here we've got a callback on the promise instead
   	// of directly using the value of the promise because we'd like
@@ -66,12 +66,8 @@ angular.module('nhvioApp')
 		$scope.submitting = true;
 		$scope.user.put().then(function(){
 			$scope.submitting = false;
-
-			// If they were just registering,
-			// redirect them to the developer page
-			if (wasNewlyRegistered) {
-				$window.location.href = '/developers';		
-			};
+      UserService.clearAll();
+      $location.path('/');
 		}, function(response) {
 			$scope.submitting = false;
 			alert('Error saving!');

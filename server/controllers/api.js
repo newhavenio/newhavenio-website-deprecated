@@ -24,13 +24,30 @@ ApiController.prototype.route = function()
 {
     var _this = this;
 
-    this.app.get('/api/languages', function(req, res){
+    // Require authentication for all requests to the
+    // API.  If authenticated, add a CSRF token.
+    checkAuth = function(req, res, next){
+      if (req.user) {
+        // I don't think this is right place to do this.
+        // Perhaps better when the user requests /profile
+        // or /admin.
+        res.cookie('XSRF-TOKEN', req.csrfToken());
+        next();
+      }else{
+        return res.status(403).send("Authentication required");
+      };
+    }
+
+
+
+    this.app.get('/api/languages', checkAuth,  function(req, res){
         res.sendfile(path.resolve('server/lib/languages.json'));
     });
 
     // *********************************************
     // Company API
     // *********************************************
+    var companyDetailRoute = '/api/companies/:id([a-zA-Z0-9]{24})'
 
     var Company = mongoose.model('Company');
 
@@ -44,8 +61,13 @@ ApiController.prototype.route = function()
 
     updateCompany = function(req, res, company){
 
+        if (company.admin_ids.indexOf(req.user._id) == -1 && !req.user.isAdmin()){
+            return res.status(401).send("Not permitted");
+        }
+
+
         // Prepare Company Object
-        var editableFields = ['name', 'description', 'webUrl', 'twitterUrl', 'technologies', 'location'],
+        var editableFields = ['name', 'description', 'webUrl', 'twitterUrl', 'technologies', 'location', 'languages', 'admin_ids'],
             payload = _.pick(req.body, editableFields);
 
 
@@ -66,7 +88,7 @@ ApiController.prototype.route = function()
     }
 
     // Create new companies entry
-    this.app.put('/api/companies/:id', function(req, res){
+    this.app.put(companyDetailRoute, checkAuth, function(req, res){
 
         // Make sure the user is authorized
         if (!req.user){
@@ -89,7 +111,7 @@ ApiController.prototype.route = function()
     });
 
     // Create new companies entry
-    this.app.post('/api/companies', function(req, res){
+    this.app.post('/api/companies', checkAuth, function(req, res){
 
         // Make sure the user is authorized
         if (!req.user){
@@ -99,13 +121,16 @@ ApiController.prototype.route = function()
         // Company object to be created
         var company = new Company();
         company.active = true;
+
+        // Add this person as admin
+        company.admin_ids.push(req.user._id);
         updateCompany(req, res, company);
 
     });
 
     // Delete a user
     //
-    this.app.delete('/api/companies/:id', function(req, res)
+    this.app.delete(companyDetailRoute, checkAuth, function(req, res)
     {
         var co_id = mongoose.Types.ObjectId(req.param('id'));
 
@@ -130,7 +155,7 @@ ApiController.prototype.route = function()
 
     // GET a list of companies
     //
-    this.app.get('/api/companies', function(req, res)
+    this.app.get('/api/companies', checkAuth, function(req, res)
     {
         Company.find().lean().exec(function(err, businesses){
             if (businesses != null){
@@ -143,7 +168,7 @@ ApiController.prototype.route = function()
 
     // GET a particular company
     //
-    this.app.get('/api/companies/:id', function(req, res)
+    this.app.get(companyDetailRoute, checkAuth, function(req, res)
     {
         var co_id = mongoose.Types.ObjectId(req.param('id'));
         Company
@@ -153,6 +178,7 @@ ApiController.prototype.route = function()
                 if (company != null){
                     res.send(company);
                 }else{
+                    console.log('Could not find company w/ id', co_id);
                     res.status(404).send("No such company");
                 }
             });
@@ -173,14 +199,14 @@ ApiController.prototype.route = function()
 
     // Return JSON representation of the user that
     // is currently logged in.
-    this.app.get('/api/users/me', function(req, res)
+    this.app.get('/api/users/me', checkAuth, function(req, res)
     {
         res.send(req.user);
     });
 
     // GET a single user.
     //
-    this.app.get(userDetailRoute, function(req, res)
+    this.app.get(userDetailRoute, checkAuth, function(req, res)
     {
         // Get a user by their Mongodb ID.  Here, the .lean
         // method means that we'll get back JavaScript objects
@@ -200,9 +226,30 @@ ApiController.prototype.route = function()
             });
     });
 
+    function getUserAdminCompanies(req, res, user_id){        
+        Company
+            .find({admin_ids: req.user._id})
+            .lean()
+            .exec(function(err, companies){
+                if (companies === null) {companies = []};
+                res.send(companies);
+            });
+    }
+
+    // GET the companies on which requesting user is admin
+    //
+    this.app.get('/api/users/me/companies', checkAuth, function(req, res){
+        var user_id = mongoose.Types.ObjectId(req.param('id'));
+        return getUserAdminCompanies(req, res, req.user.id);
+    });
+    this.app.get(userDetailRoute + '/companies', checkAuth, function(req, res){
+        var user_id = mongoose.Types.ObjectId(req.param('id'));
+        return getUserAdminCompanies(req, res, user_id);
+    });
+
     // PUT a single user.
     //
-    this.app.put(userDetailRoute, function(req, res)
+    this.app.put(userDetailRoute, checkAuth, function(req, res)
     {
         // Get a user by their Mongodb ID.
         var user_id = mongoose.Types.ObjectId(req.param('id'));
@@ -255,7 +302,7 @@ ApiController.prototype.route = function()
 
     // Delete a user
     //
-    this.app.delete(userDetailRoute, function(req, res)
+    this.app.delete(userDetailRoute, checkAuth, function(req, res)
     {
         var user_id = mongoose.Types.ObjectId(req.param('id'));
 
@@ -284,7 +331,7 @@ ApiController.prototype.route = function()
 
     // Get a list of users
     //
-    this.app.get('/api/users', function(req, res)
+    this.app.get('/api/users', checkAuth, function(req, res)
     {
         User.find().lean().exec(function(err, users){
             if (users != null){
