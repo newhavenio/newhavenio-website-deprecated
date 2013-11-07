@@ -28,11 +28,17 @@ ApiController.prototype.route = function()
     // API.  If authenticated, add a CSRF token.
     checkAuth = function(req, res, next){
       if (req.user) {
+        // I don't think this is right place to do this.
+        // Perhaps better when the user requests /profile
+        // or /admin.
+        res.cookie('XSRF-TOKEN', req.csrfToken());
         next();
       }else{
         return res.status(403).send("Authentication required");
       };
     }
+
+
 
     this.app.get('/api/languages', checkAuth,  function(req, res){
         res.sendfile(path.resolve('server/lib/languages.json'));
