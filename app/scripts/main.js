@@ -1,7 +1,6 @@
 $(function() {
     
   var $grid = $('#grid');
-  $sizer = $grid.find('.shuffle__sizer');
 
   // initialize
   $grid.shuffle({

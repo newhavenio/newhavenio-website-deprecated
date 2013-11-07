@@ -47,6 +47,11 @@ html, body {
 
 .navbar ul li.last {
   margin-right: 0;
+  float: right;
+
+  .btn {
+    border: 0 none;
+  }
 }
 
 .navbar ul li a {

@@ -14,9 +14,6 @@
         min-height: inherit;
       }
     }
-  .searchbar {
-    margin-bottom: 0;
-  } 
    
    .tag {
      float: left;
@@ -27,7 +24,6 @@
   .searchbar {
     height: 60px;
     background: #fff;
-    margin-bottom: 20px;
     position: relative;
     .field {
       margin: 0;
@@ -122,6 +118,12 @@
     margin-top: 20px;
     margin-right: 20px; 
     padding-bottom: 0;
+    &.company {
+      width: 100%;
+      .brick {
+        margin-bottom: 0;
+      }
+    }
     @include respond(tablets) {
       width: 100%;
     }

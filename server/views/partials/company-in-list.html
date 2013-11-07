@@ -1,37 +1,39 @@
 {% from "macros.html" import semanticComma %}
-
-<div class="content">
-  <div class="item-header">
-    <img class="avatar" src="http://placehold.it/110x110&text=COMPANY+LOGO">
-    <span class="name fleft">{(company.name)}</span>
-    <ul class="social-icons">
-      <li><a href="https://www.github.com/{(company.githubInfo.login)}"><i class="icon-github"></i></a></li>
-      {% if company.twitterUrl %}
-        <li><a href="https://www.twitter.com/{(company.twitterUrl)}"><i class="icon-twitter"></i></a></li>
-      {% endif %}
-      {% if company.linkedinUrl %}
-        <li><a href="https://www.linkedin.com/{(company.linkedinUrl)}"><i class="icon-linkedin"></i></a></li>
-      {% endif %}
-    </ul>
+<div class="brick company">
+  <div class="content">
+    <div class="item-header">
+      <img class="avatar" src="http://placehold.it/110x110&text=COMPANY+LOGO">
+      <span class="name fleft">{(company.name)}</span>
+      <ul class="social-icons">
+        <li><a href="https://www.github.com/{(company.githubInfo.login)}"><i class="icon-github"></i></a></li>
+        {% if company.twitterUrl %}
+          <li><a href="https://www.twitter.com/{(company.twitterUrl)}"><i class="icon-twitter"></i></a></li>
+        {% endif %}
+        {% if company.linkedinUrl %}
+          <li><a href="https://www.linkedin.com/{(company.linkedinUrl)}"><i class="icon-linkedin"></i></a></li>
+        {% endif %}
+      </ul>
+    </div>
+    <p>{(company.description)}</p>
+    {% if company.developers %}
+    <p class="item-developers">
+      <strong>Developers:</strong><br>
+      {% for developer in company.developers %}
+        <img src="{(developer.githubInfo.avatar_url)}" alt="{(developer.githubInfo.name)}">
+      {% endfor %}
+    </p>
+    {% endif %}
+    {% if company.languages.length > 0 %}  
+    <p class="item-languages">
+      {# NOTE: The '-' in this for loop eliminates whitespace #}
+      <strong>Languages:</strong><br>
+      {% for key, lang in company.languagePairs -%}
+        <a href="/companies/{(key)}" class="tag">{(lang)}</a>
+      {%- endfor %}
+    </p>
+    <div class="clearfix"></div>
+    {% endif %}
+    <!-- <a href="#/developers/{(developer._id)}">edit</a> -->
   </div>
-  <p>{(company.description)}</p>
-  {% if company.developers %}
-  <p class="item-developers">
-    <strong>Developers:</strong><br>
-    {% for developer in company.developers %}
-      <img src="{(developer.githubInfo.avatar_url)}" alt="{(developer.githubInfo.name)}">
-    {% endfor %}
-  </p>
-  {% endif %}
-  {% if company.languages.length > 0 %}  
-  <p class="item-languages">
-    {# NOTE: The '-' in this for loop eliminates whitespace #}
-    <strong>Languages:</strong><br>
-    {% for key in company.languages -%}
-      <a href="/companies/{(key)}" class="tag">{(programmingLanguages[key].name)}</a>
-    {%- endfor %}
-  </p>
-  <div class="clearfix"></div>
-  {% endif %}
-  <!-- <a href="#/developers/{(developer._id)}">edit</a> -->
+
 </div>
