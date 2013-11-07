@@ -12,5 +12,9 @@ angular.module('nhvioApp')
         // Set them to active by default in the interface.
         user.active = true;
       };
+
+      user.getList('companies').then(function(userCompanies){
+        $scope.userCompanies = userCompanies;
+      });
     });
   }]);

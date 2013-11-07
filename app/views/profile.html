@@ -1,6 +1,7 @@
 <div class="about row">
   <div class="sixteen columns brick">
-    <h2><strong>Your profile</strong></h2>
+    <h2><strong>Your account</strong></h2>
+    <hr>
     <h2>Developer profile:</h2>
     <ul>
       <li>
@@ -8,12 +9,14 @@
       </li>
     </ul>
 
-    <h2>Companies on which you're admin</h2>
+    <h2>Companies on which you're admin:</h2>
     <ul>
-      <li>
-        foo
+      <li data-ng-repeat="co in userCompanies">
+        {{co.name}} &mdash; <a href="#/companies/{{co.__id}}/edit">Edit</a>
       </li>
     </ul>
+    <h2><strong>Actions</strong></h2>
+    <hr>
     <div class="medium primary btn icon-left entypo icon-pencil">
       <a href="#/companies/add">Create a company</a>
     </div>

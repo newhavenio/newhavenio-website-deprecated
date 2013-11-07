@@ -60,7 +60,7 @@ ApiController.prototype.route = function()
 
     updateCompany = function(req, res, company){
 
-        if (company.admin_ids.indexOf(req.user._id) == -1){
+        if (company.admin_ids.indexOf(req.user._id) == -1 && !req.user.isAdmin()){
             return res.status(401).send("Not permitted");
         }
 
@@ -222,6 +222,27 @@ ApiController.prototype.route = function()
                     res.status(404).send("No such user");
                 }
             });
+    });
+
+    function getUserAdminCompanies(req, res, user_id){        
+        Company
+            .find({admin_ids: req.user._id})
+            .lean()
+            .exec(function(err, companies){
+                if (companies === null) {companies = []};
+                res.send(companies);
+            });
+    }
+
+    // GET the companies on which requesting user is admin
+    //
+    this.app.get('/api/users/me/companies', checkAuth, function(req, res){
+        var user_id = mongoose.Types.ObjectId(req.param('id'));
+        return getUserAdminCompanies(req, res, req.user.id);
+    });
+    this.app.get(userDetailRoute + '/companies', checkAuth, function(req, res){
+        var user_id = mongoose.Types.ObjectId(req.param('id'));
+        return getUserAdminCompanies(req, res, user_id);
     });
 
     // PUT a single user.
