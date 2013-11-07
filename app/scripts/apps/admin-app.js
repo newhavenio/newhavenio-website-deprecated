@@ -33,11 +33,11 @@ app.config(['$routeProvider', function ($routeProvider) {
       redirectTo: '/'
     });
 }]);
-app.config(function (RestangularProvider) {
+app.config(['RestangularProvider', function (RestangularProvider) {
     // In this case we are mapping the id of each element to the _id field.
     // See http://www.ng-newsletter.com/posts/restangular.html
     RestangularProvider.setRestangularFields({
       id: "_id",
     });
     RestangularProvider.setBaseUrl('/api');
-});
+}]);
