@@ -54,8 +54,13 @@ ApiController.prototype.route = function()
 
     updateCompany = function(req, res, company){
 
+        if (company.admin_ids.indexOf(req.user._id) == -1){
+            return res.status(401).send("Not permitted");
+        }
+
+
         // Prepare Company Object
-        var editableFields = ['name', 'description', 'webUrl', 'twitterUrl', 'technologies', 'location'],
+        var editableFields = ['name', 'description', 'webUrl', 'twitterUrl', 'technologies', 'location', 'languages', 'admin_ids'],
             payload = _.pick(req.body, editableFields);
 
 
@@ -109,6 +114,9 @@ ApiController.prototype.route = function()
         // Company object to be created
         var company = new Company();
         company.active = true;
+
+        // Add this person as admin
+        company.admin_ids.push(req.user._id);
         updateCompany(req, res, company);
 
     });
