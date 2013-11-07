@@ -17,4 +17,16 @@ angular.module('nhvioApp')
         }
       }
     }
+  ])
+  
+  .directive('shuffleSearch', ['$window',
+    function($window){
+      return {
+        priority: 100,
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+          
+        }
+      }
+    }
   ]);

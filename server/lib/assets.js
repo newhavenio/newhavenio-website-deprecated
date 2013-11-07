@@ -71,6 +71,8 @@ function AssetManager(app, server){
           'gumby': [
             "app/bower_components/jquery/jquery.js",
             "app/scripts/lib/gumby.min.js",
+            "app/scripts/lib/shuffle.min.js",
+            "app/scripts/main.js"
           ]
         }
 
