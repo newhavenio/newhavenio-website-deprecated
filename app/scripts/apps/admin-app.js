@@ -15,7 +15,8 @@ app.config(['$routeProvider', function ($routeProvider) {
     }
   }
   $routeProvider
-    .when('', defaultController)
+    // .when('', defaultController)
+    .when('/', defaultController)
     .when('/developers/:developerId/edit', {
       templateUrl: 'views/user-edit.html',
       controller: 'UserEditCtrl'
@@ -29,7 +30,7 @@ app.config(['$routeProvider', function ($routeProvider) {
       controller: 'CompanyEditCtrl'
     })
     .otherwise({
-      redirectTo: ''
+      redirectTo: '/'
     });
 }]);
 app.config(function (RestangularProvider) {
