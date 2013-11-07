@@ -52,22 +52,22 @@ angular.module('nhvioApp')
 
     // Remove the current user
     $scope.remove = function(){
-      console.log("Deleting company", $scope.company);
       $scope.submitting = true;
-      $scope.company.remove().then(function(){
+      var finishUp = function(){
         $scope.submitting = false;
-
-        // Remove company from current scope,
-        // clear our cache of companys in the
-        // companyService.  Redirect to the 
-        // list of companys.
         $scope.company = null;
         CompanyService.clearAll();
         $window.location.href = '/companies';
-      }, function(response) {
-        $scope.submitting = false;
-        alert('Error removing company!');
-      })
+      }
+      if ($scope.company.isNew) {
+        finishUp();
+      }else{
+        $scope.company.remove().then(finishUp, function(response) {
+          $scope.submitting = false;
+          alert('Error removing company!');
+        })
+      };
+
     }
 
     // Save the current company
