@@ -6,7 +6,7 @@
   &.developers {
     .brick {
       margin-bottom: 0;
-      min-height: 301px;
+      /* min-height: 301px; */
       @include respond(tablets) {
         min-height: inherit;
       }
@@ -52,7 +52,6 @@
     margin-bottom: 5px;
     padding: 0 10px;
   }
-
   .content {
     margin-left: 105px;
     p {
@@ -102,6 +101,9 @@
         }
       }
     }
+  }
+  .company .content {
+    margin-left: 0;
   }
   .shuffle-item.concealed {
     display: none;
