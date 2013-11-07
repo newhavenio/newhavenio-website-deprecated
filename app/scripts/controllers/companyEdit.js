@@ -20,6 +20,8 @@ angular.module('nhvioApp')
     if (typeof $routeParams.companyId !== 'undefined') {
       CompanyService.getCompany($routeParams.companyId).then(function(company){
         setCompany(company);
+      }, function(err){
+        $location.path('/');
       });
     }else{
       var company = {isNew: true};
@@ -61,7 +63,7 @@ angular.module('nhvioApp')
         // list of companys.
         $scope.company = null;
         CompanyService.clearAll();
-        $window.location.href = '/developers';
+        $window.location.href = '/companies';
       }, function(response) {
         $scope.submitting = false;
         alert('Error removing company!');
@@ -75,6 +77,7 @@ angular.module('nhvioApp')
       if ($scope.company.isNew) {
         CompanyService.createCompany($scope.company).then(function(){
           $scope.submitting = false;
+          CompanyService.clearAll();
           $location.path('/');
         }, function(response) {
           $scope.submitting = false;
@@ -83,6 +86,7 @@ angular.module('nhvioApp')
 
       }else{
         $scope.company.put().then(function(){
+          CompanyService.clearAll();
           $location.path('/');
           $scope.submitting = false;
         }, function(response) {
