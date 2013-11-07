@@ -98,11 +98,11 @@
         url: "/api/users/me",
       }).done(function(response){
         if(typeof response !== 'undefined' && response != null && response._id){
-          markup = '<div class="medium primary btn icon-left entypo icon-user"><a href="/profile">My account</a> </div>';
+          markup = '<div class="medium default btn icon-left entypo icon-user"><a href="/profile">My account</a> </div>';
           $('#login-holder').prepend(markup);
         }
       }).error(function(){
-        markup = '<div class="medium primary btn icon-left entypo icon-github"><a href="/auth">Login with GitHub</a> </div>';
+        markup = '<div class="medium default btn icon-left entypo icon-github"><a href="/auth">Login with GitHub</a> </div>';
         $('#login-holder').prepend(markup);        
       });
     </script>
