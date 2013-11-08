@@ -32,15 +32,39 @@ ApiController.prototype.route = function()
         // Perhaps better when the user requests /profile
         // or /admin.
         res.cookie('XSRF-TOKEN', req.csrfToken());
+        if ('PUT' == req.method || 'POST' == req.method || 'DELETE' == req.method){
+
+          // On write operations, clear our in-memory cache,
+          // which is used for public-facing HTML responses,
+          // but never the API.
+          res.on('header', function(){
+            User.clearCached();
+            Company.clearCached();
+          });
+        };
+
         next();
       }else{
         return res.status(403).send("Authentication required");
       };
     }
 
+    this.get = function(route, cb){
+        this.app.get(route, checkAuth, cb);
+    }
+    this.put = function(route, cb){
+        this.app.put(route, checkAuth, cb);
+    }
+    this.post = function(route, cb){
+        this.app.post(route, checkAuth, cb);
+    }
+    this.delete = function(route, cb){
+        this.app.delete(route, checkAuth, cb);
+    }
 
 
-    this.app.get('/api/languages', checkAuth,  function(req, res){
+
+    this.get('/api/languages',  function(req, res){
         res.sendfile(path.resolve('server/lib/languages.json'));
     });
 
@@ -88,7 +112,7 @@ ApiController.prototype.route = function()
     }
 
     // Create new companies entry
-    this.app.put(companyDetailRoute, checkAuth, function(req, res){
+    this.put(companyDetailRoute, function(req, res){
 
         // Make sure the user is authorized
         if (!req.user){
@@ -111,7 +135,7 @@ ApiController.prototype.route = function()
     });
 
     // Create new companies entry
-    this.app.post('/api/companies', checkAuth, function(req, res){
+    this.post('/api/companies', function(req, res){
 
         // Make sure the user is authorized
         if (!req.user){
@@ -130,7 +154,7 @@ ApiController.prototype.route = function()
 
     // Delete a user
     //
-    this.app.delete(companyDetailRoute, checkAuth, function(req, res)
+    this.delete(companyDetailRoute, function(req, res)
     {
         var co_id = mongoose.Types.ObjectId(req.param('id'));
 
@@ -155,7 +179,7 @@ ApiController.prototype.route = function()
 
     // GET a list of companies
     //
-    this.app.get('/api/companies', checkAuth, function(req, res)
+    this.get('/api/companies', function(req, res)
     {
         Company.find().lean().exec(function(err, businesses){
             if (businesses != null){
@@ -168,7 +192,7 @@ ApiController.prototype.route = function()
 
     // GET a particular company
     //
-    this.app.get(companyDetailRoute, checkAuth, function(req, res)
+    this.get(companyDetailRoute, function(req, res)
     {
         var co_id = mongoose.Types.ObjectId(req.param('id'));
         Company
@@ -199,14 +223,14 @@ ApiController.prototype.route = function()
 
     // Return JSON representation of the user that
     // is currently logged in.
-    this.app.get('/api/users/me', checkAuth, function(req, res)
+    this.get('/api/users/me', function(req, res)
     {
         res.send(req.user);
     });
 
     // GET a single user.
     //
-    this.app.get(userDetailRoute, checkAuth, function(req, res)
+    this.get(userDetailRoute, function(req, res)
     {
         // Get a user by their Mongodb ID.  Here, the .lean
         // method means that we'll get back JavaScript objects
@@ -238,18 +262,18 @@ ApiController.prototype.route = function()
 
     // GET the companies on which requesting user is admin
     //
-    this.app.get('/api/users/me/companies', checkAuth, function(req, res){
+    this.get('/api/users/me/companies', function(req, res){
         var user_id = mongoose.Types.ObjectId(req.param('id'));
         return getUserAdminCompanies(req, res, req.user.id);
     });
-    this.app.get(userDetailRoute + '/companies', checkAuth, function(req, res){
+    this.get(userDetailRoute + '/companies', function(req, res){
         var user_id = mongoose.Types.ObjectId(req.param('id'));
         return getUserAdminCompanies(req, res, user_id);
     });
 
     // PUT a single user.
     //
-    this.app.put(userDetailRoute, checkAuth, function(req, res)
+    this.put(userDetailRoute, function(req, res)
     {
         // Get a user by their Mongodb ID.
         var user_id = mongoose.Types.ObjectId(req.param('id'));
@@ -302,7 +326,7 @@ ApiController.prototype.route = function()
 
     // Delete a user
     //
-    this.app.delete(userDetailRoute, checkAuth, function(req, res)
+    this.delete(userDetailRoute, function(req, res)
     {
         var user_id = mongoose.Types.ObjectId(req.param('id'));
 
@@ -331,7 +355,7 @@ ApiController.prototype.route = function()
 
     // Get a list of users
     //
-    this.app.get('/api/users', checkAuth, function(req, res)
+    this.get('/api/users', function(req, res)
     {
         User.find().lean().exec(function(err, users){
             if (users != null){

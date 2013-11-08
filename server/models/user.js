@@ -178,7 +178,6 @@ UserSchema.pre('save', function(next) {
   return next();
 });
 
-var User = mongoose.model('User', UserSchema)
 
 
 // Validation
@@ -191,6 +190,27 @@ UserSchema.path('blogUrl').validate(function (value) {
   }
 }, 'Too long');
 
+// Keep an array of active users cached in
+// memory.  Clear them upon write operations!
+var cachedUsers = [];
+UserSchema.statics.getActiveCached = function (cb) {
+  if (cachedUsers.length == 0) {
+    this.find({ active: true }, function(err, users){
+      console.log('found ', users.length, ' users');
+      cachedUsers = users;
+      cb(err, cachedUsers);
+    });
+  }else{
+      console.log('found ', cachedUsers.length, ' cached users');
+      cb(null, cachedUsers);
+  };
+}
+UserSchema.statics.clearCached = function (cb) {
+  console.log('Cleared cache of users');
+  cachedUsers = [];
+}
+
+var User = mongoose.model('User', UserSchema)
 
 
 module.exports = User;

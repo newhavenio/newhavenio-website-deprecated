@@ -39,8 +39,8 @@ DevelopersController.prototype.route = function()
   function doRender(res, langKey){
 
     async.parallel({
-      developers: function(cb){User.find({active: true}, cb)},
-      companies: function(cb){Company.find({active: true}, cb)}
+      developers: function(cb){User.getActiveCached(cb)},
+      companies: function(cb){Company.getActiveCached(cb)}
     },function(err, context){
 
       // Handle errors

@@ -5,6 +5,7 @@ var EventEmitter = require('events').EventEmitter,
 // Get the User model from mongoose.  Assumes that
 // You've registered this model already.  See user.js.
 var User = mongoose.model('User');
+var Company = mongoose.model('Company');
 
 function AuthController(app)
 {
@@ -77,10 +78,13 @@ AuthController.prototype.init = function(passport)
 
             // Save the user
             user.save(function(saveerr){
-              if(saveerr)
-              {
+              if(saveerr) {
                 console.log("save error:", saveerr)
               }
+              // This is the only write operation here.
+              // Requires clearing our in-memory cache.
+              User.clearCached();
+              Company.clearCached();
               return done(err, user);
             });
 

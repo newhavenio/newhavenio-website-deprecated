@@ -63,4 +63,24 @@ CompanySchema.virtual('languagePairs').get(function () {
   });
 });
 
+// Keep an array of active companies cached in
+// memory.  Clear them upon write operations!
+var cachedCompanies = [];
+CompanySchema.statics.getActiveCached = function (cb) {
+  if (cachedCompanies.length == 0) {
+    this.find({ active: true }, function(err, companies){
+      console.log('found ', companies.length, ' companies');
+      cachedCompanies = companies;
+      cb(err, cachedCompanies);
+    });
+  }else{
+      console.log('found ', cachedCompanies.length, ' cached companies');
+      cb(null, cachedCompanies);
+  };
+}
+CompanySchema.statics.clearCached = function (cb) {
+  console.log('Cleared cache of companies');
+  cachedUsers = [];
+}
+
 module.exports = mongoose.model('Company', CompanySchema);
