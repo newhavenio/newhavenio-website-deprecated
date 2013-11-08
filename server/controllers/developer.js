@@ -68,7 +68,7 @@ DevelopersController.prototype.route = function()
         )
       };
 
-      // Populate relationships
+      // Populate relationships. How ghetto is this?
       var companyDict = _.indexBy(context['companies'], '_id');
       var developerDict = _.indexBy(context['developers'], '_id');
       for (var i = context['companies'].length - 1; i >= 0; i--) {
