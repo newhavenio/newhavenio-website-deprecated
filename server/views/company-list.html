@@ -1,6 +1,8 @@
 
 {% extends "developer-list.html" %}
-
+{% block title%}
+  New Haven Companies{% if language %} using {(language)}{% endif %}
+{% endblock %}
 
 <div class="searchbar">
   <div class="row">
