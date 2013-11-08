@@ -27,7 +27,7 @@ function AssetManager(app, server){
                 res.setHeader('Cache-Control', 'public, max-age=290304000');
             }
             next();
-        });        
+        });
     })
 
     // Configure JS
@@ -44,9 +44,9 @@ function AssetManager(app, server){
           'modernizr': [
             "app/bower_components/modernizr/modernizr.js",
           ],
-          'admin-app': [   
+          'admin-app': [
             "app/bower_components/jquery/jquery.js",
-            "app/scripts/lib/gumby.min.js",     
+            "app/bower_components/gumby/js/libs/gumby.min.js",
             "app/bower_components/lodash/lodash.js",
             "app/bower_components/angular/angular.js",
             "app/bower_components/angular-resource/angular-resource.js",
@@ -68,9 +68,9 @@ function AssetManager(app, server){
             "app/scripts/filters/niceListFilter.js",
             "app/scripts/directives/confirmClick.js"
           ],
-          'meetup-app': [   
+          'meetup-app': [
             "app/bower_components/jquery/jquery.js",
-            "app/scripts/lib/gumby.min.js",     
+            "app/bower_components/gumby/js/libs/gumby.min.js",
             "app/bower_components/lodash/lodash.js",
             "app/bower_components/angular/angular.js",
             "app/bower_components/angular-resource/angular-resource.js",
@@ -86,9 +86,9 @@ function AssetManager(app, server){
           ],
           'gumby': [
             "app/bower_components/jquery/jquery.js",
-            "app/scripts/lib/gumby.min.js",
+            "app/bower_components/gumby/js/libs/gumby.min.js",
             "app/scripts/lib/shuffle.min.js",
-            "app/scripts/main.js"
+            "app/scripts/main.js" // This may need some syncing with main.js found in bower_components/gumby/js/main.js
           ]
         }
 
