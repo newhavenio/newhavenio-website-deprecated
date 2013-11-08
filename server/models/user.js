@@ -149,6 +149,9 @@ UserSchema.methods.populateFromGithub = function (cb) {
         this.firstName = nameBits[0];
         this.lastName = nameBits[nameBits.length-1];
       }
+    }else{
+      this.firstName = 'First Name';
+      this.lastName = 'Last Name';
     };
     this.email = this.githubInfo.email;
     if (this.githubInfo.blog) {
