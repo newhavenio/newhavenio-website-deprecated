@@ -71,6 +71,9 @@ DevelopersController.prototype.route = function()
       // Populate relationships
       var companyDict = _.indexBy(context['companies'], '_id');
       var developerDict = _.indexBy(context['developers'], '_id');
+      for (var i = context['companies'].length - 1; i >= 0; i--) {
+        context['companies'][i].developers = [];
+      };
       for (var i = context['developers'].length - 1; i >= 0; i--) {
         var developer = context['developers'][i];
         developer.companies = [];
