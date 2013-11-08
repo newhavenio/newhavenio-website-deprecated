@@ -173,7 +173,7 @@ UserSchema.pre('save', function(next) {
   var user = this;
 
   // Update when this user was last modified
-  user.modifiedAt = Date.now;
+  user.modifiedAt = Date.now();
 
   return next();
 });
