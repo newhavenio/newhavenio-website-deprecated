@@ -78,17 +78,15 @@ function AssetManager(app, server){
             "app/bower_components/angular-sanitize/angular-sanitize.js",
             "app/bower_components/restangular/dist/restangular.js",
             "app/scripts/apps/meetup-app.js",
-            "app/scripts/controllers/main.js",
             "app/scripts/controllers/meetup.js",
             "app/scripts/filters/ordinalFilter.js",
-            "app/scripts/services/meetupService.js",
+            "app/scripts/services/meetupService.js"
 
           ],
           'gumby': [
             "app/bower_components/jquery/jquery.js",
             "app/bower_components/gumby/js/libs/gumby.min.js",
-            "app/scripts/lib/shuffle.min.js",
-            "app/scripts/main.js" // This may need some syncing with main.js found in bower_components/gumby/js/main.js
+            "app/scripts/lib/shuffle.min.js"
           ]
         }
 
