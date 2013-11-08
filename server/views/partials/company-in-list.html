@@ -5,7 +5,10 @@
       <!-- <img class="avatar" src="http://placehold.it/110x110&text=COMPANY+LOGO"> -->
       <span class="name fleft">{(company.name)}</span>
       <ul class="social-icons">
-        <li><a href="https://www.github.com/{(company.githubInfo.login)}"><i class="icon-github"></i></a></li>
+        {#<li><a href="https://www.github.com/{(company.githubInfo.login)}"><i class="icon-github"></i></a></li>#}
+        {% if company.webUrl %}
+          <li><a href="{(company.webUrl)}" title="{(company.name)}"><i class="icon-globe"></i></a></li>
+        {% endif %}
         {% if company.twitterUrl %}
           <li><a href="https://www.twitter.com/{(company.twitterUrl)}"><i class="icon-twitter"></i></a></li>
         {% endif %}
