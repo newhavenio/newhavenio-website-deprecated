@@ -46,7 +46,7 @@ function AssetManager(app, server){
           ],
           'admin-app': [   
             "app/bower_components/jquery/jquery.js",
-            "app/bower_components/gumby/js/libs/gumby.min.js",     
+            "app/scripts/lib/gumby.min.js",     
             "app/bower_components/lodash/lodash.js",
             "app/bower_components/angular/angular.js",
             "app/bower_components/angular-resource/angular-resource.js",
@@ -70,7 +70,7 @@ function AssetManager(app, server){
           ],
           'meetup-app': [   
             "app/bower_components/jquery/jquery.js",
-            "app/bower_components/gumby/js/libs/gumby.min.js",     
+            "app/scripts/lib/gumby.min.js",     
             "app/bower_components/lodash/lodash.js",
             "app/bower_components/angular/angular.js",
             "app/bower_components/angular-resource/angular-resource.js",
@@ -86,7 +86,7 @@ function AssetManager(app, server){
           ],
           'gumby': [
             "app/bower_components/jquery/jquery.js",
-            "app/bower_components/gumby/js/libs/gumby.min.js",
+            "app/scripts/lib/gumby.min.js",
             "app/scripts/lib/shuffle.min.js",
             "app/scripts/main.js"
           ]
