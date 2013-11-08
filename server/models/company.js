@@ -78,6 +78,11 @@ CompanySchema.statics.getActiveCached = function (cb) {
   if (cachedCompanies.length == 0) {
     this.find({ active: true }, function(err, companies){
       console.log('found ', companies.length, ' companies');
+      companies.sort(function(coA, coB){
+        descLenA = coA.description ? coA.description.length : 0;
+        descLenB = coB.description ? coB.description.length : 0;
+        return descLenB - descLenA;
+      });
       cachedCompanies = companies;
       cb(err, cachedCompanies);
     });
@@ -88,7 +93,7 @@ CompanySchema.statics.getActiveCached = function (cb) {
 }
 CompanySchema.statics.clearCached = function (cb) {
   console.log('Cleared cache of companies');
-  cachedUsers = [];
+  cachedCompanies = [];
 }
 
 module.exports = mongoose.model('Company', CompanySchema);
