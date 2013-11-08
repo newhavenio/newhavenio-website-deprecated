@@ -3,6 +3,18 @@
 angular.module('nhvioApp')
   .controller('CompanyEditCtrl', ['$scope', '$routeParams', '$window', 'UserService', 'CompanyService', 'LanguageService', '$location', function ($scope, $routeParams, $window, UserService, CompanyService, LanguageService, $location) {
 
+    var setNewCompanyAdmin = function(){
+      if ($scope.company && $scope.company.isNew && $scope.me) {
+        $scope.company.admin_ids = [$scope.me._id];
+      };
+    }
+
+    // Grab me
+    UserService.getMe().then(function(me){
+      $scope.me = me;
+      setNewCompanyAdmin();
+    });
+
     var setCompany = function(company){
         if (typeof company.languages === 'undefined') {
           company.languages = [];
@@ -11,6 +23,7 @@ angular.module('nhvioApp')
           company.admin_ids = [];
         };
         $scope.company = company;
+        setNewCompanyAdmin();
     }
 
     // Note that, here we've got a callback on the promise instead
