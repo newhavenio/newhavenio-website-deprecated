@@ -22,7 +22,7 @@
     <p class="item-developers">
       <strong>Developers:</strong><br>
       {% for developer in company.developers %}
-        <a href="/developers#{(developer.githubInfo.login)}"><img src="{(developer.githubInfo.avatar_url)}" alt="{(developer.githubInfo.name)}"></a>
+        <a href="/developers#{(developer.githubInfo.login)}" title="{(developer.firstName)} {(developer.lastName)}"><img src="{(developer.githubInfo.avatar_url)}" alt="{(developer.firstName)} {(developer.lastName)}"></a>
       {% endfor %}
     </p>
     {% endif %}
