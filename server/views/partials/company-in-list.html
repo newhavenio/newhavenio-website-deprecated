@@ -3,7 +3,7 @@
   <div class="content">
     <div class="item-header">
       <!-- <img class="avatar" src="http://placehold.it/110x110&text=COMPANY+LOGO"> -->
-      <span class="name fleft">{(company.name)}</span>
+      <span class="name fleft"><a class="devco" name="{(company.nameSlug)}">{(company.name)}</a></span>
       <ul class="social-icons">
         {#<li><a href="https://www.github.com/{(company.githubInfo.login)}"><i class="icon-github"></i></a></li>#}
         {% if company.webUrl %}
@@ -22,7 +22,7 @@
     <p class="item-developers">
       <strong>Developers:</strong><br>
       {% for developer in company.developers %}
-        <img src="{(developer.githubInfo.avatar_url)}" alt="{(developer.githubInfo.name)}">
+        <a href="/developers#{(developer.githubInfo.login)}"><img src="{(developer.githubInfo.avatar_url)}" alt="{(developer.githubInfo.name)}"></a>
       {% endfor %}
     </p>
     {% endif %}

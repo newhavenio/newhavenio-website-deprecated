@@ -63,6 +63,14 @@ CompanySchema.virtual('languagePairs').get(function () {
   });
 });
 
+CompanySchema.virtual('nameSlug').get(function () {
+  if (!this._nameSlug) {
+    this._nameSlug = this.name.toLowerCase().replace(/[^A-Z]/ig, '-').replace(/-+/, '-')
+  };
+  return this._nameSlug;
+});
+
+
 // Keep an array of active companies cached in
 // memory.  Clear them upon write operations!
 var cachedCompanies = [];
