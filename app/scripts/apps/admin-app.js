@@ -15,7 +15,8 @@ app.config(['$routeProvider', function ($routeProvider) {
     }
   }
   $routeProvider
-    .when('', defaultController)
+    // .when('', defaultController)
+    .when('/', defaultController)
     .when('/developers/:developerId/edit', {
       templateUrl: 'views/user-edit.html',
       controller: 'UserEditCtrl'
@@ -29,14 +30,14 @@ app.config(['$routeProvider', function ($routeProvider) {
       controller: 'CompanyEditCtrl'
     })
     .otherwise({
-      redirectTo: ''
+      redirectTo: '/'
     });
 }]);
-app.config(function (RestangularProvider) {
+app.config(['RestangularProvider', function (RestangularProvider) {
     // In this case we are mapping the id of each element to the _id field.
     // See http://www.ng-newsletter.com/posts/restangular.html
     RestangularProvider.setRestangularFields({
       id: "_id",
     });
     RestangularProvider.setBaseUrl('/api');
-});
+}]);

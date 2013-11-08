@@ -33,7 +33,9 @@
       {# NOTE: The '-' in this for loop eliminates whitespace #}
 
       {% for key in developer.languages -%}
-        <a href="/developers/{(key)}" class="tag">{(programmingLanguages[key].name)}</a>
+        {% if key and programmingLanguages[key] %}
+          <a href="/developers/{(key)}" class="tag">{(programmingLanguages[key].name)}</a>
+        {% endif %}
       {%- endfor %}
     {% endif %}
   </p>

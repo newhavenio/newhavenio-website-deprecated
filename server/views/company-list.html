@@ -16,15 +16,15 @@
     <div class="searchbar">
       <div class="row">
         <div class="field">
-          <input class="text fleft" type="search" placeholder="Search {% block subtitle %}New Haven Companies{% if language %} using {(language)}{% endif %}{% endblock %}">
+          <input class="js-shuffle-search text fleft" placeholder="Search {% block subtitle %}New Haven Companies{% if language %} using {(language)}{% endif %}{% endblock %}">
           <a href="#" class="btn-search"><img src="/images/icon_search.png" alt="search"/></a>
         </div>
       </div> 
     </div>
     <div class="row">
-      <ul>
+      <ul id="grid">
         {% for company in companies %}
-        <li class="brick company">
+        <li class="brick-item company">
           {% include "partials/company-in-list.html" %}
         </li>
         {% endfor %}

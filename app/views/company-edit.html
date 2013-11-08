@@ -43,7 +43,7 @@
 	  			</ul>
 			</fieldset>
   			<fieldset>
-			  <legend>Company description<span data-ng-show="company.name">for {{company.name}}</span></legend>
+			  <legend>Company description<span data-ng-show="company.name"> for {{company.name}}</span></legend>
 	  			<ul>
 	  				<li class="field" data-ng-class="{'danger': companyEditForm.description.$invalid}">
   					    <textarea class="input textarea" rows="3" name="description" placeholder="Your description here, 140 characters max." data-ng-maxlength="140" ng-model="company.description" data-ng-disabled="submitting"></textarea>
@@ -57,12 +57,24 @@
 	  			</ul>
 			</fieldset>
 			<fieldset>
-			  <legend>Programming languages used<span data-ng-show="company.name">at {{company.name}}</span></legend>
+			  <legend>Programming languages used<span data-ng-show="company.name"> at {{company.name}}</span></legend>
 	  			<ul>
 	  				<li class="field" data-ng-repeat="langNo in range(1,5)">
 	  					<div class="picker">
 				  	        <select ng-model="company.languages[langNo-1]" data-ng-options="key as lang.name for (key, lang) in programmingLanguages" data-ng-disabled="submitting">
 		  	        	          <option value="">-- Language #{{langNo}} --</option>
+				  	        </select>
+				  	    </div>
+	  				</li>
+	  			</ul>
+			</fieldset>
+			<fieldset>
+			  <legend>Administrators<span data-ng-show="company.name"> for {{company.name}}</span></legend>
+	  			<ul>
+	  				<li class="field" data-ng-repeat="adminNo in range(1,3)">
+	  					<div class="picker">
+				  	        <select ng-model="company.admin_ids[adminNo-1]" data-ng-options="user._id as user.firstName+' '+user.lastName for user in users|orderBy:'lastName'" data-ng-disabled="submitting">
+		  	        	          <option value="">-- Admin #{{adminNo}} --</option>
 				  	        </select>
 				  	    </div>
 	  				</li>

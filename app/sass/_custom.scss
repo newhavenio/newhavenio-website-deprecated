@@ -47,6 +47,11 @@ html, body {
 
 .navbar ul li.last {
   margin-right: 0;
+  float: right;
+
+  .btn {
+    border: 0 none;
+  }
 }
 
 .navbar ul li a {
@@ -235,6 +240,7 @@ footer {
   position: relative;
   margin: 0 auto;
   height: 100;
+  padding-top: 50px;
 }
 
 footer ul {
