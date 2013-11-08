@@ -195,10 +195,18 @@ UserSchema.path('blogUrl').validate(function (value) {
 var cachedUsers = [];
 UserSchema.statics.getActiveCached = function (cb) {
   if (cachedUsers.length == 0) {
-    this.find({ active: true }, function(err, users){
-      console.log('found ', users.length, ' users');
-      cachedUsers = users;
-      cb(err, cachedUsers);
+    var query = {
+      active: true,
+      sort:{
+        modifiedAt: -1
+      }
+    }
+    this.find({ active: true })
+      .sort({modifiedAt: -1})
+      .exec(function(err, users){
+        console.log('found ', users.length, ' users');
+        cachedUsers = users;
+        cb(err, cachedUsers);
     });
   }else{
       console.log('found ', cachedUsers.length, ' cached users');
