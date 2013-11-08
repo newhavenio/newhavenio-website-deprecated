@@ -41,10 +41,6 @@ app.use(express.compress());
 app.set('static_dir', 'app');
 app.use(express.static(app.get('static_dir')));
 
-// Cache popular static content in memory
-// http://www.senchalabs.org/connect/staticCache.html
-app.use(express.staticCache());
-
 var assetManager = require('./lib/assets')(app, server);
 
 // Set the location of our views.  We'll use
