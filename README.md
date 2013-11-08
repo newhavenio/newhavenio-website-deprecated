@@ -11,6 +11,11 @@ find fellow New Haven hackers via
 * the [newhaven.io Twitter account](http://twitter.com/newhavenio)
 * the #newhavenio IRC channel on Freenode.
 
+## WARNING
+
+These are completely out of date now.  Somebody will update
+them within the next few days.
+
 ## Quickstart (OS X)
 
 ```
