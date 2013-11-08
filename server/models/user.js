@@ -68,7 +68,7 @@ var UserSchema = new Schema({
   //
   firstName : { type: String, required: false, match: /.{1,50}/},
   lastName : { type: String, required: false, match: /.{1,50}/ },
-  email : { type: String, required: false, index: { unique: true }, match: /.{1,50}/},
+  email : { type: String, required: false, index: { unique: false }, match: /.{1,50}/},
 
   // Social URLs, those that aren't linked by OAuth
   twitterUrl: { type: String, required: false, match: /^[A-Za-z0-9_]{3,50}$/},
