@@ -20,7 +20,7 @@
   </div>
   <p>{(developer.bio)}</p>
   <p class="item-companies">
-    {% if developer.companies %}
+    {% if developer.companies and developer.companies.length > 0 %}
       <strong>Local {% if developer.companies.length == 1 %}company{% else %}companies{% endif %}:</strong>
       {% for company in developer.companies %}
         {(company.name)}{(semanticComma(loop.last, loop.revindex, loop.length))}
