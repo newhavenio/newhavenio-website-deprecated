@@ -70,6 +70,17 @@ CompanySchema.virtual('nameSlug').get(function () {
   return this._nameSlug;
 });
 
+// The angular client sends over urls that don't
+// start w/ http.  Rather than do the right thing
+// and fix stuff, I'm going to do this for now.
+CompanySchema.virtual('procotolWebUrl').get(function () {
+  if(/https?:\/\//.test(this.webUrl)){
+    return this.webUrl;
+  }
+  return 'http://' + this.webUrl;
+});
+
+
 
 // Keep an array of active companies cached in
 // memory.  Clear them upon write operations!
