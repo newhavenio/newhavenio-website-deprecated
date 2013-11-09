@@ -22,7 +22,7 @@
     <p class="item-developers">
       <strong>New Haven area developers:</strong><br>
       {% for developer in company.developers %}
-        <a href="/developers#{(developer.githubInfo.login)}" title="{(developer.firstName)} {(developer.lastName)}"><img src="{(developer.githubInfo.avatar_url)}" alt="{(developer.firstName)} {(developer.lastName)}"></a>
+        <a href="/developers#{(developer.githubInfo.login)}" title="{(developer.firstName)} {(developer.lastName)}"><img src="{(developer.githubInfo.avatar_url)}" alt="{(developer.firstName)} {(developer.lastName)}" height=80 width=80></a>
       {% endfor %}
     </p>
     {% endif %}
