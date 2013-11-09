@@ -281,4 +281,8 @@ img.avatar {
 }
 */
 
-@media only screen and (max-width: 600px) { #hideable-intro { display: none; } }
+@media only screen and (max-width: 600px) {
+  #hideable-intro { display: none; }
+  #masthead {background:  url(/images/bg-med.jpg) no-repeat;}
+
+}
