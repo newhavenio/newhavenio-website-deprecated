@@ -4,33 +4,14 @@
   New Haven Companies{% if language %} using {(language)}{% endif %}
 {% endblock %}
 
-<div class="searchbar">
-  <div class="row">
-    <div class="field">
-      <input class="text fleft" type="search" placeholder="Search developers">
-      <i class="icon-search fright"></i>
-    </div>
-  </div> 
-</div>
+{% block directoryClass %}companies{% endblock %}
+
+{% block searchPlaceholder %}Search New Haven Companies{% if language %} using {(language)}{% endif %}{% endblock %}
 
 {% block list %}
-  <div class="directory companies">
-    <div class="searchbar">
-      <div class="row">
-        <div class="field">
-          <input class="js-shuffle-search text fleft" placeholder="Search {% block subtitle %}New Haven Companies{% if language %} using {(language)}{% endif %}{% endblock %}">
-          <a href="#" class="btn-search"><img src="/images/icon_search.png" alt="search" height="32" width="32" /></a>
-        </div>
-      </div> 
-    </div>
-    <div class="row">
-      <ul id="grid">
-        {% for company in companies %}
-        <li class="brick-item company">
-          {% include "partials/company-in-list.html" %}
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
-  </div>
+    {% for company in companies %}
+    <li class="brick-item company">
+      {% include "partials/company-in-list.html" %}
+    </li>
+    {% endfor %}
 {% endblock %}

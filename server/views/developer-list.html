@@ -11,27 +11,26 @@
 
 {% block main %}
 
-  {% block list %}
-    <div class="directory developers">
+    <div class="directory {% block directoryClass %}developers{% endblock %}">
       <div class="searchbar">
         <div class="row">
           <div class="field">
-            <input class="js-shuffle-search text fleft" type="text" placeholder="Search {% block subtitle %}New Haven {% if language %}{(language)} {% endif %}Developers{% endblock %}">
-            <a href="#" class="btn-search"><img src="/images/icon_search.png" alt="search"/></a>
+            <input class="js-shuffle-search text fleft" type="text" placeholder="{% block searchPlaceholder %}Search New Haven {% if language %}{(language)} {% endif %}Developers{% endblock %}">
+            <a href="#" class="btn-search"><img src="/images/icon_search.png" alt="search" height="32" width="32"/></a>
           </div>
         </div> 
       </div>
       <div class="row">
         <ul id="grid">
-          {% set cls = cycler("alpha", "") %}
-          {% for developer in developers %}
-          <li class="brick-item">
-            {% include "partials/developer-in-list.html" %}
-          </li>
-          {% endfor %}
+          {% block list %}
+            {% for developer in developers %}
+            <li class="brick-item">
+              {% include "partials/developer-in-list.html" %}
+            </li>
+            {% endfor %}
+          {% endblock %}
         </ul>
       </div>
   	</div>
-  {% endblock %}
   
 {% endblock %}
