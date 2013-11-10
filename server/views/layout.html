@@ -30,7 +30,7 @@
 
   <!-- Add CSS -->
   {( css.renderTags() | safe )}
-  {( js.renderTags('modernizr') | safe )}
+  {( js.renderTags('modernizr', {disableGlobal: true}) | safe )}
 </head>
 
 <body data-ng-app="nhvioApp">
@@ -86,7 +86,7 @@
 
   <!-- Add the javascript -->
   {% block bottom_js %}
-    {( js.renderTags('gumby') | safe )}
+    {( js.renderTags('gumby', {disableGlobal: true}) | safe )}
   {% endblock %}
 
   {% block load_user_js %}

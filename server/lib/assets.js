@@ -31,9 +31,7 @@ function AssetManager(app, server){
     })
 
     // Configure JS
-    app.locals.js = piler.createJSManager({
-        disableGlobal: true
-    });
+    app.locals.js = piler.createJSManager();
     app.locals.js.bind(app, server);
 
     // Not sure why we have to do this binding inside

@@ -7,5 +7,5 @@
 {% extends "layout.html" %}
 
 {% block bottom_js %}
-	{( js.renderTags('meetup-app') | safe )}
+	{( js.renderTags('meetup-app', {disableGlobal: true}) | safe )}
 {% endblock %}
