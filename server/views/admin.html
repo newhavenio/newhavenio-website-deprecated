@@ -1,7 +1,9 @@
 
 {% extends "layout.html" %}
 
+{% block main_attributes %}data-ng-view=""{% endblock %}
 {% block main %}
+<p class="loading">Loading...</p>
 {% endblock %}
 
 {% block bottom_js %}
