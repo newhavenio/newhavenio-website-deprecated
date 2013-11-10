@@ -98,7 +98,7 @@ var UserSchema = new Schema({
     // Core deets
     id: {type: Number, required: true, index: { unique: true }},
     login: { type: String, required: true },
-    name: { type: String, required: true },
+    name: String,
 
     // Other shiz
     avatar_url: String,
