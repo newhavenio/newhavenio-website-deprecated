@@ -94,6 +94,8 @@
     {# Gumby already relies on jQuery, so use that.  #}
     <script type="text/javascript">
       $(function(){
+
+        // Add the login button
         $.ajax({
           type: "GET",
           url: "/api/users/me",
@@ -106,6 +108,19 @@
           markup = '<div class="medium default btn icon-left entypo icon-github"><a href="/auth">Login with GitHub</a> </div>';
           $('#login-holder').prepend(markup);        
         });
+
+        // Fix mobile menu.  Some weird interaction of our JS
+        // assets is preventing the menu from working on mobile.
+        // This is a kludge, and we still have a problem where
+        // Gumby is raising an exception like
+        // TypeError: 'undefined' is not an object (evaluating '$.event.handle.apply')
+        // 
+        if (window.Modernizr.touch) {
+          $('a.toggle').first().on('touchstart click', function(e){
+            $(e.target).trigger('gumby.trigger');
+            e.preventDefault();
+          });
+        };
       });
     </script>
 
