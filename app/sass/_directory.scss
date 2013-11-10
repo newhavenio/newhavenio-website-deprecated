@@ -138,3 +138,9 @@
   }
   
 }
+
+@media only screen and (max-width: 600px) {
+  i.btn-search{
+    display:none;
+  }
+}
