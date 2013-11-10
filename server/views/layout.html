@@ -116,7 +116,7 @@
         // TypeError: 'undefined' is not an object (evaluating '$.event.handle.apply')
         // 
         if (window.Modernizr.touch) {
-          $('a.toggle').first().on('touchstart click', function(e){
+          $('a.toggle').first().on('touchstart', function(e){
             $(e.target).trigger('gumby.trigger');
             e.preventDefault();
           });
