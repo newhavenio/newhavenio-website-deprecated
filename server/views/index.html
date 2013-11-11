@@ -12,6 +12,7 @@
 
 {% block main %}
  <header id="masthead">
+    <div class="background"></div>
     <div class="row">
     	<div class="sixteen columns">
     		<div class="welcome">
@@ -31,4 +32,41 @@
   <div class="container" data-ng-view="">
   </div>
 
+{% endblock %}
+
+
+{% block bottom_js_2 %}
+  {# Now we're going to fade in a nice background #}
+  {# The page should already be readable by the user #}
+  {# which was why we delayed this. #}
+
+  {% if cdn %}
+    {% set bg = cdn + '/images/bg.jpg' %}
+    {% set bgmed = cdn + '/images/bg-med.jpg' %}
+  {% else %}
+    {% set bg = '/images/bg.jpg' %}
+    {% set bgmed = '/images/bg-med.jpg' %}
+  {% endif %}
+
+  <style type="text/css">
+    #masthead div.background-ready{
+      background: url({(bg)}); 
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      -ms-behavior: url(../../../backgroundsize.min.htc);
+      opacity: 1;
+    }
+    @media only screen and (max-width: 600px) {
+      #masthead div.background-ready {
+        background:  url({(bgmed)});
+      }
+    }
+  </style>
+  <script type="text/javascript">
+    $(function(){
+      $('#masthead div.background').addClass('background-ready');
+    });
+  </script>
 {% endblock %}
