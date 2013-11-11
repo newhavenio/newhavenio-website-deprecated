@@ -113,12 +113,10 @@
         // Gumby is raising an exception like
         // TypeError: 'undefined' is not an object (evaluating '$.event.handle.apply')
         // 
-        if (window.Modernizr.touch) {
-          $('a.toggle').first().on('touchstart', function(e){
-            $(e.target).trigger('gumby.trigger');
-            e.preventDefault();
-          });
-        };
+        $('a.toggle').first().on('touchstart', function(e){
+          e.preventDefault();
+          $(e.target).trigger('gumby.trigger');
+        });
       });
     </script>
 
