@@ -87,6 +87,9 @@
     {( js.renderTags('gumby', {disableGlobal: true}) | safe )}
   {% endblock %}
 
+  {% block bottom_js_2 %}
+  {% endblock %}
+
   {% block load_user_js %}
     {# Trying to get angular off the non-admin pages #}
     {# Gumby already relies on jQuery, so use that.  #}
@@ -106,7 +109,13 @@
           markup = '<div class="medium default btn icon-left entypo icon-github"><a href="/auth">Login with GitHub</a> </div>';
           $('#login-holder').prepend(markup);        
         });
+      });
+    </script>
 
+  {% endblock %}
+
+    <script type="text/javascript">
+      $(function(){
         // Fix mobile menu.  Some weird interaction of our JS
         // assets is preventing the menu from working on mobile.
         // This is a kludge, and we still have a problem where
@@ -120,7 +129,6 @@
       });
     </script>
 
-  {% endblock %}
 
 <script type="text/javascript">
 
