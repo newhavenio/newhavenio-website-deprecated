@@ -19,12 +19,10 @@ angular.module('nhvioApp')
 
     CompanyService.getCompanies().then(function(companies){
     	$scope.companies = companies;
-    	console.log(companies);
     });
 
     LanguageService.getLanguages().then(function(languages){
     	$scope.programmingLanguages = languages;
-    	console.log(languages);
     });
 
 
@@ -42,7 +40,6 @@ angular.module('nhvioApp')
 
 	// Remove the current user
 	$scope.remove = function(){
-		console.log("Deleting user", $scope.user);
 		$scope.submitting = true;
 		$scope.user.remove().then(function(){
 			$scope.submitting = false;
@@ -62,7 +59,6 @@ angular.module('nhvioApp')
 
 	// Save the current user
 	$scope.put = function(){
-		console.log("submitting", $scope.user);
 		$scope.submitting = true;
 		$scope.user.put().then(function(){
 			$scope.submitting = false;

@@ -15,9 +15,7 @@ angular.module('nhvioApp')
     $scope.me = null;
     UserService.getMe().then(function(user){
     	$scope.me = user;
-    	console.log('WTF biznatch!');
     });
 
-    console.log('Here baby!');
 
   }]);

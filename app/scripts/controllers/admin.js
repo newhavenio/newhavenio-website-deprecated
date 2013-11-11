@@ -34,7 +34,6 @@ angular.module('nhvioApp')
         return user._id == userId;
       })
       var user = $scope.users[userIndex];
-      console.log(user);
       UserService.removeUserById(userId).then(function(){
         // Remove the user from the list of users
         $scope.users.splice(userIndex, 1);

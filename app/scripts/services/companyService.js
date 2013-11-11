@@ -59,7 +59,6 @@ angular.module('nhvioApp')
         var deferred = $q.defer();
         var base = Restangular.all('companies');
         base.post(company).then(function(company){
-            console.log(company);
             deferred.resolve(company);
         }, function(err){
             deferred.reject(err);

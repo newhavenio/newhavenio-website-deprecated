@@ -35,14 +35,12 @@ angular.module('nhvioApp')
         // Create a promise representing the result we'll return.
         var deferred = $q.defer();
         if (userId === 'me' && cachedMe != null) {
-            console.log("me from cache");
             deferred.resolve(cachedMe);
         }else{
             Restangular.one('users', userId).get().then(function(user){
                 if (userId === 'me') {
                     cachedMe = user;
                 };
-                console.log('User = ', user);
                 deferred.resolve(user);
             });
         };

@@ -43,7 +43,6 @@ angular.module('nhvioApp')
 
     LanguageService.getLanguages().then(function(languages){
       $scope.programmingLanguages = languages;
-      console.log(languages);
     });
 
     // Grab the list of users
@@ -85,7 +84,6 @@ angular.module('nhvioApp')
 
     // Save the current company
     $scope.put = function(){
-      console.log("submitting", $scope.company);
       $scope.submitting = true;
       if ($scope.company.isNew) {
         CompanyService.createCompany($scope.company).then(function(){
