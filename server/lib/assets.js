@@ -40,7 +40,7 @@ function AssetManager(app, server){
         app.locals.js.bind(app, server);
         var jsFiles = {
           'modernizr': [
-            "app/bower_components/modernizr/modernizr.js",
+            "app/scripts/lib/modernizr-custom.min.js",
           ],
           'admin-app': [   
             "app/bower_components/jquery/jquery.js",
