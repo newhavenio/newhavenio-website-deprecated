@@ -29,8 +29,24 @@
 
 
   <!-- Add CSS -->
-  {( css.renderTags() | safe )}
-  {( js.renderTags('modernizr', {disableGlobal: true}) | safe )}
+  {% if cdn %}
+    {( css.renderTags().replace('href="', 'href="' + cdn) | safe )}
+    {( js.renderTags('modernizr', {disableGlobal: true}).replace('src="', 'src="' + cdn) | safe )}
+    {% set bg = cdn + '/images/bg.jpg' %}
+    {% set bgmed = cdn + '/images/bg-med.jpg' %}
+  {% else %}
+    {( css.renderTags() | safe )}
+    {( js.renderTags('modernizr', {disableGlobal: true}) | safe )}
+    {% set bg = '/images/bg.jpg' %}
+    {% set bgmed = '/images/bg-med.jpg' %}
+  {% endif %}
+  <style type="text/css">
+    #masthead {background:  url({(bg)}) no-repeat;}
+    @media only screen and (max-width: 600px) {
+      #masthead {background:  url({(bgmed)}) no-repeat;}
+    }
+
+  </style>
 </head>
 
 <body data-ng-app="nhvioApp">

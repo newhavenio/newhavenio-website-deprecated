@@ -23,6 +23,9 @@ var server = http.createServer(app);
 // Set the port.  Heroku will set the env var
 app.set('port', process.env.PORT || 3000);
 
+// Set the cdn.
+app.locals.cdn = process.env.CDN;
+
 // Set a global 5s timeout on requests
 // http://www.senchalabs.org/connect/timeout.html
 app.use(express.timeout(5000));
