@@ -54,14 +54,6 @@ CompanySchema.pre('save', function(next) {
   return next();
 });
 
-// Return a list of the languages this person uses,
-// in pairs like ['python', 'Python'], etc.
-// 
-CompanySchema.virtual('languagePairs').get(function () {
-  return _.map(this.languages, function(l){
-    return [l, programmingLanguages[l]]
-  });
-});
 
 CompanySchema.virtual('nameSlug').get(function () {
   if (!this._nameSlug) {
@@ -79,7 +71,6 @@ CompanySchema.virtual('procotolWebUrl').get(function () {
   }
   return 'http://' + this.webUrl;
 });
-
 
 
 // Keep an array of active companies cached in
