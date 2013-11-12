@@ -1,8 +1,0 @@
-  <!-- Add CSS -->
-  {% if cdn %}
-    {( css.renderTags().replace('href="', 'href="' + cdn) | safe )}
-    {( js.renderTags('modernizr', {disableGlobal: true}).replace('src="', 'src="' + cdn) | safe )}
-  {% else %}
-    {( css.renderTags() | safe )}
-    {( js.renderTags('modernizr', {disableGlobal: true}) | safe )}
-  {% endif %}

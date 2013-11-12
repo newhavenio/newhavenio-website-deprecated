@@ -27,8 +27,8 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-
-  {% include "partials/head-assets.html" %}
+  {( css.asHTML('global') | safe )}
+  {( js.asHTML('modernizr') | safe )}
 </head>
 
 <body data-ng-app="nhvioApp">
@@ -84,7 +84,7 @@
 
   <!-- Add the javascript -->
   {% block bottom_js %}
-    {( js.renderTags('gumby', {disableGlobal: true}) | safe )}
+    {( js.asHTML('gumby') | safe )}
   {% endblock %}
 
   {% block bottom_js_2 %}

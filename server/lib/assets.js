@@ -31,13 +31,13 @@ function AssetManager(app, server){
     })
 
     // Configure JS
-    app.locals.js = piler.createJSManager();
-    app.locals.js.bind(app, server);
+    js = piler.createJSManager();
+    js.bind(app, server);
 
     // Not sure why we have to do this binding inside
     // of the app.configure
     app.configure(function() {
-        app.locals.js.bind(app, server);
+        js.bind(app, server);
         var jsFiles = {
           'modernizr': [
             "app/scripts/lib/modernizr-custom.min.js",
@@ -95,15 +95,36 @@ function AssetManager(app, server){
           var key = keys[i],
               files = jsFiles[key];
           for (var j = 0; j < files.length; j++) {
-            app.locals.js.addFile(key, files[j]);
+            js.addFile(key, files[j]);
           };
         };
     });
 
     // Configure CSS
-    app.locals.css = piler.createCSSManager();
-    app.locals.css.addFile('app/css/gumby.css');
-    app.locals.css.bind(app, server);
+    css = piler.createCSSManager();
+    css.addFile('app/css/gumby.css');
+    css.bind(app, server);
+
+    // Set up some magic to output tags that use
+    // our CDN settings.
+    var asHTML = function(namespace){
+        var markup = this.renderTags(namespace, {disableGlobal: true});
+        if (this.app.locals.cdn && process.env.NODE_ENV === 'production') {
+            if (this.contentType === 'text/css') {
+                var repl = 'href="';
+            }else{
+                var repl = 'src="';
+            };
+            markup = markup.replace(repl, repl + app.locals.cdn);
+        };
+        return markup;
+    }
+    css.asHTML = asHTML;
+    js.asHTML = asHTML;
+
+    app.locals.js = js
+    app.locals.css = css
+
 }
 
 module.exports = AssetManager;
