@@ -60,7 +60,13 @@
     }
     @media only screen and (max-width: 600px) {
       #masthead div.background-ready {
-        background:  url({(bgmed)});
+		background:  url({(bgmed)});
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		-ms-behavior: url(../../../backgroundsize.min.htc);
+		opacity: 1;
       }
     }
   </style>
