@@ -39,6 +39,25 @@ app.use(express.limit('0.25mb'));
 // Set up compression
 app.use(express.compress());
 
+// Add some misc caching behavior, minor kludge
+// since we should do this elsewhere. Clearly, if
+// we altered these bg images, we'd need to update
+// their paths in order to uncache them in the
+// CDN. TODO: improve this.
+var cachable = [
+  '/fonts/',
+  '/images/bg.jpg',
+  '/images/bg-med.jpg',
+];
+for (var i = cachable.length - 1; i >= 0; i--) {
+  app.use(cachable[i], function(req, res, next){
+    if (!res.getHeader('Cache-Control')){
+      res.setHeader('Cache-Control', 'public, max-age=290304000');
+    }
+    next();
+  });
+};
+
 // Handle static content first
 // http://www.senchalabs.org/connect/static.html
 app.set('static_dir', 'app');
