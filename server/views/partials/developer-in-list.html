@@ -7,6 +7,7 @@
   <div class="item-header">
     <img class="avatar" src="{(developer.githubInfo.avatar_url)}" height="80" width="80" itemprop="photo" alt="{(developer.firstName)} {(developer.lastName)}">
     <span class="name fleft"><a class="devco" name="{(developer.githubInfo.login)}" itemprop="name">{(developer.firstName)} {(developer.lastName)}</a></span>
+    <span itemprop="role" class="role">Developer</span>
     <ul class="social-icons">
       <li>
         <a href="https://www.github.com/{(developer.githubInfo.login)}" itemprop="url" title="{(developer.firstName)} {(developer.lastName)} on GitHub"><i class="icon-github"></i></a></li>
@@ -29,7 +30,7 @@
     {% if developer.companies and developer.companies.length > 0 %}
       <strong>Local {% if developer.companies.length == 1 %}company{% else %}companies{% endif %}:</strong>
       {% for company in developer.companies %}
-        <a href="/companies#{(company.nameSlug)}" itemprop="worksFor">{(company.name)}</a>{(semanticComma(loop.last, loop.revindex, loop.length))}
+        <a href="/companies#{(company.nameSlug)}" itemprop="affiliation">{(company.name)}</a>{(semanticComma(loop.last, loop.revindex, loop.length))}
       {% endfor %}
     {% endif %}
   </p>
