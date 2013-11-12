@@ -20,19 +20,19 @@ var CompanySchema = new Schema({
     active: {type: Boolean, default: false, index: true, required: true},
 
     // Company name
-    name: {type: String, required: true},
+    name: {type: String, required: true, match: /^.{0,50}$/},
 
     // Company description
-    description: {type: String, required: false},
+    description: {type: String, required: false, match: /^.{0,140}$/},
 
     // Web URL or
     // Careers page link
-    webUrl: {type: String, required: false},
+    webUrl: {type: String, required: false, match: /((http|ftp|https):\/\/)?[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/},
 
-    slug: {type: String, required: false},
+    slug: {type: String, required: false, match: /^.{0,25}$/},
 
     // Company Twitter Acct
-    twitterUrl: {type: String, required: false},
+    twitterUrl: { type: String, required: false, match: /^[A-Za-z0-9_]{3,50}$/},
     linkedinUrl: { type: String, required: false, match: /^[\.A-Za-z0-9-\/]{5,75}$/},
 
     // Technology stack
@@ -40,7 +40,7 @@ var CompanySchema = new Schema({
     languages: [{type: String, enum: _.keys(programmingLanguages)}],
 
     // Address string (multi-line?)
-    location: {type: String, required: false},
+    location: {type: String, required: false, match: /^.{0,140}$/},
 
     admin_ids: [{ type: Schema.Types.ObjectId, ref: 'User'}]
 
