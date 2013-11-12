@@ -33,6 +33,7 @@ var CompanySchema = new Schema({
 
     // Company Twitter Acct
     twitterUrl: {type: String, required: false},
+    linkedinUrl: { type: String, required: false, match: /^[\.A-Za-z0-9-\/]{5,75}$/},
 
     // Technology stack
     // Tech used within company
