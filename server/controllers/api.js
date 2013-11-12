@@ -91,8 +91,12 @@ ApiController.prototype.route = function()
 
 
         // Prepare Company Object
-        var editableFields = ['name', 'description', 'webUrl', 'twitterUrl', 'technologies', 'location', 'languages', 'admin_ids'],
-            payload = _.pick(req.body, editableFields);
+        var editableFields = [
+            'name', 'description', 'webUrl', 'twitterUrl',
+            'technologies', 'location', 'languages', 'admin_ids',
+            'linkedinUrl'
+        ];
+        var payload = _.pick(req.body, editableFields);
 
 
         // Populate business object
