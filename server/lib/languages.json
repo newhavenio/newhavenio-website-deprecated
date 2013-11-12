@@ -278,7 +278,7 @@
         "priority": 150, 
         "name": "Prolog", 
         "key": "prolog"
-    }
+    },
     "sql": {
         "priority": 41, 
         "name": "SQL", 
