@@ -21,8 +21,8 @@
         <table class="user-admin admin striped">
         <tbody>
         <tr data-ng-repeat="user in users|filter:userQuery">
-          <td><img data-ng-src="{{user.githubInfo.avatar_url}}?s=40" height=40 width=40></td>
-          <td class="name">{{user.githubInfo.name}}</td>
+          <td><img data-ng-src="{{user.githubInfo.avatar_url}}" height=40 width=40></td>
+          <td class="name">{{user.firstName}} {{user.lastName}}</td>
           <td>
             <div class="medium primary btn icon-left entypo icon-pencil"><a href="/admin#/developers/{{user._id}}/edit">Edit</a> </div>
           </td>
