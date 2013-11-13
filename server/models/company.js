@@ -20,26 +20,27 @@ var CompanySchema = new Schema({
     active: {type: Boolean, default: false, index: true, required: true},
 
     // Company name
-    name: {type: String, required: true},
+    name: {type: String, required: true, match: /^.{0,50}$/},
 
     // Company description
-    description: {type: String, required: false},
+    description: {type: String, required: false, match: /^.{0,140}$/},
 
     // Web URL or
     // Careers page link
-    webUrl: {type: String, required: false},
+    webUrl: {type: String, required: false, match: /((http|ftp|https):\/\/)?[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/},
 
-    slug: {type: String, required: false},
+    slug: {type: String, required: false, match: /^.{0,25}$/},
 
     // Company Twitter Acct
-    twitterUrl: {type: String, required: false},
+    twitterUrl: { type: String, required: false, match: /^[A-Za-z0-9_]{3,50}$/},
+    linkedinUrl: { type: String, required: false, match: /^[\.A-Za-z0-9-\/]{5,75}$/},
 
     // Technology stack
     // Tech used within company
     languages: [{type: String, enum: _.keys(programmingLanguages)}],
 
     // Address string (multi-line?)
-    location: {type: String, required: false},
+    location: {type: String, required: false, match: /^.{0,140}$/},
 
     admin_ids: [{ type: Schema.Types.ObjectId, ref: 'User'}]
 
@@ -54,14 +55,6 @@ CompanySchema.pre('save', function(next) {
   return next();
 });
 
-// Return a list of the languages this person uses,
-// in pairs like ['python', 'Python'], etc.
-// 
-CompanySchema.virtual('languagePairs').get(function () {
-  return _.map(this.languages, function(l){
-    return [l, programmingLanguages[l]]
-  });
-});
 
 CompanySchema.virtual('nameSlug').get(function () {
   if (!this._nameSlug) {
@@ -79,7 +72,6 @@ CompanySchema.virtual('procotolWebUrl').get(function () {
   }
   return 'http://' + this.webUrl;
 });
-
 
 
 // Keep an array of active companies cached in

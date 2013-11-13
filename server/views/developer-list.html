@@ -9,6 +9,12 @@
 	New Haven {% if language %}{(language)} {% endif %}Developers
 {% endblock %}
 
+{% block meta_description %}
+Developers in New Haven Connecticut{% if language -%} using the {(language)} programming language
+{%- endif %}.
+{% endblock %}
+
+
 {% block main %}
 
     <div class="directory {% block directoryClass %}developers{% endblock %}">

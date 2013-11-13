@@ -54,12 +54,21 @@
     padding: 0 10px;
   }
   .content {
+    .co-member-name{
+      display: none;
+    }
+    .role{
+      display: none;
+    }
     a.devco{
       color: #7d7d7d;
     }
     margin-left: 105px;
     p {
       margin-bottom: 5px;
+    }
+    p.co-description{
+      clear:both;
     }
     .item-header {
       margin-bottom: 5px;
