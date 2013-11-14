@@ -7,9 +7,9 @@
 //
 //
 //
-var mongoose = require('mongoose')
-  , Schema = mongoose.Schema
-  , _ = require('underscore');
+var mongoose = require('mongoose'),
+  Schema = mongoose.Schema,
+  _ = require('underscore');
 
 // This is a list of the top 100 languages on GitHub
 // in 2013 taken from the following website:
@@ -177,8 +177,6 @@ UserSchema.pre('save', function(next) {
 
   return next();
 });
-
-
 
 // Validation
 
