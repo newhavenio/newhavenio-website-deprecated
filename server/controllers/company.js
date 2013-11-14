@@ -5,6 +5,7 @@ var EventEmitter = require('events').EventEmitter,
 function CompanyController(app){
     if (!(this instanceof CompanyController)) return new CompanyController(app);
 
+    var _this = this;
     EventEmitter.call(this);
 
     this.app = app;
@@ -15,8 +16,10 @@ function CompanyController(app){
     this.cachedResponses = {};
     function bustCache(){
       console.log('Busted cache for CompanyController');
-      this.cachedResponses = {};      
+      _this.cachedResponses = {};      
     }
+    mongoose.model('User').schema.post('save', bustCache);
+    mongoose.model('Company').schema.post('save', bustCache);
     mongoose.model('User').schema.post('save', bustCache);
     mongoose.model('Company').schema.post('save', bustCache);
 

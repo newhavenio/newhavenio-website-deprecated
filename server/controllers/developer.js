@@ -7,6 +7,7 @@ var EventEmitter = require('events').EventEmitter,
 function DevelopersController(app){
     if (!(this instanceof DevelopersController)) return new DevelopersController(app);
 
+    var _this = this;
     EventEmitter.call(this);
 
     this.app = app;
@@ -16,11 +17,12 @@ function DevelopersController(app){
 
     this.cachedResponses = {};
     function bustCache(){
-      console.log('Busted cache for DevelopersController');
-      this.cachedResponses = {};      
+      _this.cachedResponses = {};      
     }
     mongoose.model('User').schema.post('save', bustCache);
     mongoose.model('Company').schema.post('save', bustCache);
+    mongoose.model('User').schema.post('remove', bustCache);
+    mongoose.model('Company').schema.post('remove', bustCache);
 }
 
 DevelopersController.prototype = Object.create(EventEmitter.prototype);
@@ -113,7 +115,6 @@ DevelopersController.prototype.route = function()
   function checkCache(req, res, next){
     var cachedResponse = _this.cachedResponses[req.url];
     if (cachedResponse) {
-      console.log('returned cached content for ', req.url);
       return res.send(cachedResponse);
     };
     next();    
