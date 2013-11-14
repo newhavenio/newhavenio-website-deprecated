@@ -11,6 +11,15 @@ function CompanyController(app){
     this.slug = 'companies';
     this.Model = mongoose.model('Company');
     this.template = 'company-list.html';
+
+    this.cachedResponses = {};
+    function bustCache(){
+      console.log('Busted cache for CompanyController');
+      this.cachedResponses = {};      
+    }
+    mongoose.model('User').schema.post('save', bustCache);
+    mongoose.model('Company').schema.post('save', bustCache);
+
 }
 
 CompanyController.prototype = Object.create(EventEmitter.prototype);

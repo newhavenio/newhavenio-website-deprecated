@@ -13,6 +13,14 @@ function DevelopersController(app){
     this.slug = 'developers';
     this.Model = mongoose.model('User');
     this.template = 'developer-list.html';
+
+    this.cachedResponses = {};
+    function bustCache(){
+      console.log('Busted cache for DevelopersController');
+      this.cachedResponses = {};      
+    }
+    mongoose.model('User').schema.post('save', bustCache);
+    mongoose.model('Company').schema.post('save', bustCache);
 }
 
 DevelopersController.prototype = Object.create(EventEmitter.prototype);
@@ -25,6 +33,29 @@ DevelopersController.prototype.route = function()
   var _this = this
     , User = mongoose.model('User')
     , Company = mongoose.model('Company');
+
+  function ghettoJoin(developers, companies){
+    // Populate relationships. How ghetto is this?
+    var companyDict = _.indexBy(companies, '_id');
+    var developerDict = _.indexBy(developers, '_id');
+    for (var i = companies.length - 1; i >= 0; i--) {
+      companies[i].developers = [];
+    };
+    for (var i = developers.length - 1; i >= 0; i--) {
+      var developer = developers[i];
+      developer.companies = [];
+      for (var j = developer.company_ids.length - 1; j >= 0; j--) {
+        var company = companyDict[developer.company_ids[j]];
+        if (typeof company !== 'undefined') {
+          if (typeof company.developers === 'undefined') {
+            company.developers = [];
+          };
+          developer.companies.push(company);
+          company.developers.push(developer);            
+        };
+      };
+    };
+  }
 
   // This function will populate the users and
   // companies and then pass the context on to
@@ -68,39 +99,34 @@ DevelopersController.prototype.route = function()
         )
       };
 
-      // Populate relationships. How ghetto is this?
-      var companyDict = _.indexBy(context['companies'], '_id');
-      var developerDict = _.indexBy(context['developers'], '_id');
-      for (var i = context['companies'].length - 1; i >= 0; i--) {
-        context['companies'][i].developers = [];
-      };
-      for (var i = context['developers'].length - 1; i >= 0; i--) {
-        var developer = context['developers'][i];
-        developer.companies = [];
-        for (var j = developer.company_ids.length - 1; j >= 0; j--) {
-          var company = companyDict[developer.company_ids[j]];
-          if (typeof company !== 'undefined') {
-            if (typeof company.developers === 'undefined') {
-              company.developers = [];
-            };
-            developer.companies.push(company);
-            company.developers.push(developer);            
-          };
-        };
-      };
+      ghettoJoin(context.developers, context.companies);
 
-      res.render(_this.template, context);
+      // Render the template and cache it
+      res.render(_this.template, context, function(err, html){
+        if (err) {throw(err)};
+        _this.cachedResponses[res.req.url] = html;
+        res.send(html);
+      });
     });
   }
 
+  function checkCache(req, res, next){
+    var cachedResponse = _this.cachedResponses[req.url];
+    if (cachedResponse) {
+      console.log('returned cached content for ', req.url);
+      return res.send(cachedResponse);
+    };
+    next();    
+  }
+
   // Get users (developers) or companies
-  this.app.get('/' + this.slug, function(req, res){
+  this.app.get('/' + this.slug, checkCache, function(req, res){
     doRender(res);
   });
 
   // Get users or companies who use a particular language
   var langRoute = '/' + this.slug + '/:langKey(' + _.keys(languages).join('|') + ')?';
-  this.app.get(langRoute, function(req, res){
+  this.app.get(langRoute, checkCache, function(req, res){
     doRender(res, req.params.langKey);
   });
 
