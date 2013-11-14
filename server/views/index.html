@@ -6,6 +6,10 @@
 
 {% extends "layout.html" %}
 
+{% block google_fonts %}
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700">
+{% endblock %}
+
 {% block bottom_js %}
 	{( js.asHTML('meetup-app') | safe )}
 {% endblock %}

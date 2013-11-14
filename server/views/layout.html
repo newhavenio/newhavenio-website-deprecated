@@ -25,7 +25,9 @@
   <link rel="shortcut icon" href="favicon.gif" type="image/x-icon" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700">
+  {% block google_fonts %}
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700">
+  {% endblock %}
 
   {( css.asHTML('global') | safe )}
   {( js.asHTML('modernizr') | safe )}
