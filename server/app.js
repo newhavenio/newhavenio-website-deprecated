@@ -44,13 +44,13 @@ app.use(express.compress());
 // we altered these bg images, we'd need to update
 // their paths in order to uncache them in the
 // CDN. TODO: improve this.
-var cachable = [
+var longExpiringAssets = [
   '/fonts/',
   '/images/bg.jpg',
   '/images/bg-med.jpg',
 ];
-for (var i = cachable.length - 1; i >= 0; i--) {
-  app.use(cachable[i], function(req, res, next){
+for (var i = longExpiringAssets.length - 1; i >= 0; i--) {
+  app.use(longExpiringAssets[i], function(req, res, next){
     if (!res.getHeader('Cache-Control')){
       res.setHeader('Cache-Control', 'public, max-age=290304000');
     }
