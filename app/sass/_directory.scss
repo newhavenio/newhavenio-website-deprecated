@@ -54,6 +54,8 @@
     padding: 0 10px;
   }
   .content {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
     .co-member-name{
       display: none;
     }
