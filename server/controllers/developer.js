@@ -106,7 +106,7 @@ DevelopersController.prototype.route = function()
       // Render the template and cache it
       res.render(_this.template, context, function(err, html){
         if (err) {throw(err)};
-        _this.cachedResponses[res.req.url] = html.replace(/\s+/, ' ');
+        _this.cachedResponses[res.req.url] = html;
         res.send(html);
       });
     });
