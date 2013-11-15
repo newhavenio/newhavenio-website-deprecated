@@ -73,9 +73,8 @@ html, body {
     }
 }
 
-$masthead-color: #4C4D47;
 #masthead {
-  @include background-image(linear-gradient(lighten($masthead-color, 10%), darken($masthead-color, 5%)));
+  @include background-image(linear-gradient(#33322E, #24231F));
 
   width: 100%;
   height: 1500px;
