@@ -14,15 +14,6 @@ function DevelopersController(app){
     this.slug = 'developers';
     this.Model = mongoose.model('User');
     this.template = 'developer-list.html';
-
-    this.cachedResponses = {};
-    function bustCache(){
-      _this.cachedResponses = {};      
-    }
-    mongoose.model('User').schema.post('save', bustCache);
-    mongoose.model('Company').schema.post('save', bustCache);
-    mongoose.model('User').schema.post('remove', bustCache);
-    mongoose.model('Company').schema.post('remove', bustCache);
 }
 
 DevelopersController.prototype = Object.create(EventEmitter.prototype);
@@ -35,6 +26,15 @@ DevelopersController.prototype.route = function()
   var _this = this
     , User = mongoose.model('User')
     , Company = mongoose.model('Company');
+
+  this.cachedResponses = {};
+  function bustCache(){
+    _this.cachedResponses = {};      
+  }
+  mongoose.model('User').schema.post('save', bustCache);
+  mongoose.model('Company').schema.post('save', bustCache);
+  mongoose.model('User').schema.post('remove', bustCache);
+  mongoose.model('Company').schema.post('remove', bustCache);
 
   function ghettoJoin(developers, companies){
     // Populate relationships. How ghetto is this?
@@ -106,7 +106,7 @@ DevelopersController.prototype.route = function()
       // Render the template and cache it
       res.render(_this.template, context, function(err, html){
         if (err) {throw(err)};
-        _this.cachedResponses[res.req.url] = html;
+        _this.cachedResponses[res.req.url] = html.replace(/\s+/, ' ');
         res.send(html);
       });
     });
@@ -115,8 +115,10 @@ DevelopersController.prototype.route = function()
   function checkCache(req, res, next){
     var cachedResponse = _this.cachedResponses[req.url];
     if (cachedResponse) {
+      console.log("* Cache HIT for", req.url);
       return res.send(cachedResponse);
     };
+    console.log("* Cache MISS for", req.url);
     next();    
   }
 
