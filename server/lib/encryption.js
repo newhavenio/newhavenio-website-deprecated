@@ -2,7 +2,7 @@ var crypto = require('crypto');
 
 module.exports = function(){
 
-  var secret = process.env.SERVER_SECRET
+  var secret = process.env.SERVER_SECRET;
 
   this.encrypt = function(text){
     var cipher = crypto.createCipher('aes-256-cbc', secret);
