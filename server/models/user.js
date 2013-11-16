@@ -9,7 +9,8 @@
 //
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
-  _ = require('underscore');
+  _ = require('underscore'),
+  encryption = require('../lib/encryption')();
 
 // This is a list of the top 100 languages on GitHub
 // in 2013 taken from the following website:
@@ -87,7 +88,7 @@ var UserSchema = new Schema({
   // information and not accidently return it in an
   // API response.
   //
-  githubAccessToken : { type: String, required: true, select: false},
+  githubAccessToken : { type: String, required: true, select: false, get: encryption.decrypt, set: encryption.encrypt},
   githubAccessTokenExpired : { type: String, required: true, default: false, select: false},
 
   // Info we receive from GitHub after successful
