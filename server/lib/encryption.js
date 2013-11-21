@@ -12,6 +12,9 @@ module.exports = function(){
   }
  
   this.decrypt = function(text){
+    if (text === null || typeof text === 'undefined') {
+      return text;
+    };
     var decipher = crypto.createDecipher('aes-256-cbc', secret);
     var dec = decipher.update(text,'hex','utf8');
     dec += decipher.final('utf8');
