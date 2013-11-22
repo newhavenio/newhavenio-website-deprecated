@@ -32,11 +32,16 @@
     		</div>
     	</div>
     </div>
-</header>
+  </header>
+  <!--
+    The "ng-view" parameter here indicates that this
+    is the element into which our AngularJS application
+    will render the content specified each time there
+    is a route change.
+  -->
   <div class="container" data-ng-view="">
     <p class="loading">Loading...</p>
   </div>
-
 {% endblock %}
 
 
