@@ -1,12 +1,12 @@
 
 {% extends "developer-list.html" %}
-{% block title%}
+{% block title -%}
   New Haven technology companies{% if language %} using {(language)}{% endif %}
-{% endblock %}
+{%- endblock %}
 
-{% block meta_description %}
+{% block meta_description -%}
 Companies in New Haven Connecticut{% if language %} using the {(language)} programming language{% endif %}.
-{% endblock %}
+{%- endblock %}
 
 {% block directoryClass %}companies{% endblock %}
 
