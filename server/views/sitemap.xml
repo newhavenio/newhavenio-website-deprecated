@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+   <url>
+      <loc>{(baseUrl)}</loc>
+      <changefreq>daily</changefreq>
+      <priority>1</priority>
+   </url>
+
+   <url>
+      <loc>{(baseUrl)}/about</loc>
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
+   </url>
+
+   {% for entity, languages in entityLanguages %}
+	   <url>
+	      <loc>{(baseUrl)}/{(entity)}</loc>
+	      <changefreq>weekly</changefreq>
+	      <priority>1</priority>
+	   </url>
+	   {% for language in languages %}
+		   <url>
+		      <loc>{(baseUrl)}/{(entity)}/{(language)}</loc>
+		      <changefreq>weekly</changefreq>
+		      <priority>0.25</priority>
+		   </url>
+	   {% endfor %}
+   {% endfor %}
+
+</urlset> 

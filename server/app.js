@@ -130,7 +130,16 @@ var AuthController = require('./controllers/auth');
 var DeveloperController = require('./controllers/developer');
 var CompanyController = require('./controllers/company');
 var AboutController = require('./controllers/about');
+var SitemapController = require('./controllers/sitemap');
 
+
+/**
+ * Setup sitemap routes
+ *
+ * GET  /       Show listing of sitemaps on front page
+ */
+sitemap = new SitemapController(app);
+sitemap.route();
 
 /**
  * Setup Meetup routes

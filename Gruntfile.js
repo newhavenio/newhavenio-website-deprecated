@@ -89,7 +89,7 @@ module.exports = function (grunt) {
       express: {
         // We shouldn't really have to watch the views;
         // however nunjucks appears to cache them.
-        files: ['server/{,*/}*.js', 'server/views/**/*.html'],
+        files: ['server/{,*/}*.js', 'server/views/**/*ml'],
         options: {nospawn: true},
         tasks: ['express:dev']
       },
