@@ -1,7 +1,7 @@
 var EventEmitter = require('events').EventEmitter,
     mongoose = require('mongoose'),
     languages = require('../lib/languages'),
-    async = require('async');
+    async = require('async'),
     _ = require('underscore');
 
 function DevelopersController(app){
