@@ -7,6 +7,9 @@
       <li>
         {{user.firstName}} {{user.lastName}} &mdash; <a href="#/developers/me/edit">Edit</a>
       </li>
+      <li>
+        {{user.bio}} &mdash; <a href="#/developers/me/edit">Edit</a>
+      </li>
     </ul>
 
     <h2>Companies on which you're admin:</h2>
@@ -17,8 +20,13 @@
     </ul>
     <h2><strong>Actions</strong></h2>
     <hr>
-    <div class="medium primary btn icon-left entypo icon-pencil">
-      <a href="#/companies/add">Create a company</a>
+    <div class="action-bar">
+      <div class="medium primary btn icon-left entypo icon-pencil">
+        <a href="#/companies/add">Create a company</a>
+      </div>
+      <div class="medium primary btn icon-left entypo icon-pencil">
+        <a href="#/developers/me/edit">Edit Profile</a>
+      </div>
     </div>
 
   </div>
