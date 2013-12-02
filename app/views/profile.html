@@ -17,6 +17,8 @@
       <li data-ng-repeat="co in userCompanies">
         {{co.name}} &mdash; <a href="#/companies/{{co._id}}/edit">Edit</a>
       </li>
+      <li data-ng-show="userCompanies.length == 0">None!
+      </li>
     </ul>
     <h2><strong>Actions</strong></h2>
     <hr>
