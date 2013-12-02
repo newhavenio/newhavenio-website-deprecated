@@ -157,6 +157,7 @@ its variants.  E.g.
 The following people generously donated their time to building
 the newhaven.io website.  You should generously donate yours too!
 
+* [Devin Weaver](https://github.com/sukima)
 * [Adam Soffer](http://github.com/ads1018)
 * [Joel Nimety](https://github.com/jnimety)
 * [Dan Bernier](https://github.com/danbernier)
