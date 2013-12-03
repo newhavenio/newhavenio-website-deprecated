@@ -56,6 +56,13 @@ for (var i = longExpiringAssets.length - 1; i >= 0; i--) {
     }
     next();
   });
+
+  // Allow cross-domain usage for fonts. This is needed
+  // for IE and Firefox users.
+  app.use('/fonts/', function(req, res, next){
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    next();
+  });
 };
 
 // Handle static content first
