@@ -14,7 +14,7 @@ find fellow New Haven hackers via
 ## WARNING
 
 These are completely out of date now.  Somebody will update
-them within the next few days.
+them soon, sorry.
 
 ## Quickstart (OS X)
 
@@ -34,15 +34,16 @@ foreman start -f Procfile.dev
 
 ## Requirements
 
-The newhaven.io website is a single-page
-[Angular.js](http://angularjs.org/) application
-that is hosted on [S3](http://aws.amazon.com/s3/)
-as a set of static assets.  Those static
-assets are built locally using
+The newhaven.io website is 
+an [Express](http://expressjs.com/)
+application
+that is hosted on [Heroku](https://www.heroku.com/).
+We use a variety of tools to build the app, including
+[Sass](http://sass-lang.com/),
 [Yeoman](http://yeoman.io/),
-[Bower](http://bower.io/), and
-[Grunt](http://gruntjs.com/) as described in the
-[Yeoman documentation](https://github.com/yeoman/yeoman/wiki/Getting-Started).
+[Bower](http://bower.io/),
+[Grunt](http://gruntjs.com/), 
+and Yeoman's [Angular Generator](https://github.com/yeoman/generator-angular).
 
 To make changes to the website, you'll need a few
 tools in your environment, mostly Yeoman, Bower, Grunt
@@ -75,33 +76,8 @@ First, you'll need to check out this repository.
 
 ### Installing the dependencies
 
-The server-side dependencies for the newhaven.io website (those
-things we need to build the site) are enumerated in `package.json`.
-To install the dependencies do
-
-    npm install
-
-from the copy of the repo that you checked out.  That will create
-a directory called `node_modules`, which is ignored via our `.gitignore`
-file.  The `node_modules` directory contains a subdirectory called
-`.bin` into which a number of executable scripts are placed.  We
-need to run some of these during
-our build process, so we want to make sure they're in our path.
-If you're using a Bourne-decended shell (bash, zsh, etc.) you can
-add the `.bin` directory to your path like
-
-    export PATH="./node_modules/.bin:$PATH"
-
-*Note:* you'll probably want to do that every time you work on the site.
-
-Now we want to install our client-side dependencies, like
-[jQuery](http://jquery.com/), Angular, etc.  These are enumerated in
-`bower.json`. You can install those dependencies via
-
-    bower install
-
-which populates the directory `app/bower_components`.  Now you've
-got everything you need to test, build, and deploy the site.
+All the dependencies are under version control, so you
+shouldn't need to `npm install` anything.
 
 ## Developing
 
@@ -109,7 +85,7 @@ got everything you need to test, build, and deploy the site.
 
 You can preview any changes you're making live by running
 
-    grunt server
+    foreman run grunt server
 
 This will open up a browser window and automatically refresh
 as you make changes to different files.
@@ -137,20 +113,8 @@ assets, placing them into the `dist` directory.
 
 ### Deploying the site
 
-To deploy the site, you'll need to set two environment variables:
-`AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.  These are the
-credentials that allow you to write to the www.newhaven.io bucket
-on S3.  If you're on of these people that has these credentials,
-you can deploy using
-
-    grunt deploy
-
-It is likely most convenient to keep your credentials in a `.env`
-file, which is ignored in `.gitignore`, and to run the grunt deployment
-task using [foreman](https://github.com/ddollar/foreman) or one of
-its variants.  E.g.
-
-    foreman run grunt deploy
+The site is hosted on Heroku.  Only a few people
+can deploy, please contact Kyle, Joel, or Chris.
 
 ## Contributors
 
