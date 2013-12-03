@@ -85,7 +85,39 @@ You can preview any changes you're making live by running
     foreman run grunt server
 
 This will open up a browser window and automatically refresh
-as you make changes to different files.
+as you make changes to different files.  If you run the server
+like that, you'll also need to be running Mongodb via the 
+`mongod` command.  Alternatively, you can run both MongoDB
+and the server using the following command
+
+	foreman start -f Procfile.dev
+
+(See the contents of the `Procfile.dev` file.)
+
+## Environment variables
+
+If you encountered an exception starting the server, it's
+likely that your environment is missing some required 
+variables.  You should keep these variables in a `.env` file,
+so that `foreman` will source them automatically.  Your
+`.env` should contain the following:
+
+	GITHUB_CLIENT_ID=PUT-SOME-THING-HERE
+	GITHUB_CLIENT_SECRET=PUT-SOME-THING-HERE
+	GITHUB_CALLBACK_URL=http://localhost:9000/auth/callback
+	MONGOHQ_URL=mongodb://localhost/newhaven-io
+	COOKIE_SECRET=whatever-doesnt-matter-locally
+	KNOWN_ADMINS=your-github-login
+
+If you want to test the GitHub Oauth, you'll need to
+[set up a GitHub application here](https://github.com/settings/applications)
+and stick the credentials GitHub gives you in the `GITHUB_*` variables.
+Obviously, you can change the value of the `MONGOHQ_URL`,
+`COOKIE_SECRET` and `KNOWN_ADMINS` to be whatever you want.
+(The latter parameter is a comma-delimited list of GitHub
+users that should receive the "admin" role in the NewHaven.io
+app.)
+
 
 ### Testing the site
 
