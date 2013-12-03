@@ -158,6 +158,7 @@ The following people generously donated their time to building
 the newhaven.io website.  You should generously donate yours too!
 
 * [Devin Weaver](https://github.com/sukima)
+* [Chris Fidao](https://github.com/fideloper)
 * [Adam Soffer](http://github.com/ads1018)
 * [Joel Nimety](https://github.com/jnimety)
 * [Dan Bernier](https://github.com/danbernier)
