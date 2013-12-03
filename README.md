@@ -102,15 +102,6 @@ Then, you can run the tests like
 
     grunt test
 
-### Building the site
-
-To build the site, run
-
-    grunt build
-
-This will compile, concatenate, minify, and version all our
-assets, placing them into the `dist` directory.
-
 ### Deploying the site
 
 The site is hosted on Heroku.  Only a few people
