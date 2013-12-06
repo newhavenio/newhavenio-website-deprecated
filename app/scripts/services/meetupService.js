@@ -7,9 +7,6 @@
 angular.module('nhvioApp')
   .factory('meetupService', ['$http', '$q', function ($http, $q) {
 
-    // Service logic goes here.
-    // ...
-    var meaningOfLife = 42;
 
     // Calculate the difference in days between two
     // times, ignoring the hours, min, sec, etc.
@@ -22,20 +19,51 @@ angular.module('nhvioApp')
       return diffDays;
     }
 
+    // Remove events with the same title that occur
+    // one after another.
+    // 
+    function removeDuplicateEvents(meetupEvents){
+      var lastName = null;
+
+      function timeCompare(a,b) {
+        if (a.time < b.time){
+           return -1;
+        }
+        if (a.time > b.time){
+          return 1;
+        }
+        return 0;
+      }
+
+      // Sort the events by ascending time
+      meetupEvents.sort(timeCompare);
+
+      // Mark duplicates
+      for (var i = 0; i < meetupEvents.length; i++) {
+        if (lastName === meetupEvents[i].name) {
+          meetupEvents[i].isDuplicate = true;
+        }else{
+          meetupEvents[i].isDuplicate = false;
+        };
+        lastName = meetupEvents[i].name;
+      };
+      return meetupEvents;
+    }
+
     // Get lists of events from the Meetup.com API.
     // Returns a promise, which is resolved to the
     // combined list of events.
     // 
     function getEvents(feeds){
-      var deferred = $q.defer();
-      var meetupEvents = [];
-      var numRequestsFinished = 0;
+      var deferred = $q.defer(),
+        meetupEvents = [],
+        numRequestsFinished = 0;
 
       // If we're done requesting 
       function resolveIfDone(action){
         numRequestsFinished += 1;
         if (numRequestsFinished === feeds.length) {
-          action(meetupEvents);
+          action(removeDuplicateEvents(meetupEvents));
         }
       }
 
