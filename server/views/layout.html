@@ -123,6 +123,19 @@
           e.preventDefault();
           $(e.target).trigger('gumby.trigger');
         });
+        //Responsive menu doesn't work on firefox
+        //due to lack of support for touchstart.
+        //http://caniuse.com/#search=touchstart
+        //However, based on the commit history,
+        //'click' had an issue on Android.
+        //Possible Fix:  Only use 'click' if 
+        //the user is on Firefox.
+        if (/Firefox/i.test(navigator.userAgent)){
+            $('a.toggle').first().on('click', function(e){
+                e.preventDefault();
+                $(e.target).trigger('gumby.trigger');
+            });
+        };
       });
     </script>
 
