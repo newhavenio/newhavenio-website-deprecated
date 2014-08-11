@@ -157,6 +157,7 @@ the newhaven.io website.  You should generously donate yours too!
 * [Zach Morek](https://github.com/ZachBeta)
 * [Krishna R. Sampath](https://github.com/KrishnaRSampath)
 * [Kyle Jensen](http://github.com/kljensen)
+* [Jacob Burden](http://github.com/JacobJWBurden)
 
 ## License
 
