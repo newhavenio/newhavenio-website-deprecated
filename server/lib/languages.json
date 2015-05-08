@@ -283,5 +283,10 @@
         "priority": 41, 
         "name": "SQL", 
         "key": "sql"
+    },
+    "swift": {
+        "priority": 81, 
+        "name": "Swift", 
+        "key": "swift"
     }
 }
