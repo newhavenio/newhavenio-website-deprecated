@@ -1,9 +1,4 @@
 {
-    "rank": {
-        "priority": 190, 
-        "name": "Rank", 
-        "key": "rank"
-    }, 
     "c-sharp": {
         "priority": 80, 
         "name": "C#", 
