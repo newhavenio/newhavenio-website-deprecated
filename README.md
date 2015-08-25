@@ -9,7 +9,6 @@ find fellow New Haven hackers via
 
 * the [newhaven.io Google group](https://groups.google.com/forum/?fromgroups#!forum/newhavenio);
 * the [newhaven.io Twitter account](http://twitter.com/newhavenio)
-* the #newhavenio IRC channel on Freenode.
 
 ## Quickstart (OS X)
 
