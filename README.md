@@ -1,6 +1,9 @@
 newhaven.io
 ===========
 
+(_These instructions are rather outdated and have proven to be problematic lately. 
+There are some [updated instructions](https://gist.github.com/lourinaldi/9511c5c2c8e65d9b1f73) available that you may find more useful._)
+
 This is the code for the
 [newhaven.io](http://www.newhaven.io) website. It's just a
 placeholder right now. If you'd like to help build the
