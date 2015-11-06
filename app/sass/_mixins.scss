@@ -1,0 +1,12 @@
+// Mixin for putting in custom breakpoints
+@mixin breakpoint($breakpoint) {
+	@media (min-width: $breakpoint) {
+	 	@content;
+	}
+}
+
+// Common breakpoint sizes
+$mobile-screen: 320px;
+$mobile-h-screen: 480px;
+$tablet-screen: 787px;
+$desktop-screen: 1024px;

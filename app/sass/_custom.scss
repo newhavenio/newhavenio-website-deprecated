@@ -32,10 +32,10 @@ html, body {
   padding-top: 2px;
   line-height: 52px;
   font-weight: 400;
-  @include respond(portrait-tablets) {
+  @include breakpoint($tablet-screen) {
     padding-left: 20px;
   }
-  @include respond(tablets) {
+  @include breakpoint($tablet-screen) {
     padding-left: 20px;
   }
 }
@@ -62,10 +62,10 @@ html, body {
 }
 
 #githubforkme {
-    @include respond (all-phones) {
+    @include breakpoint ($mobile-h-screen) {
       display: none;
     }
-    @include respond (tablets) {
+    @include breakpoint ($tablet-screen) {
       display: none;
     }
     img {
@@ -102,22 +102,22 @@ html, body {
         position: relative;
         top: 60px;
 
-        @include respond(portrait-phones) {
+        @include breakpoint(portrait-phones) {
             top: 20px;
         }
 
-        @include respond(tablets) {
+        @include breakpoint($tablet-screen) {
             padding: 0 20px;
         }
 
-        @include respond(all-phones) {
+        @include breakpoint($mobile-h-screen) {
             top: 10px;
             padding: 0 20px;
         }
     }
 
     h2 {
-        @include respond (all-phones) {
+        @include breakpoint ($mobile-h-screen) {
             font-size: 35px;
         }
         font-size: 45px;
@@ -127,11 +127,11 @@ html, body {
     }
 
     p {
-        @include respond (all-phones) {
+        @include breakpoint ($mobile-h-screen) {
             font-size: 14px;
             line-height: 25px;
         }
-        @include respond (tablets) {
+        @include breakpoint ($tablet-screen) {
           font-size: 18px;
           line-height: 30px;
         }
@@ -180,7 +180,7 @@ html, body {
   font-size: 12px;
   position: absolute;
   right: 25px;
-  @include respond(portrait-tablets) {
+  @include breakpoint($tablet-screen) {
     top: 54px;
     left: 25px;
   }
@@ -190,7 +190,7 @@ html, body {
   border-right: 1px solid #e0e2e4;
   padding-right: 15px;
   padding-top: 15px;
-  @include respond(portrait-tablets) {
+  @include breakpoint($tablet-screen) {
     border-right: none;
     padding-right: 0;
   }
@@ -199,14 +199,14 @@ html, body {
 .brick .right {
   padding-left: 15px;
   padding-top: 15px;
-  @include respond(portrait-tablets) {
+  @include breakpoint($tablet-screen) {
     padding-left: 0;
   }
 }
 
 .brick h2 {
   font-size: 1.5rem;
-  @include respond(portrait-tablets) {
+  @include breakpoint($tablet-screen) {
     font-size: 1.4rem;
   }
   padding-top: 0;
@@ -218,7 +218,7 @@ html, body {
         color: $body-font-color;
         display: inline-block;
         padding-right: 15px;
-        @include respond(all-phones) {
+        @include breakpoint($mobile-h-screen) {
             padding-bottom: 10px;
         }
         &:hover {
@@ -228,11 +228,11 @@ html, body {
 
     span {
         font-weight: 600;
-        @include respond(all-phones) {
+        @include breakpoint($mobile-h-screen) {
             float: none;
             display: inline-block;
             padding-top: 8px;
-            @include respond (all-phones) {
+            @include breakpoint ($mobile-h-screen) {
                 padding: 0;
             }
         }
@@ -240,7 +240,7 @@ html, body {
         strong {
             color: #ff7b1a;
             padding-left: 5px;
-            @include respond (all-phones) {
+            @include breakpoint ($mobile-h-screen) {
                 padding: 0;
             }
         }
@@ -267,7 +267,7 @@ footer {
 }
 
 footer ul {
-  @include respond(portrait-tablets) {
+  @include breakpoint($tablet-screen) {
     padding-left: 20px;
   }
   float: left;
@@ -277,7 +277,7 @@ footer h3 {
   font-size: 16px;
   font-family: $font-family-heading;
   float: right;
-  @include respond(portrait-tablets) {
+  @include breakpoint($tablet-screen) {
     padding-right: 20px;
   }
 }

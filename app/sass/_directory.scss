@@ -7,10 +7,10 @@
     .brick {
       margin-bottom: 0;
       /* min-height: 301px; */
-      @include respond(tablets) {
+      @include breakpoint($tablet-screen) {
         min-height: inherit;
       }
-      @include respond(all-phones) {
+      @include breakpoint($mobile-h-screen) {
         min-height: inherit;
       }
     }
@@ -140,10 +140,10 @@
         margin-bottom: 0;
       }
     }
-    @include respond(tablets) {
+    @include breakpoint($tablet-screen) {
       width: 100%;
     }
-    @include respond(all-phones) {
+    @include breakpoint($mobile-h-screen) {
       width: 100%;
     }
   }

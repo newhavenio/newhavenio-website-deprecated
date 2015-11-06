@@ -18,23 +18,16 @@
 
 @charset "UTF-8";
 
+@import "mixins";
 @import "modular-scale";
 
 @import "var/settings";
-@import "../bower_components/gumby/sass/var/lists";
-@import "../bower_components/gumby/sass/var/icons/entypo";
+@import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss";
 
 @import "compass";
 @import "compass/reset";
 
-@import "../bower_components/gumby/sass/functions/all";
-
-@import "../bower_components/gumby/sass/base";
-@import "fonts";
-@import "../bower_components/gumby/sass/typography";
-@import "../bower_components/gumby/sass/grid";
-@import "../bower_components/gumby/sass/ui/all";
-@import "../bower_components/gumby/sass/shame";
+@import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap.scss";
 
 @import "directory";
 @import "user-edit";
