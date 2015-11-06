@@ -11,11 +11,11 @@
     "angular-resource": "~1.0.7",
     "angular-cookies": "~1.0.7",
     "angular-sanitize": "~1.0.7",
-    "gumby": "~2.5.15",
     "restangular": "~1.1.6"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.7",
-    "angular-scenario": "~1.0.7"
+    "angular-scenario": "~1.0.7",
+    "bootstrap-sass": "~3.3.5"
   }
 }
