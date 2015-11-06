@@ -1,6 +1,6 @@
 
 <div class="row">
-	<div class="sixteen columns centered">
+	<div class="col-sm-12">
 <div class="brick" data-ng-repeat="event in events| filter: {isDuplicate: false}| limitTo: 10">
     <h2>
       	<a href="{{event.event_url}}">{{event.name}}</a>
